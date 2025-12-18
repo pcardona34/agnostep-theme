@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="48"
+   height="48"
+   version="1.1"
+   id="svg12"
+   sodipodi:docname="clock.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     id="namedview12"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="12.433294"
+     inkscape:cx="24.008118"
+     inkscape:cy="23.967904"
+     inkscape:window-width="1253"
+     inkscape:window-height="1047"
+     inkscape:window-x="196"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg12" />
+  <path
+     style="opacity:0.2;stroke-width:1.011"
+     d="M 24.442361,5.0000004 C 13.162974,5.0000004 4,13.96469 4,25 c 0,11.03531 9.162974,20.000003 20.442361,20 11.279386,0 20.442371,-8.96469 20.44236,-20 0,-11.03531 -9.162974,-19.9999996 -20.44236,-19.9999996 z"
+     id="path1"
+     inkscape:export-filename="AClock.tiff"
+     inkscape:export-xdpi="299.70731"
+     inkscape:export-ydpi="299.70731" />
+  <path
+     style="fill:#ff9800;stroke-width:1.011"
+     d="M 24.442361,4.0000004 C 13.162974,4.0000004 4,12.96469 4,24 c 0,11.03531 9.162974,20.000003 20.442361,20 11.279386,0 20.442371,-8.96469 20.44236,-20 0,-11.03531 -9.162974,-19.9999996 -20.44236,-19.9999996 z"
+     id="path2" />
+  <path
+     style="opacity:0.2;fill:#ffffff;stroke-width:1.011"
+     d="M 24.442361,4 C 13.162974,4 4,12.96469 4,24 4,24.167832 4.00777,24.33315 4.011978,24.5 4.2848468,13.696117 13.334518,5 24.442361,5 c 11.107842,0 20.157513,8.696117 20.430382,19.5 0.0042,-0.16685 0.01198,-0.332168 0.01198,-0.5 0,-11.03531 -9.162974,-20 -20.44236,-20 z"
+     id="path3" />
+  <path
+     style="opacity:0.2;stroke-width:1.011"
+     d="m 24.442362,9.0000001 c -9.023513,0 -16.3538899,7.1717509 -16.3538899,15.9999989 0,8.828249 7.3303769,16.000003 16.3538899,16.000001 9.02351,0 16.353893,-7.171752 16.353887,-16.000001 0,-8.828248 -7.330377,-15.9999989 -16.353887,-15.9999989 z"
+     id="path4" />
+  <path
+     style="fill:#ffffff;stroke-width:1.011"
+     d="m 24.442362,8.0000001 c -9.023513,0 -16.3538899,7.1717509 -16.3538899,15.9999989 0,8.828249 7.3303769,16.000003 16.3538899,16.000001 9.02351,0 16.353893,-7.171752 16.353887,-16.000001 0,-8.828248 -7.330377,-15.9999989 -16.353887,-15.9999989 z"
+     id="path5" />
+  <path
+     style="font-variation-settings:normal;inline-size:0;opacity:0.1;stroke-width:1.011;stop-color:#000000"
+     d="m 30.02608,13.999844 a 1.533177,1.5 0 0 0 -1.289626,0.748047 l -5.621649,9.5 a 1.533177,1.5 0 0 0 -0.153717,0.357422 l -11.241302,5.5 a 1.022118,1 0 0 0 -0.457158,1.341797 1.022118,1 0 0 0 1.371475,0.447265 l 11.243298,-5.5 a 1.533177,1.5 0 0 0 1.892515,-0.642578 l 5.621649,-9.5 a 1.533177,1.5 0 0 0 -0.55897,-2.050781 1.533177,1.5 0 0 0 -0.806515,-0.201172 z"
+     id="path6" />
+  <path
+     style="font-variation-settings:normal;inline-size:0;fill:#ff4747;stroke-width:1.011;stop-color:#000000"
+     d="M 24.789721,23.632812 24.095,24.367188 36.098898,35.207031 c 0.238741,-0.237656 0.463408,-0.488447 0.686736,-0.740234 z"
+     id="path7" />
+  <path
+     style="fill:none;stroke:#4f4f4f;stroke-width:2.022;stroke-linecap:round;stroke-linejoin:round"
+     d="M 12.176944,30 24.442361,24"
+     id="path8" />
+  <path
+     style="fill:none;stroke:#4f4f4f;stroke-width:3.033;stroke-linecap:round;stroke-linejoin:round"
+     d="M 24.442361,24 30.06401,14.5"
+     id="path9" />
+  <ellipse
+     style="opacity:0.1;stroke-width:1.011"
+     cx="24.44236"
+     cy="25"
+     id="circle9"
+     rx="3.066354"
+     ry="3" />
+  <ellipse
+     style="fill:#4f4f4f;stroke-width:1.011"
+     cx="24.44236"
+     cy="24"
+     id="circle10"
+     rx="3.066354"
+     ry="3" />
+  <ellipse
+     style="opacity:0.1;stroke-width:1.011"
+     cx="24.44236"
+     cy="25"
+     id="circle11"
+     rx="2.0442362"
+     ry="2" />
+  <ellipse
+     style="fill:#ffffff;stroke-width:1.011"
+     cx="24.44236"
+     cy="24"
+     id="circle12"
+     rx="2.0442362"
+     ry="2" />
+</svg>

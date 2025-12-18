@@ -1,0 +1,109 @@
+wmudmount (3.0-1) UNRELEASED; urgency=medium
+
+  * New upstream version
+  * Update debhelper compat.
+
+ -- Brad Jorsch <anomie@users.sourceforge.net>  Sun, 16 Dec 2018 16:26:19 -0500
+
+wmudmount (2.2-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Brad Jorsch <anomie@users.sourceforge.net>  Wed, 26 Feb 2014 16:57:42 -0500
+
+wmudmount (2.1-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Brad Jorsch <anomie@users.sourceforge.net>  Fri, 14 Feb 2014 22:48:45 -0500
+
+wmudmount (2.0-1) unstable; urgency=medium
+
+  * New upstream version
+
+ -- Brad Jorsch <anomie@users.sourceforge.net>  Fri, 07 Feb 2014 12:52:13 -0500
+
+wmudmount (1.13-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Brad Jorsch <anomie@users.sourceforge.net>  Mon, 09 Apr 2012 15:55:59 -0400
+
+wmudmount (1.12-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Brad Jorsch <anomie@users.sourceforge.net>  Thu, 01 Mar 2012 12:32:32 -0500
+
+wmudmount (1.11-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Brad Jorsch <anomie@users.sourceforge.net>  Thu, 23 Feb 2012 19:20:59 -0500
+
+wmudmount (1.10-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Brad Jorsch <anomie@users.sourceforge.net>  Tue, 20 Sep 2011 10:56:58 -0400
+
+wmudmount (1.9-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Brad Jorsch <anomie@users.sourceforge.net>  Thu, 25 Aug 2011 16:13:03 -0400
+
+wmudmount (1.8-1) unstable; urgency=low
+
+  * New upstream version
+  * Pass --disable-gtk-withdrawn-hack to configure
+
+ -- Brad Jorsch <anomie@users.sourceforge.net>  Tue, 28 Sep 2010 10:07:44 -0400
+
+wmudmount (1.7-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Brad Jorsch <anomie@users.sourceforge.net>  Wed, 15 Sep 2010 10:31:26 -0400
+
+wmudmount (1.6-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Brad Jorsch <anomie@users.sourceforge.net>  Fri, 11 Jun 2010 11:52:05 -0400
+
+wmudmount (1.5-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Brad Jorsch <anomie@users.sourceforge.net>  Wed, 19 May 2010 00:23:21 -0400
+
+wmudmount (1.4-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Brad Jorsch <anomie@users.sourceforge.net>  Sun, 04 Apr 2010 01:22:04 -0400
+
+wmudmount (1.3-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Brad Jorsch <anomie@users.sourceforge.net>  Sun, 21 Mar 2010 12:46:24 -0400
+
+wmudmount (1.2-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Brad Jorsch <anomie@users.sourceforge.net>  Fri, 12 Mar 2010 11:23:06 -0500
+
+wmudmount (1.1-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Brad Jorsch <anomie@users.sourceforge.net>  Thu, 11 Mar 2010 15:47:50 -0500
+
+wmudmount (1.0-1) unstable; urgency=low
+
+  * Initial release
+
+ -- Brad Jorsch <anomie@users.sourceforge.net>  Mon, 25 Jan 2010 13:12:53 -0500

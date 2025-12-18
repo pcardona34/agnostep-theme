@@ -1,0 +1,230 @@
+.de Sh
+.br
+.if t .Sp
+.ne 5
+.PP
+\fB\\$1\fR
+.PP
+..
+.TH wmudmount 1 "December 16, 2018"
+.SH NAME
+wmudmount \- A WindowMaker filesystem mounting dockapp using udisks
+.P
+.SH SYNOPSIS
+.B wmdgumount
+.RB [\| options \|]
+.SH DESCRIPTION
+\fBwmudmount\fP is a filesystem mounter that uses udisks to handle
+notification of new volumes and mounting of the filesystems as a non-root
+user. It also includes a mode to display the mounted filesystems with the least
+free space percentage (similar to wmfsm).
+.SH OPTIONS
+.TP
+.B --help
+Display usage information.
+.TP
+.BR -V ", " --version
+Display the version number and exit.
+.TP
+.BI --no-default-config
+Prevent reading of the default configuration files.
+.TP
+.BI --conf " <filename>"
+Specify a configuration file to use in addition to the default.
+.TP
+.BR -v ", " --verbose
+Print more messages to the console. May be repeated.
+.TP
+.BR -q ", " --quiet
+Print fewer messages to the console. May be repeated.
+.TP
+.BI "-n\fR,\fP --notify" " <level>"
+Specify what level of notification to display (using the desktop notification service). Valid levels are:
+
+none - No messages
+.br
+error - Only provide failure messages, e.g. "Mount failed"
+.br
+warn - Only provide failure and warning messages
+.br
+info - Provide informational messages, e.g. "Device added" (default)
+.TP
+.BR --exclude-system-volumes ", " --include-system-volumes
+.PD 0
+.TP
+.BR --fsm-exclude-system-volumes ", " --fsm-include-system-volumes
+.TP
+.BR --pager-exclude-system-volumes ", " --pager-include-system-volumes
+.PD
+Whether to include volumes in the paging list and/or the FSM display that require the administrator authorization for mounting (i.e. those reported as "system internal" by udisks and those listed in fstab without the "user" option).
+.TP
+.BI --return-to-fsm-timeout " <seconds>"
+Specify the number of seconds the mouse pointer must be away from the dockapp before the display changes back to the FSM view. The default is 60, set negative to disable.
+.TP
+.BR --allow-insecure-memory ", " --no-allow-insecure-memory
+Normally, the password dialog will insist that secure memory be allocated to hold the entered password; this can prevent the password from being written to swap in a low-memory situation. If your system does not allow users to allocate secure memory, you can use \fB--allow-insecure-memory\fP to allow the use of normal, insecure memory.
+.TP
+.BR --allow-core-files ", " --no-allow-core-files
+The dumping of core files is disabled so entered passwords will not be written to disk if a coredump signal is received. Normally, the program will exit if this cannot be done; if necessary, \fB--allow-core-files\fP may be used to allow execution despite the risk.
+.TP
+.BR --blink-full-filesystems ", " --no-blink-full-filesystems
+Normally, the "disk space used" bar for a read-write filesystem will blink when it is over 95% full. \fB--no-blink-full-filesystems\fP may be used to prevent this.
+.TP
+.B --non-wmaker
+Create windows differently, in a manner more friendly to non-Window Maker window managers. If you wind up with both a docked icon and an unmanaged window, try setting this.
+.TP
+.BR --use-secret-service ", " --no-secret-service
+Whether to use the Secrets service for encrypted filesystem unlock passphrase storage.
+.SH CONFIGURATION
+The configuration files may contain the following options:
+.TP
+.BI verbose
+.PD 0
+.TP
+.BI quiet 
+.TP
+.BI non-wmaker
+.TP
+.BI notify "\fR = \fP<level>"
+.TP
+.BI exclude-system-volumes
+.TP
+.BI include-system-volumes
+.TP
+.BI fsm-exclude-system-volumes
+.TP
+.BI fsm-include-system-volumes
+.TP
+.BI pager-exclude-system-volumes
+.TP
+.BI pager-include-system-volumes
+.TP
+.BI return-to-fsm-timeout "\fR = \fP<seconds>"
+.TP
+.BI allow-insecure-memory
+.TP
+.BI no-allow-insecure-memory
+.TP
+.BI allow-core-files
+.TP
+.BI no-allow-core-files
+.TP
+.BI blink-full-filesystems
+.TP
+.BI no-blink-full-filesystems
+.TP
+.BI use-secret-service
+.TP
+.BI no-secret-service
+.PD
+Same as the corresponding command line options.
+.TP
+.BI warn "\fR = \fP<level>"
+Sets the verbosity level, \fIerror\fP, \fIwarn\fP (default), \fIinfo\fP, or \fIdebug\fP.
+.TP
+.BI command "\fR = \fP<command-spec>"
+Allows adding arbitrary commands to the right-click menu. A command-spec is of
+the form \fItitle\fP;\fIcommand\fP. The command is NOT passed through the shell, but the search path is used. The following printf-style escapes may be used:
+
+\fB%p\fP - The udisks dbus path for the device
+.br
+\fB%d\fP - The /dev path for the device
+.br
+\fB%m\fP - The mountpoint of the filesystem
+.br
+\fB%%\fP - A literal "%"
+
+If any of the above are not available (e.g. the filesystem is not mounted), commands using them will be greyed-out in the right-click menu.
+
+For example, "command = Console; urxvt \-cd %m" would create a menu item that will open a terminal window at the filesystem's mountpoint.
+.TP
+.BI click-command "\fR = \fP<command-spec>"
+Same as \fIcommand\fP, plus this command will be executed when clicking a device in the display.
+.TP
+.BI double-click-command "\fR = \fP<command-spec>"
+Same as \fIcommand\fP, plus this command will be executed when double-clicking a device in the display.
+.TP
+.BI include-volume "\fR = \fP<spec>"
+.PD 0
+.TP
+.BI exclude-volume "\fR = \fP<spec>"
+.TP
+.BI fsm-include-volume "\fR = \fP<spec>"
+.TP
+.BI fsm-exclude-volume "\fR = \fP<spec>"
+.TP
+.BI pager-include-volume "\fR = \fP<spec>"
+.TP
+.BI pager-exclude-volume "\fR = \fP<spec>"
+.PD
+Allows for specificly identifying volumes to include or exclude from the paging and/or the FSM display, overriding the general behavior chosen by \-\-include\-system\-volumes or \-\-exclude\-system\-volumes.
+
+The values for \fI<spec>\fP are similar to those for the first field in /etc/fstab: If it begins with "LABEL=", the remainder of the spec is matched against the volume's label. If it begins with "UUID=", the remainder of the spec is matched against the volume's UUID. Otherwise, the spec is matched against the volume's device and current mountpoint.
+
+If multiple include and exclude entries match a volume, the last one wins. Specifying include\-volume is equivalent to specifying both fsm\-include\-volume and pager\-include\-volume (and similarly for the exclude variants).
+.SH DISPLAY
+The dockapp consists of a display window, two "action" buttons on the left, and
+two "paging" buttons on the right. The paging buttons are used for paging
+through the available devices; the mouse scrollwheel may also be used while
+over the dockapp for the same purpose. The action buttons vary depending on
+which device is focused.
+
+Hovering the mouse over the display will show a tooltip with information on the
+current device, and over the action buttons will show a tooltip describing the
+button's action. Right-clicking the display gives a popup menu with additional
+options for the current device. Middle-clicking moves back to FSM mode.
+
+The "default" mode is the FSM display. In this mode, the filesystem usage
+information for all filesystems reported as mounted by udisks is periodically
+queried and the 6 with the highest percentage used are displayed, along with a
+bar indicating the percentage. If the percentage is over 95%, the bar turns red
+and (optionally) blinks. The action buttons are not used. If no
+\fIclick-command\fP is set, clicking a filesystem line will go to that device's
+page, if any.
+
+The other mode is for displaying a device. In this mode, the top of the display
+window shows the device label or /dev node name, with an icon representing the
+device below. The right action button is used for removing the media as
+applicable, e.g. locking a crypto device, ejecting a CD, or detaching a USB
+stick for safe removal.
+
+When displaying a filesystem device, the mountpoint and usage percent bar (if
+mounted) are at the bottom of the display. The icon has a blue background if
+the filesystem is mounted, or a red background if an operation is currently in
+progress. The left action button is used to mount or unmount the filesystem.
+
+When displaying a locked crypto device, the type of the device (e.g. "LUKS
+device") is displayed at the bottom. The left action button is used to unlock
+the device; the passphrase will be loaded from the system Secrets service if
+possible, and you will be prompted if necessary.
+
+The right-click menu gives access to a few additional actions, including
+relabeling a filesystem and forgetting a saved crypto device password.
+.SH BUGS
+None yet.
+.SH FILES
+.TP
+.I /etc/wmudmount.conf
+System configuration.
+.TP
+.I $HOME/.wmudmountrc
+User configuration.
+.SH SIGNALS
+.TP
+.I SIGUSR1
+Perform the same action as clicking the left action button.
+.TP
+.I SIGUSR2
+Perform the same action as clicking the right action button.
+.TP
+.I SIGRTMIN+0
+Perform the same action as clicking the left paging button. To find the expected signal number of SIGRTMIN+0, use the \fB--verbose\fP option.
+.TP
+.I SIGRTMIN+1
+Perform the same action as clicking the right paging button. To find the expected signal number of SIGRTMIN+1, use the \fB--verbose\fP option.
+.SH AUTHORS
+\fBwmudmount\fP was written by \fIBrad Jorsch
+<anomie@users.sourceforge.net>\fP.
+.P
+Email regarding wmudmount should be sent to
+\fIanomie@users.sourceforge.net\fP.

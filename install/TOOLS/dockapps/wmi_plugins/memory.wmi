@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# wminfo plugin: displays Memory infos
+# This script must be copied to: /usr/local/bin
+# command: wminfo -p memory.wmi -u 1 -k -b#2f2f2f -f#c0c0c0
+
+# Get total and used memory
+TOTAL=$(free | grep -e "Mem:" | awk '{print $2}')
+USED=$(free | grep -e "Mem:" | awk '{print $3}')
+PERCENT=$((USED * 100 / TOTAL))
+PERSIX=$((USED * 6 / TOTAL))
+
+# Get uptime
+UP=$(uptime | awk '{print $3}' | awk -F, '{print $1}')
+
+# Construct the memory bar using square characters (filled squares)
+BAR=""
+for ((i=0; i<PERSIX; i++)); do
+    BAR+="#"  # Use the filled square character directly
+done
+
+# Add some ASCII representation for the remaining part
+for ((i=PERSIX; i<6; i++)); do
+    BAR+=" "  # Empty space for the rest
+done
+
+# Prepare output lines
+L1="UP: ${UP}"
+L2=""
+L3="MEMORY:"
+L4="${BAR}${PERCENT}%"
+L5=""
+
+# Print the results
+echo "$L1"
+echo "$L2"
+echo "$L3"
+printf "%s\n" "$L4"
+echo "$L5"
+

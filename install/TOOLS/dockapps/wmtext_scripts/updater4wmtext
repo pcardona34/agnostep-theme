@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# wmtxt plugin: displays System Updates
+# This script must be copied to: /usr/local/bin
+# command: 
+# wmtext -i 30 -b 'forest green' -a 'New|Nouveaux' red white /usr/local/bin/updater4wmtext
+
+NB=0
+FLAG=$HOME/.UPDATER
+
+PREFIX=$(echo ${LANG%.UTF-8} | awk -F'_' '{print $1}')
+
+case "$PREFIX" in
+	"fr")
+		TITLE="M.À.J:"
+		MSG="Nouveaux\nPaquets:"
+		ELSE="Système\nà jour";;
+	"en" | *)
+		TITLE="Updater:"
+		MSG="New\nPackages:"
+		ELSE="System\nis up\nto date";;
+esac
+
+printf "%b\n" "$TITLE"
+
+### Is there an UPDATER flag?
+
+if [ -f $FLAG ];then
+. $FLAG
+fi
+
+if [ $NB -gt 0 ];then
+        printf "%b\n%b" "${MSG}" "${NB}"
+else
+	printf "%b" "${ELSE}"
+fi

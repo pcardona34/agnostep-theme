@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   id="svg3071"
+   sodipodi:docname="home-icon.svg"
+   viewBox="0 0 64 64"
+   version="1.1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs3073">
+    <filter
+       id="filter3214"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Darken the edges with an inner blur"
+       inkscape:label="Darken edges"
+       color-interpolation-filters="sRGB"
+       x="-0.19922768"
+       y="-0.42174509"
+       width="1.3985922"
+       height="1.8434902">
+      <feGaussianBlur
+         id="feGaussianBlur3216"
+         stdDeviation="0.77745194"
+         result="result6" />
+      <feComposite
+         id="feComposite3218"
+         operator="atop"
+         result="result8"
+         in2="result6"
+         in="SourceGraphic" />
+      <feComposite
+         id="feComposite3220"
+         operator="atop"
+         result="result9"
+         in2="SourceAlpha"
+         in="result8" />
+    </filter>
+    <filter
+       id="filter4"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Darken the edges with an inner blur"
+       inkscape:label="Darken edges"
+       color-interpolation-filters="sRGB"
+       x="-0.21800064"
+       y="-0.19458592"
+       width="1.4360576"
+       height="1.3884678">
+      <feGaussianBlur
+         id="feGaussianBlur3"
+         stdDeviation="3.9009781"
+         result="result6" />
+      <feComposite
+         id="feComposite3"
+         operator="atop"
+         result="result8"
+         in2="result6"
+         in="SourceGraphic" />
+      <feComposite
+         id="feComposite4"
+         operator="atop"
+         result="result9"
+         in2="SourceAlpha"
+         in="result8" />
+    </filter>
+    <filter
+       id="filter6"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Darken the edges with an inner blur"
+       inkscape:label="Darken edges"
+       color-interpolation-filters="sRGB"
+       x="-0.18166684"
+       y="-0.42518983"
+       width="1.3633337"
+       height="1.7843053">
+      <feGaussianBlur
+         id="feGaussianBlur4"
+         stdDeviation="2.1719654"
+         result="result6" />
+      <feComposite
+         id="feComposite5"
+         operator="atop"
+         result="result8"
+         in2="result6"
+         in="SourceGraphic" />
+      <feComposite
+         id="feComposite6"
+         operator="atop"
+         result="result9"
+         in2="SourceAlpha"
+         in="result8" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     bordercolor="#666666"
+     inkscape:pageshadow="2"
+     inkscape:window-y="0"
+     pagecolor="#ffffff"
+     inkscape:window-height="1047"
+     inkscape:grid-bbox="true"
+     inkscape:window-maximized="0"
+     inkscape:zoom="3.8369511"
+     inkscape:window-x="323"
+     showgrid="false"
+     borderopacity="1.0"
+     inkscape:current-layer="layer1"
+     inkscape:cx="32.968885"
+     inkscape:cy="68.283383"
+     inkscape:window-width="1253"
+     inkscape:pageopacity="0.0"
+     inkscape:document-units="px"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid
+       id="grid4242"
+       type="xygrid"
+       originx="0"
+       originy="0"
+       spacingy="1"
+       spacingx="1"
+       units="px" />
+  </sodipodi:namedview>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <rect
+       id="rect5320"
+       style="opacity:0;stroke-width:0;filter:url(#filter3214)"
+       height="64"
+       width="64"
+       y="-2.2651999"
+       x="-0.79549998"
+       transform="matrix(0.85410351,0,0,0.81569,5.3480401,9.2593413)" />
+    <g
+       id="g6"
+       inkscape:export-filename="house.tiff"
+       inkscape:export-xdpi="207.63049"
+       inkscape:export-ydpi="207.63049"
+       transform="matrix(1.1036234,0,0,0.98618591,-3.8765634,-50.954264)">
+      <path
+         id="path3982"
+         sodipodi:nodetypes="cccccc"
+         style="fill:#59597e;fill-opacity:1;stroke:#d7d7d7;stroke-width:0.16716;filter:url(#filter4)"
+         d="m 10.431,61.792 43.318,-0.001 -0.79388,-27.427 -21.353,-21.292 -21.183,21.013 0.01135,27.707 z"
+         transform="matrix(0.8540847,0,0,0.82434484,5.3486435,57.48824)" />
+      <path
+         id="path3072"
+         sodipodi:nodetypes="ccc"
+         style="fill-opacity:0;stroke:#8686be;stroke-width:8.041;stroke-linecap:round;stroke-opacity:1;filter:url(#filter6)"
+         d="m 6.2369,31.722 25.455,-25.711 25.37,25.711"
+         transform="matrix(0.85410351,0,0,0.81569,5.3480401,57.259341)" />
+      <g
+         id="g3"
+         transform="translate(0,20)">
+        <path
+           id="path3878"
+           sodipodi:nodetypes="ccccc"
+           style="fill:#333333;stroke-width:0;filter:url(#filter3214)"
+           d="m 44.583,12.191 0.15566,-3.5023 9.4952,0.07783 -0.07783,13.231 -9.573,-9.8065 z"
+           transform="matrix(0.85410351,0,0,0.81569,5.3480401,35.259341)" />
+        <g
+           id="g1"
+           transform="translate(0,28)"
+           style="fill:#59597e;fill-opacity:1">
+          <path
+             id="path4034"
+             sodipodi:nodetypes="ccccc"
+             style="fill:#59597e;fill-opacity:1;stroke:#797575;stroke-width:0.090478;filter:url(#filter3214)"
+             d="m 44.583,12.191 -0.021,-3.5686 9.407,-0.0106 0.187,13.385 -9.573,-9.806 z"
+             transform="matrix(0.85410351,0,0,0.81569,5.3480401,9.259341)" />
+          <path
+             id="path3988"
+             sodipodi:nodetypes="ccccccc"
+             style="fill:#59597e;fill-opacity:1;stroke-width:0;filter:url(#filter3214)"
+             d="m 56.858,7.201 -1.2336,0.81446 -12.059,-0.00395 -0.9726,-0.72945 0.0257,-3.6908 14.158,0.043502 0.08105,3.5662 z"
+             transform="matrix(0.85410351,0,0,0.81569,5.3480401,9.259341)" />
+        </g>
+      </g>
+      <rect
+         id="rect4316"
+         style="fill:#eeeeec;stroke:#322828;stroke-width:0.10205;stroke-linecap:round;filter:url(#filter3214)"
+         height="19.884001"
+         width="17.283001"
+         y="37.564999"
+         x="23.257"
+         transform="matrix(0.85410351,0,0,0.81569,5.3480401,51.259341)" />
+      <rect
+         id="rect5668"
+         style="fill:#2e3436;stroke:#322828;stroke-width:0.081653;stroke-linecap:round;filter:url(#filter3214)"
+         height="15.91"
+         width="13.829"
+         y="39.551998"
+         x="24.983999"
+         transform="matrix(0.85410351,0,0,0.81569,5.3480401,51.259341)" />
+    </g>
+  </g>
+  <metadata
+     id="metadata1">
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>home icon</dc:title>
+        <dc:date>2010-04-15T05:41:33</dc:date>
+        <dc:description>real estate clip art by netalloy</dc:description>
+        <dc:source>https://openclipart.org/detail/47197/home-icon-by-netalloy</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>netalloy</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>building</rdf:li>
+            <rdf:li>construction</rdf:li>
+            <rdf:li>cottage</rdf:li>
+            <rdf:li>home</rdf:li>
+            <rdf:li>house</rdf:li>
+            <rdf:li>icon</rdf:li>
+            <rdf:li>real estate icons</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>

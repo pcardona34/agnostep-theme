@@ -1,0 +1,9 @@
+#! /bin/zsh
+# Tested with a 2.6.32 kernel.
+
+dir=/sys/class/power_supply/BAT0
+now=$( < $dir/charge_now )
+full=$( < $dir/charge_full )
+echo "Battery"
+cat $dir/status
+printf "%.1f%%" $(( 100 * $now. / full ))
