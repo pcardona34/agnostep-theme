@@ -6,7 +6,7 @@ Although this theme was created with the AGNoStep Project in mind, it could be a
  
 This theme was created mostly from the [Papirus Iconset](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme.git).
 New icons were created for some applications: Gorm, projectCenter...
-The UI theme was inpired by the Sleek flat theme of GNUstep.
+The UI theme was inspired by the Sleek flat theme of GNUstep.
 The color palette was inspired from the classic OPENSTEP background.
 The default wallpapers were created on purpose. Of course, you may change it with a picture of your own using the Preferences of GWorkspace. 
 
@@ -24,9 +24,9 @@ If not, you must adapt all the dependencies.
 
 1) Install the Window manager Window Maker;
 
-2) Install a complete GNUstep system with the frameworks.
+2) Install a complete GNUstep system with the frameworks (see  [agnostep](https://github.com/pcardona34/agnostep) for a complete list).
 
-3) Install the Workspace (GWorkspace) and the mostly used GNUstep applications: namely SimpleAgenda, TextEdit, Terminal, InnerSpace.  
+3) Install the Workspace (GWorkspace) and the mostly used GNUstep applications: namely AddressManager, GNUMail, SimpleAgenda, TextEdit, Terminal, InnerSpace...  
 For the Classic Flavour (C5C) you will need also: AClock, TimeMon.
 
 4) Clone this repository:
