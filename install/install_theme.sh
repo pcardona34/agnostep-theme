@@ -12,6 +12,7 @@
 ####################################################
 ### Install the Theme AGNOSTEP
 ### And set the User settings: defaults, .xsession...
+### accordingly.
 ####################################################
 
 clear
@@ -25,13 +26,12 @@ fi
 
 _PWD=`pwd`
 SPIN='\-/|'
-STOP=1 # Set to 0 to avoid stops; to 1 to make stops
+STOP=0 # Set to 0 to avoid stops; to 1 to make stops for debugging purpose
 #set -v
 MSG_STOP="Stop: type <Enter> to continue."
 LOG=$HOME/AGNOSTEP_THEME.log
 GWDEF="org.gnustep.GWorkspace"
 DEFDIR=RESOURCES/DEFAULTS
-DEPS="laptop-detect"
 RPI=1 # By default, we assume the hw is not a RPI one. If not, it will be detected.
 
 ####################################################
@@ -45,15 +45,11 @@ RPI=1 # By default, we assume the hw is not a RPI one. If not, it will be detect
 . SCRIPTS/functions_misc_themes.sh
 . RELEASE
 
-stop
-
 echo $PATH | grep -e "/System/Tools" &>/dev/null
 if [ $? -ne 0 ];then
 	export PATH=/System/Tools:$PATH
 fi
 LOCAL_INSTALL_DIR=$(gnustep-config --variable=GNUSTEP_LOCAL_APPS)
-
-stop
 
 ### End of functions
 ####################################################
@@ -65,8 +61,8 @@ titulo
 ### Dependencies
 STR="Dependencies"
 subtitulo
-DEPS="laptop-detect"
-sudo apt -y install "$DEPS"
+DEPS="laptop-detect picom dunst dialog"
+sudo apt -y install ${DEPS}
 ok "Done"
 sleep 2;clear
 
@@ -78,53 +74,43 @@ subtitulo
 
 ### Set or restore standard $HOME filesystem
 ### Do NOT use xdg-user-dirs-update!!!
-for FOLD in Books Desktop Documents Downloads Favorites GNUstep Images Mailboxes Music Samples Videos
-do
-	if ! [ -d $HOME/$FOLD ];then
-		mkdir -p $HOME/$FOLD
-	fi
-done
 
-cd $_PWD
-
-################################
-### Miscellaneous for Home Folders
-################################
-
-################################
-### ENV
-
-STR="Miscellaneous for Home Folders"
-subtitulo
-###########################################
-### L18N for some folders (out of the scope of XDG rules)
-
-STR="L18N Folders"
-subtitulo
-
-l18n_folder
-
-stop
-cd $_PWD
-
-###############################################
 LG=${LANG:0:2}
 case "$LG" in
 "fr")
-	FOLDERS="Livres Favoris GNUstep Mailboxes Exemples SOURCES";;
+	# Some folders are auto-translated by GNUstep, others none: we only care about the others;
+	# The same is for the folders icons...
+	FOLDERS="Livres Desktop Documents Downloads Favoris GNUstep Images Mailboxes Music Exemples SOURCES Videos";;
 "en"|*)
-	FOLDERS="Books Favorites GNUstep Mailboxes Samples SOURCES";;
+	FOLDERS="Books Desktop Documents Downloads Favorites GNUstep Images Mailboxes Music Samples SOURCES Videos";;
 esac
+
+### We manage the case of existing folders in English or in French
+l18n_folder
+
+stop
 
 for FOLD in ${FOLDERS}
 do
 	printf "Setting Folder ${FOLD}\n"
+	if [ ! -d ${FOLD} ];then
+		mkdir -p $HOME/${FOLD}
+	fi
 	icon_folder $FOLD
 	ok "Done"
 done
-ok "Done"
+sleep 2
 stop
+
 cd $_PWD
+###############################################
+
+STR="Compositor"
+cd TOOLS/agnostep_picom
+. install_agnostep_picom.sh || exit 1
+install_picom
+cd $_PWD
+stop
 
 ###################################################
 ### Autostart, Xinitrc / Xsession, meteo config...
@@ -135,11 +121,18 @@ subtitulo
 
 cd $_PWD
 set_flavour
-write_xinitrc
-write_autostart
-write_meteo_conf
 
 stop
+
+write_xinitrc
+
+stop
+
+write_autostart
+
+stop
+
+write_meteo_conf
 
 cd $_PWD
 ok "Done"
@@ -170,7 +163,7 @@ stop
 STR="Wallpaper"
 subtitulo
 
-. $HOME/.config/agnostep/flavour.conf
+. $HOME/.config/agnostep/flavour.conf || exit 1
 case $FLAVOUR in
 "conky")
 	WP="fond_agnostep_cubes.png";;
@@ -195,13 +188,21 @@ stop
 STR="Main AGNOSTEP Theme"
 titulo
 
-printf "Window Maker Theme...\n"
-install_wm_theme
+#printf "Window Maker Theme...\n"
+#install_wm_theme
+#stop
+
 customize_clip
+
+stop
+
 cd $_PWD
 
 printf "GNUstep Theme..."
 install_gs_theme
+
+stop
+
 cd $_PWD
 
 ### Some Apps known to not comply with Theme: workaround
@@ -243,13 +244,29 @@ fi
 cat ${GWD} | sed -e s/patrick/$USER/g > ${GWDEF}.plist
 
 cd $_PWD
-if [ ! -f $HOME_GNUSTEP_DEF/WindowMaker ];then
-	cd RESOURCES/DEFAULTS && cp WindowMaker $HOME_GNUSTEP_DEF/
-fi
-if [ ! -f $HOME_GNUSTEP_DEF/WMState ];then
-        cd RESOURCES/DEFAULTS && cp WMState $HOME_GNUSTEP_DEF/
+#if [ ! -f $HOME_GNUSTEP_DEF/WindowMaker ];then
+#	cd RESOURCES/DEFAULTS && cp WindowMaker $HOME_GNUSTEP_DEF/
+#fi
+
+
+
+. $HOME/.config/agnostep/flavour.conf || exit 1
+case $FLAVOUR in
+"conky")
+	WMSTATE="WMState_conky";;
+"c5c"|*)
+	WMSTATE="WMState_c5c";;
+esac
+
+cd RESOURCES/DEFAULTS
+if [ ! -f $WMSTATE ];then
+	alert "The file $WMSTATE was not found. This is a major issue."
+	exit 1
+else
+	cp $WMSTATE $HOME_GNUSTEP_DEF/WMState
 fi
 cd $_PWD
+stop
 
 ################################
 ### Set the defaults
@@ -257,25 +274,19 @@ cd $_PWD
 ################################
 
 ############################################
-### Applying a theme for WMaker:
-printf "Applying a theme for WMaker...\n"
-#### Syntax: setstyle THEME-PACK
-#### (in our case: THEME-PACK is 'AGNOSTEP')
+### Applying a style for WMaker:
+printf "Applying a Style to WMaker...\n"
+#### Syntax: setstyle style.style
 
-. $HOME/.config/agnostep/flavour.conf
-if [ "$FLAVOUR" == "c5c" ];then
-	WMSTYLE=$HOME/GNUstep/Library/WindowMaker/Themes/AGNOSTEP-C5C.themed
-else
-	WMSTYLE=$HOME/GNUstep/Library/WindowMaker/Themes/AGNOSTEP.themed
-fi
-
-if [ ! -d $WMSTYLE ];then
-	alert "$WMSTYLE was not found!\nThis is a major issue."
+STYLE=RESOURCES/THEMES/wmaker.style
+if [ ! -f $STYLE ];then
+	alert "$STYLE was not found!\nThis is a major issue."
 	exit 1
 fi
 
-setstyle --no-cursors --no-fonts $WMSTYLE
+setstyle --no-cursors --no-fonts $STYLE
 ok "Done"
+stop
 
 ############################################
 #### Applying Defaults for GNUstep
@@ -286,6 +297,8 @@ if ! [ -d $DEST ];then
 	alert "$DEST was not found!"
 	exit 1
 fi
+
+stop
 
 cd RESOURCES/DEFAULTS || exit 1
 
@@ -303,20 +316,25 @@ do
 			fi
 		fi
 		ok "Done"
+		stop
 	else
 		warning "The File ${PLIST}.plist was not found."
+		stop
 	fi
 done
 
 ### Misc GWorkspace settings
-. $HOME/.config/agnostep/flavour.conf
+. $HOME/.config/agnostep/flavour.conf || exit 1
 case $FLAVOUR in
 "conky")
-        DOCKPOS=0;;
+        DOCKPOS=0
+	HIDE=0;;
 "c5c")
-        DOCKPOS=1;;
+        DOCKPOS=1
+	HIDE=1;;
 esac
 defaults write org.gnustep.GWorkspace dockposition $DOCKPOS
+defaults write org.gnustep.GWorkspace hidedock $HIDE
 
 cd $_PWD
 
@@ -359,39 +377,18 @@ ok "Done"
 
 stop
 #################################################
-### Installing Tools and confs... Setup_Printer
-TITLE="Setup_Printer"
-echo "$TITLE" >>$LOG
-title "$TITLE"
-
-cd TOOLS || exit 1
-sudo cp Setup_Printer /usr/local/bin/
-cd $_PWD
-ok "Done"
-
-stop
-##################################################
-### Installing Tools and confs... Shooting CLI
-TITLE="Screenshot Shooting CLI"
-echo "$TITLE" >>$LOG
-title "$TITLE"
-
-cd TOOLS || exit 1
-sudo cp Shooting /usr/local/bin/
-cd $_PWD
-ok "Done"
-
-stop
 
 ####################################################
 ### Installing Tools and confs... Conky
-. $HOME/.config/agnostep/flavour.conf
+. $HOME/.config/agnostep/flavour.conf || exit 1
 if [ "$FLAVOUR" == "conky" ];then
 	STR="Conky Monitoring Board"
 	titulo
 	cd TOOLS/agnostep_conky || exit 1
 	. ./prepare_agnostep_conky.sh || exit 1
 	. ./install_agnostep_conky.sh || exit 1
+
+stop
 
 	cd $_PWD
 	### We must complete conky symbols: icon battery
@@ -402,16 +399,19 @@ if [ "$FLAVOUR" == "conky" ];then
 	sudo cp ${ICOBAT} /usr/local/share/icons/conky/
 	cd $_PWD
 	ok "Done"
-
-	##################################################
-	### Installing Tools and confs... Compton
-	STR="Compton Compositing"
-	subtitulo
-	cd TOOLS/agnostep_compton || exit 1
-	. ./install_agnostep_compton.sh
-	cd $_PWD
-	ok "Done"
 fi
+stop
+
+####################################################
+### Installing Tools and confs... Dockapps 
+### for C(C flavour
+. $HOME/.config/agnostep/flavour.conf || exit 1
+if [ "$FLAVOUR" == "c5c" ];then
+	cd TOOLS/dockapps
+	./install_dockapps.sh
+	cd $_PWD
+fi
+
 stop
 
 ###########################################
@@ -435,19 +435,12 @@ cd TOOLS/agnostep_fw || exit 1
 . ./install_agnostep_fw.sh
 cd $_PWD
 ok "Done"
-###########################################
-
-####################################################
-### Installing Tools and confs... Conky
-. $HOME/.config/agnostep/flavour.conf
-if [ "$FLAVOUR" == "c5c" ];then
-	cd TOOLS/dockapps
-	./install_dockapps.sh
-	cd $_PWD
-fi
+stop
 
 ###########################################
-### Loading
+
+###########################################
+### Loading notification
 sudo cp -u RESOURCES/SCRIPTS/loading.sh /usr/local/bin/
 
 stop

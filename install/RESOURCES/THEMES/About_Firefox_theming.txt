@@ -1,0 +1,8 @@
+Firefox AGNOSTEP theme
+======================
+
+You can get online editable theme there:
+https://color.firefox.com/?theme=XQAAAAIfAQAAAAAAAABBKYhm849SCia3ftKEGccwS-xMDPsqs1mDZ7rpAavnJaJMx-DTeHqPJkTu1cMBQhzZp7pHXyxl1UONhflTvPWT8vc23yu9rge-r3M6muDfRlFEUw_dX0HA8KoKSh2FQ20L8DKSGpPYrn_V9PIYAM0wz_ReJ_5cBxAU_V5TufWIWdZO6phRIiD90hM7M9oiZACk6LWfUPzRfmTTBFSoFvP57Wk2dkH-aILA
+
+A copy of the theme is also available:
+AGNOSTEP_theme.xpi

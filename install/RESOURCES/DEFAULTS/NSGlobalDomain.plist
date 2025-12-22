@@ -10,11 +10,6 @@
     <string>Alt_L</string>
     <key>GSFirstControlKey</key>
     <string>Control_L</string>
-    <key>GSRemovableMediaPaths</key>
-    <array>
-	<string>/mnt/CRUCIAL</string>
-	<string>/mnt/CLEPAT</string>
-    </array>
     <key>GSSecondControlKey</key>
     <string>Control_R</string>
     <key>GSTheme</key>

@@ -41,7 +41,7 @@ For the Classic Flavour (C5C) you will need also: AClock, TimeMon.
 ````
 You will be asked for the Flavour:
 - Conky: it is a theme with a Conky panel.
-- Classic (C5C): it is a more classic organisation of the Workspace with a Deamon top bar (known as 'Fiend' within OpenStep) named 'Clip' within Window Maker. 
+- Classic (C5C): it is a more classic organisation of the Workspace with a Deamon top bar (known as 'Fiend' within OpenStep) named 'Clip' and the WMDock within Window Maker. 
 
 You will also be asked for the Weather Station next to you to set the Weather info.
 

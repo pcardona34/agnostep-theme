@@ -14,6 +14,9 @@
 ################################
 
 ###############################################
+### !!! The funtion: install_wm_theme is obsolete
+### DO NOT use it
+###############################################
 function install_wm_theme
 {
 title "AGNOSTEP Theme for WindowMaker"

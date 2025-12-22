@@ -16,12 +16,12 @@ fi
 HEAT=`curl "wttr.in/${STATION}?m&format=1" | awk '{print $2}'`
 SITE=`echo $STATION | awk -F, '{print $1}'`
 
-DATE1=$(date +"%a %d")
-DATE2=$(date +"%b")
+DATE1=$(date +"%a%d/%m")
+#DATE2=$(date +"%m")
 L1="$DATE1"
-L2="$DATE2"
+L2=""
 L3="      "
-L4="$SITE"
+L4="${SITE:0:9}"
 L5="$HEAT"
 
 

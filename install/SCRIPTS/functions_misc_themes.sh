@@ -37,7 +37,7 @@ function customize_clip
 CLIP_ICON=$_PWD/RESOURCES/ICONS/clip.tiff
 DESTINATION_ICON=$HOME/GNUstep/Library/Icons
 if [ ! -d $DESTINATION ];then
-	mkdir -p $DESTINATION
+	mkdir -p $DESTINATION_ICON
 fi
-cp $CLIP_ICON $DESTINATION/
+cp $CLIP_ICON $DESTINATION_ICON/
 }

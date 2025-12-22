@@ -50,8 +50,9 @@ STR="Xinitrc - Xsession";subtitulo
 cat << "HEAD_OF_XINIT" > $XINITRC
 
 #!/bin/sh
-
 PID_XSESSION=$$
+# Compositor
+/usr/bin/picom --config $HOME/.config/picom.conf &
 
 HEAD_OF_XINIT
 
@@ -59,26 +60,22 @@ HEAD_OF_XINIT
 cat << BODY_OF_XINIT >> $XINITRC
 
 ### Window Manager
-/usr/bin/wmaker --no-dock $WMCLIP --static &
+/usr/bin/wmaker $WMDOCK $WMCLIP --static &
+### Agenda
+${AGENDA}
 
 BODY_OF_XINIT
 
-
 cat << "END_OF_XINIT" >> $XINITRC
-sleep 1
-/System/Tools/openapp SimpleAgenda &
 
 ### GWorkspace within a DBus session
 sleep 4
 exec dbus-launch --sh-syntax --exit-with-session /System/Tools/openapp GWorkspace
 
 ### This is a secure way in any case Dbus fails to kill the session:
-
 kill $PID_XSESSION
 
 END_OF_XINIT
-
-
 
 cp -f $XINITRC $XSESSION
 }
@@ -89,17 +86,14 @@ function write_autostart
 STR="Autostart";subtitulo
 
 cat << "HEAD_OF_AUTOSTART" > $AUTOSTART
+
 #!/bin/bash
 xset m 20/10 4
-
 ### This is to prevent DMPS and blanking issues on RPI machine
 xset -dpms
 xset s off
-
 ### gdnc
 /Local/Tools/gdomap -L GDNCServer || /Local/Tools/gdnc &
-### compton: the -b arg means as a daemon like &
-pgrep compton || compton -b
 ### Notifications
 systemctl --user import-environment DISPLAY
 pgrep dunst || dunst &
@@ -115,10 +109,11 @@ cat << FOOT_OF_AUTOSTART >> $AUTOSTART
 ${CONKY}
 
 ### Updater
-sleep 10 && /usr/local/bin/Updater -d &
+${UPDATER}
 
 ### Birthday Notifier only with Conky Flavour
 ${BIRTHDAY}
+
 FOOT_OF_AUTOSTART
 
 
@@ -169,13 +164,19 @@ case "$CHOICE" in
 	"2") echo "${YOUR_CHOICE}: AGNoStep Classic"
 		FLAVOUR="c5c"
 		WMCLIP=""
+		WMDOCK=""
+		AGENDA=""
 		CONKY=""
-		BIRTHDAY="";;
+		BIRTHDAY=""
+		UPDATER="";;
 	"1"|*) echo "${YOUR_CHOICE}: AGNoStep and Conky."
 		FLAVOUR="conky"
 		WMCLIP="--no-clip"
+		WMDOCK="--no-dock"
+		AGENDA="/System/Tools/openapp SimpleAgenda &"
 		CONKY="pgrep conky || sleep 8 && conky -c ~/.config/agnostep/conky.conf &"
-		BIRTHDAY="#sleep 10 && /usr/local/bin/BirthNotify &";;
+		BIRTHDAY="#sleep 10 && /usr/local/bin/BirthNotify &"
+		UPDATER="sleep 10 && /usr/local/bin/Updater -d &";;
 esac
 
 echo -e "FLAVOUR=\"${FLAVOUR}\"" > ${FLAVOUR_CONF}

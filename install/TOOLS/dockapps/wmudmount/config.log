@@ -27,10 +27,10 @@ uname -v = #1 SMP PREEMPT Debian 1:6.12.47-1+rpt1 (2025-09-16)
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
 
-PATH: /home/patrick/.local/bin
 PATH: /home/patrick/GNUstep/Tools
 PATH: /Local/Tools
 PATH: /System/Tools
+PATH: /home/patrick/.local/bin
 PATH: /usr/local/sbin
 PATH: /usr/local/bin
 PATH: /usr/sbin
@@ -681,7 +681,7 @@ CFLAGS='-g -O2'
 CPP='gcc -E'
 CPPFLAGS=''
 CYGPATH_W='echo'
-DATE='December 18, 2025'
+DATE='December 21, 2025'
 DEFS='-DHAVE_CONFIG_H'
 DEPDIR='.deps'
 ECHO_C=''
