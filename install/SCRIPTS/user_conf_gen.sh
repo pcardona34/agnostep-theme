@@ -22,6 +22,9 @@ XSESSION=$HOME/.xsession
 AUTOSTART=$HOME/GNUstep/Library/WindowMaker/autostart
 METEO_CONF=$HOME/.config/agnostep/meteo.conf
 FLAVOUR_CONF=$HOME/.config/agnostep/flavour.conf
+FICHTEMP=$(mktemp /tmp/agno-XXXXX)
+trap "rm -f $FICHTEMP" EXIT
+CHOICE=""
 
 ####################################################
 ### Functions include
@@ -62,6 +65,7 @@ cat << BODY_OF_XINIT >> $XINITRC
 ### Window Manager
 /usr/bin/wmaker $WMDOCK $WMCLIP --static &
 ### Agenda
+sleep 2
 ${AGENDA}
 
 BODY_OF_XINIT
@@ -93,7 +97,7 @@ xset m 20/10 4
 xset -dpms
 xset s off
 ### gdnc
-/Local/Tools/gdomap -L GDNCServer || /Local/Tools/gdnc &
+#/Local/Tools/gdomap -L GDNCServer || /Local/Tools/gdnc &
 ### Notifications
 systemctl --user import-environment DISPLAY
 pgrep dunst || dunst &
@@ -116,52 +120,163 @@ ${BIRTHDAY}
 
 FOOT_OF_AUTOSTART
 
-
+chmod +x $AUTOSTART
 }
 ####################################################
 
 ####################################################
 ### Writing the meteo conf
+
+function inputboxCountry
+{
+# boîte d'entrée de valeur proprement dite
+dialog --backtitle "$METEO_TITLE" --title "$COUNTRY_TAG" \
+--inputbox "
+${COUNTRY_TAG}:" 14 60 2> $FICHTEMP
+# retour d'information (boîte d'info)
+# 0 est le code retour du bouton Accepter
+if [ $? = 0 ];then
+        COUNTRY=`cat $FICHTEMP`
+        #echo "$COUNTRY"
+else
+        inputboxCountry
+fi
+
+}
+
+function inputboxState
+{
+# boîte d'entrée de valeur proprement dite
+dialog --backtitle "$METEO_TITLE" --title "$STATE_TAG" \
+--inputbox "
+${STATE_TAG}:" 14 60 2> $FICHTEMP
+# retour d'information (boîte d'info)
+# 0 est le code retour du bouton Accepter
+if [ $? = 0 ];then
+        STATE=`cat $FICHTEMP`
+        #echo "$STATE"
+else
+        inputboxState
+fi
+
+}
+
+function inputboxCity
+{
+# boîte d'entrée de valeur proprement dite
+dialog --backtitle "$METEO_TITLE" --title "$CITY_TAG" \
+--inputbox "
+${CITY_TAG}:" 14 60 2> $FICHTEMP
+# retour d'information (boîte d'info)
+# 0 est le code retour du bouton Accepter
+if [ $? = 0 ];then
+        CITY=`cat $FICHTEMP`
+        #echo "$CITY"
+else
+        inputboxCity
+fi
+
+}
+
 function write_meteo_conf
 {
 STR="$METEO_TITLE";subtitulo
+sleep 2
 
 if [ -f $METEO_CONF ];then
-	printf "${INFO_FILE_EXISTS}\n"
-	read -p "(1) ${EDIT_FILE} - (2) ${ERASE_FILE} - ${ENTER}: " REP
-	case "$REP" in
-		1)
-		nano $METEO_CONF;;
-		2|*)
+	dialog --backtitle "AGNoStep Setup" --title "Weather Settings" \
+	--yesno "
+	${INFO_FILE_EXISTS}
+	${EDIT_FILE}?" 12 60
+	# traitement de la réponse
+	# O est le code retour du bouton Oui
+	# toute autre action (Non, Esc, Ctrl-C) le poursuit
+	if [ $? = 0 ];then
+		nano $METEO_CONF
+	else
 		rm -f $METEO_CONF
-		read -p "${COUNTRY_TAG} - ${ENTER}: " COUNTRY
-		read -p "${STATE_TAG}:  - ${ENTER}: " STATE
-		read -p "${CITY_TAG}:  - ${ENTER}: " CITY
-		echo -e "STATION=\"${CITY},${STATE},${COUNTRY}\"" > $METEO_CONF;;
-	esac
+		#read -p "${COUNTRY_TAG} - ${ENTER}: " COUNTRY
+		#read -p "${STATE_TAG}:  - ${ENTER}: " STATE
+		#read -p "${CITY_TAG}:  - ${ENTER}: " CITY
+		inputboxCountry
+		inputboxState
+		inputboxCity
+		echo -e "STATION=\"${CITY},${STATE},${COUNTRY}\"" > $METEO_CONF
+	fi
+else
+	inputboxCountry
+	inputboxState
+	inputboxCity
+	echo -e "STATION=\"${CITY},${STATE},${COUNTRY}\"" > $METEO_CONF
 fi
-
 info "$INFO_METEO_END"
-
 }
 ####################################################
-
 
 ####################################################
 ### What is the flavour?
 ####################################################
 
+function menu_fr
+{
+# boîte de menu
+dialog --backtitle "Variante du thème" --title "Choix de la variante" \
+--menu "
+Le thème AGNOSTEP se décline en deux variantes.
+
+Choisissez une des variantes proposées:" 18 66 2 \
+"Conky" "Installer le panneau d'infos système de Conky" \
+"Classic" "Installer la variante classique de Window Maker" 2>> $FICHTEMP
+# traitement de la réponse
+if [ $? = 0 ]
+then
+for i in `cat $FICHTEMP`
+do
+case $i in
+"Conky") echo "Vous avez choisi: Conky";CHOICE="CONKY" ;;
+"Classic") echo "Vous avez choisi: Classic";CHOICE="CLASSIC";;
+esac
+done
+fi
+}
+
+function menu_en
+{
+# boîte de menu
+dialog --backtitle "Flavour of the Theme" --title "Flavour Choice" \
+--menu "
+The AGNOSTEP Theme provides two flavours.
+
+Select one of these flavours:" 18 66 2 \
+"Conky" "Install the Conky Sysinfo Panel" \
+"Classic" "Install the Classic flavour of Window Maker" 2>> $FICHTEMP
+# traitement de la réponse
+if [ $? = 0 ]
+then
+for i in `cat $FICHTEMP`
+do
+case $i in
+"Conky") echo "You chose: Conky";CHOICE="CONKY" ;;
+"Classic") echo "You chose: Classic";CHOICE="CLASSIC";;
+esac
+done
+fi
+}
+
 function set_flavour
 {
 clear
 STR="A G N o S t e p  -  ${FLAVOUR_TITLE}";titulo
+sleep 2
 
-info "${FLAVOUR_INFO}: \n\t(1) Conky: ${FLAVOUR_ONE}. \n\t(2) C5C: ${FLAVOUR_TWO}. ${INFO_BOTH}."
-
-read -p "${CHOICE_PROMPT}: 1, 2. ${ENTER} : " CHOICE
+LG=${LANG:0:2}
+case $LG in
+"fr") menu_fr;;
+"en"|*) menu_en;;
+esac
 
 case "$CHOICE" in
-	"2") echo "${YOUR_CHOICE}: AGNoStep Classic"
+	"CLASSIC")
 		FLAVOUR="c5c"
 		WMCLIP=""
 		WMDOCK=""
@@ -169,13 +284,13 @@ case "$CHOICE" in
 		CONKY=""
 		BIRTHDAY=""
 		UPDATER="";;
-	"1"|*) echo "${YOUR_CHOICE}: AGNoStep and Conky."
+	"CONKY"|*) echo "${YOUR_CHOICE}: AGNoStep and Conky."
 		FLAVOUR="conky"
 		WMCLIP="--no-clip"
 		WMDOCK="--no-dock"
 		AGENDA="/System/Tools/openapp SimpleAgenda &"
 		CONKY="pgrep conky || sleep 8 && conky -c ~/.config/agnostep/conky.conf &"
-		BIRTHDAY="#sleep 10 && /usr/local/bin/BirthNotify &"
+		BIRTHDAY="sleep 10 && /usr/local/bin/BirthNotify &"
 		UPDATER="sleep 10 && /usr/local/bin/Updater -d &";;
 esac
 

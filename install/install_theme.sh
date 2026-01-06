@@ -45,6 +45,16 @@ RPI=1 # By default, we assume the hw is not a RPI one. If not, it will be detect
 . SCRIPTS/functions_misc_themes.sh
 . RELEASE
 
+####################################################
+### DO NOT RUN under an existent X session
+####################################################
+
+if [ -n "$DISPLAY" ];then
+	alert "You should not install this theme within an XTERM!"
+	info "Logout the Graphical session, open a tty console and try again."
+	exit 1
+fi
+
 echo $PATH | grep -e "/System/Tools" &>/dev/null
 if [ $? -ne 0 ];then
 	export PATH=/System/Tools:$PATH
@@ -80,9 +90,9 @@ case "$LG" in
 "fr")
 	# Some folders are auto-translated by GNUstep, others none: we only care about the others;
 	# The same is for the folders icons...
-	FOLDERS="Livres Desktop Documents Downloads Favoris GNUstep Images Mailboxes Music Exemples SOURCES Videos";;
+	FOLDERS="Livres Desktop Documents Downloads Favoris GNUstep Aide Images Mailboxes Music Exemples SOURCES Videos";;
 "en"|*)
-	FOLDERS="Books Desktop Documents Downloads Favorites GNUstep Images Mailboxes Music Samples SOURCES Videos";;
+	FOLDERS="Books Desktop Documents Downloads Favorites GNUstep Help Images Mailboxes Music Samples SOURCES Videos";;
 esac
 
 ### We manage the case of existing folders in English or in French
@@ -117,6 +127,7 @@ stop
 STR="Flavour, Autostart, Xsession..."
 subtitulo
 
+. SCRIPTS/functions_goodies.sh || exit 1
 . SCRIPTS/user_conf_gen.sh || exit 1
 
 cd $_PWD
@@ -125,6 +136,7 @@ set_flavour
 stop
 
 write_xinitrc
+cp $HOME/.xinitrc $HOME/.xsession
 
 stop
 
@@ -192,18 +204,19 @@ titulo
 #install_wm_theme
 #stop
 
-customize_clip
-
-stop
-
-cd $_PWD
-
 printf "GNUstep Theme..."
 install_gs_theme
 
+cd $_PWD
 stop
 
+### Clip
+. $HOME/.config/agnostep/flavour.conf || exit 1
+if [ "$FLAVOUR" == "c5c" ];then
+	customize_clip
+fi
 cd $_PWD
+stop
 
 ### Some Apps known to not comply with Theme: workaround
 ### We need to update Info-gnustep.plist for these apps
@@ -255,6 +268,14 @@ case $FLAVOUR in
 "conky")
 	WMSTATE="WMState_conky";;
 "c5c"|*)
+	if [ -d $HOME/GNUstep/Library/WindowMaker/CachedPixmaps ];then
+		cd $HOME/GNUstep/Library/WindowMaker/CachedPixmaps
+		rm -f *.xpm
+		cp $_PWD/RESOURCES/THEMES/c5c_cachedpixmaps.tar.gz ./
+		gunzip --force c5c_cachedpixmaps.tar.gz
+		tar -xf c5c_cachedpixmaps.tar && rm c5c_cachedpixmaps.tar
+		cd $_PWD
+	fi
 	WMSTATE="WMState_c5c";;
 esac
 
@@ -333,8 +354,8 @@ case $FLAVOUR in
         DOCKPOS=1
 	HIDE=1;;
 esac
-defaults write org.gnustep.GWorkspace dockposition $DOCKPOS
 defaults write org.gnustep.GWorkspace hidedock $HIDE
+defaults write org.gnustep.GWorkspace dockposition $DOCKPOS
 
 cd $_PWD
 
@@ -403,7 +424,7 @@ fi
 stop
 
 ####################################################
-### Installing Tools and confs... Dockapps 
+### Installing Tools and confs... Dockapps
 ### for C(C flavour
 . $HOME/.config/agnostep/flavour.conf || exit 1
 if [ "$FLAVOUR" == "c5c" ];then

@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# WindowMaker will wait until this script finishes, so if you run any
+# commands that take long to execute (like a xterm), put a '&' in the
+# end of the command line.
+#
+# This file must be executable.
+#
+xset m 20/10 4
+
+### This is to prevent DMPS and blanking issues on RPI machine
+xset -dpms
+xset s off
+
+### gdnc
+#$(which gdomap) -L GDNCServer || $(which gdnc) &
+
+

@@ -18,7 +18,7 @@ function icon_folder
 {
 FOLDER="$1"
 cd RESOURCES/ICONS
-if [ -f dir_${FOLDER} ];then
+if [ -f dir_${FOLDER}.tiff ];then
 	### We only set an icon for non standard folders
 	cp -u dir_${FOLDER}.tiff $HOME/${FOLDER}/.dir.tiff
 fi
@@ -52,6 +52,14 @@ case $LG in
 		fi
 		mv $HOME/Samples $HOME/Exemples
 	fi
+	if [ -d $HOME/Help ];then
+		if [ -d $HOME/Aide ];then
+			alert "Vous avez déjà deux dossiers pour gérer les exemples: Samples et Exemples. Vous devez en supprimer un."
+			exit 1
+		fi
+		mv $HOME/Help $HOME/Aide
+	fi
+
 	printf "Les dossiers ont été francisés autant que faire se peut.\n";;
 	"en"|*)
 	printf "The Folders names were not changed: default is English.\n";;

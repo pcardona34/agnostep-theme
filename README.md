@@ -2,25 +2,40 @@
 
 GNUstep theme for the [AGNoStep Desktop Project](https://github.com/pcardona34/agnostep).
 
-Although this theme was created with the AGNoStep Project in mind, it could be also used with a GNUstep system already installed.
+Although this theme was created with the AGNoStep Project in mind, it could be also used with any other GNUstep system already installed.
  
 This theme was created mostly from the [Papirus Iconset](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme.git).
 New icons were created for some applications: Gorm, projectCenter...
+
 The UI theme was inspired by the Sleek flat theme of GNUstep.
+
 The color palette was inspired from the classic OPENSTEP background.
-The default wallpapers were created on purpose. Of course, you may change it with a picture of your own using the Preferences of GWorkspace. 
 
-## With AGNoStep Desktop
+The default wallpapers were created on purpose:
+- Cubes for the Conky flavour;
+- Waves for the Classic flavour.
 
-If you installed the whole AGNoStep Desktop, this theme will be already set. You do not need it.
+Of course, you may change it with a picture of your own using the Preferences of GWorkspace.
 
-## Without AGNoStep Desktop
+## Goodies
+
+The theme is also providing some usefull desktop tools:
+- Time, date, Wheather health, CPU, Network and Memory monitoring.
+- Birthday Notification.
+- Updater: checking wether new Debian packages are available...
+
+## How to install AGNOSTEP theme
+
+### Within AGNoStep Desktop
+
+If you yet installed the whole AGNoStep Desktop, this theme has been already set.
+
+## Installing without AGNoStep Desktop
 
 If not, you might first set a compliant GNUstep Desktop.
 
 **IMPORTANT NOTE**
-As the dependencies are managed with the apt command, you must use a compliant Operating System like GNU/Linux Debian Trixie.
-If not, you must adapt all the dependencies.
+As the dependencies are managed with the apt command, you must use a compliant Operating System like GNU/Linux Debian Trixie. (If not, you must adapt all the dependencies. Do not hesitate to create a PR if you did it).
 
 1) Install the Window manager Window Maker;
 
@@ -49,4 +64,16 @@ That's done. Enjoy!
 
 ## Screenshots
 
-Some screenshots are provided in the folder [Screenshots](Screenshots).
+![AGNOSTEP Classic French](./Screenshots/screenshot_2025-12-21_Agnostep_Classic.png)
+
+Some other screenshots are provided in the folder [Screenshots](Screenshots).
+
+## How to uninstall
+
+````
+    cd agnostep-theme
+    cd install
+    ./uninstall_theme.sh
+````
+
+You will revert to the Default GNUstep Theme.
