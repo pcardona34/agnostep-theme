@@ -36,12 +36,14 @@ function not_again
 {
 ### We should not reinstall GNUstep
 ### To avoid side effects...
-GSPATH=/System
-if [ -d $GSPATH ];then
-	alert "GNUstep has been already built. DO NOT build again."
-	info "To install apps, use instead the script:"
-	cli "./5_install_AGNOSTEP.sh"
-	exit 1
+GNUSTEP_SYSTEM_TOOLS=$(gnustep-config --variable=GNUSTEP_SYSTEM_TOOLS)
+if [ -n "$GNUSTEP_SYSTEM_TOOLS" ];then
+	if [ -d ${GNUSTEP_SYSTEM_TOOLS} ];then
+		alert "GNUstep has been already built. DO NOT build again."
+		info "To install apps, use instead the script:"
+		cli "./5_install_apps.sh"
+		exit 1
+	fi
 fi
 }
 

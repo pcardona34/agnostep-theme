@@ -25,6 +25,7 @@ FLAVOUR_CONF=$HOME/.config/agnostep/flavour.conf
 FICHTEMP=$(mktemp /tmp/agno-XXXXX)
 trap "rm -f $FICHTEMP" EXIT
 CHOICE=""
+GNUSTEP_SYSTEM_TOOLS=$(gnustep-config --variable=GNUSTEP_SYSTEM_TOOLS)
 
 ####################################################
 ### Functions include
@@ -68,13 +69,13 @@ cat << BODY_OF_XINIT >> $XINITRC
 sleep 2
 ${AGENDA}
 
+### GWorkspace within a DBus session
+sleep 4
+exec dbus-launch --sh-syntax --exit-with-session ${GNUSTEP_SYSTEM_TOOLS}/openapp GWorkspace
+
 BODY_OF_XINIT
 
 cat << "END_OF_XINIT" >> $XINITRC
-
-### GWorkspace within a DBus session
-sleep 4
-exec dbus-launch --sh-syntax --exit-with-session /System/Tools/openapp GWorkspace
 
 ### This is a secure way in any case Dbus fails to kill the session:
 kill $PID_XSESSION
@@ -288,7 +289,7 @@ case "$CHOICE" in
 		FLAVOUR="conky"
 		WMCLIP="--no-clip"
 		WMDOCK="--no-dock"
-		AGENDA="/System/Tools/openapp SimpleAgenda &"
+		AGENDA="${GNUSTEP_SYSTEM_TOOLS}/openapp SimpleAgenda &"
 		CONKY="pgrep conky || sleep 8 && conky -c ~/.config/agnostep/conky.conf &"
 		BIRTHDAY="sleep 10 && /usr/local/bin/BirthNotify &"
 		UPDATER="sleep 10 && /usr/local/bin/Updater -d &";;

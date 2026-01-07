@@ -33,6 +33,8 @@ LOG=$HOME/AGNOSTEP_THEME.log
 GWDEF="org.gnustep.GWorkspace"
 DEFDIR=RESOURCES/DEFAULTS
 RPI=1 # By default, we assume the hw is not a RPI one. If not, it will be detected.
+TEMPFILE=$(mktemp /tmp/agno-XXXXX)
+trap "rm -f $TEMPFILE" EXIT
 
 ####################################################
 ### Include functions
@@ -55,11 +57,19 @@ if [ -n "$DISPLAY" ];then
 	exit 1
 fi
 
-echo $PATH | grep -e "/System/Tools" &>/dev/null
-if [ $? -ne 0 ];then
-	export PATH=/System/Tools:$PATH
+### PATH
+
+whereis gnustep-config
+if [ $? -eq 0 ];then
+	LOCAL_INSTALL_DIR=$(gnustep-config --variable=GNUSTEP_LOCAL_APPS)
+	GNUSTEP_SYSTEM_TOOLS=$(gnustep-config --variable=GNUSTEP_SYSTEM_TOOLS)
+	echo $PATH | grep -e "${GNUSTEP_SYSTEM_TOOLS}" &>/dev/null
+	if [ $? -ne 0 ];then
+		export PATH=${GNUSTEP_SYSTEM_TOOLS}:$PATH
+	fi
+else
+	alert "Your GNUstep System seems not correctly set. Aborting!"
 fi
-LOCAL_INSTALL_DIR=$(gnustep-config --variable=GNUSTEP_LOCAL_APPS)
 
 ### End of functions
 ####################################################
@@ -254,7 +264,7 @@ else
 	GWD=${GWDEF}.TEMPLATE
 fi
 
-cat ${GWD} | sed -e s/patrick/$USER/g > ${GWDEF}.plist
+cat ${GWD} | sed -e s/patrick/$USER/g | sed -e s#/Local/Applications#${LOCAL_INSTALL_DIR}#g > ${GWDEF}.plist
 
 cd $_PWD
 #if [ ! -f $HOME_GNUSTEP_DEF/WindowMaker ];then
@@ -285,6 +295,9 @@ if [ ! -f $WMSTATE ];then
 	exit 1
 else
 	cp $WMSTATE $HOME_GNUSTEP_DEF/WMState
+	### Setting to the user env
+	cat $HOME_GNUSTEP_DEF/WMState | sed -e s#/System/Tools#${GNUSTEP_SYSTEM_TOOLS}#g > $TEMPFILE
+	cat $TEMPFILE > $HOME_GNUSTEP_DEF/WMState
 fi
 cd $_PWD
 stop
@@ -425,7 +438,7 @@ stop
 
 ####################################################
 ### Installing Tools and confs... Dockapps
-### for C(C flavour
+### for C5C flavour
 . $HOME/.config/agnostep/flavour.conf || exit 1
 if [ "$FLAVOUR" == "c5c" ];then
 	cd TOOLS/dockapps
