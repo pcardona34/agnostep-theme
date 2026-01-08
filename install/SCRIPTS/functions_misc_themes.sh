@@ -19,8 +19,8 @@ cd $_PWD/RESOURCES/INFOS
 for INFO in Info-gnustep.plist_*
 do
 	printf "Updating ${INFO#Info-gnustep.plist_}...\n"
-	TARGET="${LOCAL_INSTALL_DIR}/${INFO#Info-gnustep.plist_}.app/Resources/Info-gnustep.plist"
-	if [ -d ${LOCAL_INSTALL_DIR}/${INFO#Info-gnustep.plist_}.app/Resources ]; then
+	TARGET="${APP_DIR}/${INFO#Info-gnustep.plist_}.app/Resources/Info-gnustep.plist"
+	if [ -d ${APP_DIR}/${INFO#Info-gnustep.plist_}.app/Resources ]; then
 		sudo cp --remove-destination ${INFO} ${TARGET} && ok "Done"
 	else
 		warning "$TARGET was not found for $INFO"

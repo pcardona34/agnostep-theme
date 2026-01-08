@@ -1,9 +1,12 @@
 #!/bin/bash
 
-# wminfo plugin: displays weather from Wttr.in
+# wmtxt plugin: displays Weather Heat
 # This script must be copied to: /usr/local/bin
 # command: 
-#	wminfo -p meteo.wmi -u 3600 -k -b#2f2f2f -f#c0c0c0
+# wmtext -i 3600 -b '#2f2f2f' -f '#c0c0c0' ./meteo4wmtext
+# wmtext -i 3600 -b '#2f2f2f' -f '#c0c0c0' /usr/local/bin/meteo4wmtext
+
+# Gets weather Heat from Wttr.in
 
 ### We get the STATION var:
 CONF=$HOME/.config/agnostep/meteo.conf
@@ -16,17 +19,13 @@ fi
 HEAT=`curl "wttr.in/${STATION}?m&format=1" | awk '{print $2}'`
 SITE=`echo $STATION | awk -F, '{print $1}'`
 
-DATE1=$(date +"%a%d/%m")
-#DATE2=$(date +"%m")
-L1="$DATE1"
-L2=""
-L3="      "
-L4="${SITE:0:9}"
-L5="$HEAT"
-
+DATE=$(date +"%a%d/%m")
+L1="$DATE"
+L2=" "
+L3="${SITE:0:9}"
+L4="  $HEAT"
 
 echo $L1
 echo $L2
 echo $L3
 echo $L4
-echo $L5

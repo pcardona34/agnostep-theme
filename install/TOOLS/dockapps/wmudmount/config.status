@@ -437,7 +437,7 @@ Copyright (C) 2012 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/home/patrick/SOURCES/agnostep-theme/install/TOOLS/dockapps/wmudmount'
+ac_pwd='/home/patrick/SOURCES/agnostep/build/agnostep-theme/install/TOOLS/dockapps/wmudmount'
 srcdir='.'
 INSTALL='/usr/bin/install -c'
 MKDIR_P='/usr/bin/mkdir -p'
@@ -628,14 +628,14 @@ S["LIBOBJS"]=""
 S["EGREP"]="/usr/bin/grep -E"
 S["GREP"]="/usr/bin/grep"
 S["gdk_pixbuf_LIBS"]="-lgdk_pixbuf-2.0 -lgobject-2.0 -lglib-2.0 "
-S["gdk_pixbuf_CFLAGS"]="-I/usr/include/gdk-pixbuf-2.0 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/usr/include/sysprof-6 -I/usr/include/libpng16"\
-" -I/usr/include/aarch64-linux-gnu -I/usr/include/webp -I/usr/include/libmount -I/usr/include/blkid -pthread "
+S["gdk_pixbuf_CFLAGS"]="-I/usr/include/gdk-pixbuf-2.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/sysprof-6 -I/usr/include/libpng16 "\
+"-I/usr/include/x86_64-linux-gnu -I/usr/include/webp -I/usr/include/libmount -I/usr/include/blkid -pthread "
 S["GTK_LIBS"]="-lgtk-3 -lgdk-3 -lz -lpangocairo-1.0 -lpango-1.0 -lharfbuzz -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0 "
-S["GTK_CFLAGS"]="-I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/usr/include/sysprof-6 -I/us"\
-"r/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/fribidi -I/usr/inclu"\
-"de/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/aarch64-linux-gnu -I/usr/include/webp -I/usr/include/gio-unix-2.0 -I/u"\
-"sr/include/cloudproviders -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/aarch64"\
-"-linux-gnu/dbus-1.0/include -pthread "
+S["GTK_CFLAGS"]="-I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/sysprof-6 -I/usr"\
+"/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/fribidi -I/usr/includ"\
+"e/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/x86_64-linux-gnu -I/usr/include/webp -I/usr/include/gio-unix-2.0 -I/usr"\
+"/include/cloudproviders -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-li"\
+"nux-gnu/dbus-1.0/include -pthread "
 S["X_EXTRA_LIBS"]=""
 S["X_LIBS"]="$(X_PRE_LIBS)  -lX11 $(gdk_pixbuf_LIBS) $(X_EXTRA_LIBS) $(GTK_LIBS) $(udisks2_LIBS) $(secret_LIBS) $(gcr_LIBS) $(libnotify_LIBS)"
 S["X_PRE_LIBS"]=" -lSM -lICE"
@@ -644,19 +644,19 @@ S["CPP"]="gcc -E"
 S["XMKMF"]=""
 S["gcr_LIBS"]="-lgcr-ui-3 -lgcr-base-3 -lgck-1 -lp11-kit -lgtk-3 -lgdk-3 -lz -lpangocairo-1.0 -lpango-1.0 -lharfbuzz -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf"\
 "-2.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0 "
-S["gcr_CFLAGS"]="-I/usr/include/gcr-3 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/usr/include/sysprof-6 -I/usr/include/libmount -I/usr/i"\
-"nclude/blkid -I/usr/include/gck-1 -I/usr/include/p11-kit-1 -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/fr"\
-"eetype2 -I/usr/include/libpng16 -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/aar"\
-"ch64-linux-gnu -I/usr/include/webp -I/usr/include/gio-unix-2.0 -I/usr/include/cloudproviders -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -"\
-"I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/aarch64-linux-gnu/dbus-1.0/include -pthread "
+S["gcr_CFLAGS"]="-I/usr/include/gcr-3 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/sysprof-6 -I/usr/include/libmount -I/usr/in"\
+"clude/blkid -I/usr/include/gck-1 -I/usr/include/p11-kit-1 -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/fre"\
+"etype2 -I/usr/include/libpng16 -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/x86_"\
+"64-linux-gnu -I/usr/include/webp -I/usr/include/gio-unix-2.0 -I/usr/include/cloudproviders -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/"\
+"usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -pthread "
 S["secret_LIBS"]="-lsecret-1 -lgio-2.0 -lgobject-2.0 -lglib-2.0 "
-S["secret_CFLAGS"]="-I/usr/include/libsecret-1 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/usr/include/sysprof-6 -I/usr/include/libmount -I"\
-"/usr/include/blkid -I/usr/include/gio-unix-2.0 -pthread "
+S["secret_CFLAGS"]="-I/usr/include/libsecret-1 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/sysprof-6 -I/usr/include/libmount -I/"\
+"usr/include/blkid -I/usr/include/gio-unix-2.0 -pthread "
 S["libnotify_LIBS"]=""
 S["libnotify_CFLAGS"]=""
 S["udisks2_LIBS"]="-ludisks2 -lgio-2.0 -lgobject-2.0 -lglib-2.0 "
-S["udisks2_CFLAGS"]="-I/usr/include/udisks2 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/usr/include/sysprof-6 -I/usr/include/libmount -I/usr"\
-"/include/blkid -pthread "
+S["udisks2_CFLAGS"]="-I/usr/include/udisks2 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/sysprof-6 -I/usr/include/libmount -I/usr/"\
+"include/blkid -pthread "
 S["PKG_CONFIG_LIBDIR"]=""
 S["PKG_CONFIG_PATH"]="/home/patrick/GNUstep/Library/Libraries/pkgconfig:/Local/Library/Libraries/pkgconfig:/System/Library/Libraries/pkgconfig"
 S["PKG_CONFIG"]="/usr/bin/pkg-config"
@@ -678,7 +678,7 @@ S["CPPFLAGS"]=""
 S["LDFLAGS"]=" -Wl,--as-needed"
 S["CFLAGS"]="-g -O2"
 S["CC"]="gcc"
-S["DATE"]="January  6, 2026"
+S["DATE"]="January  8, 2026"
 S["AM_BACKSLASH"]="\\"
 S["AM_DEFAULT_VERBOSITY"]="0"
 S["AM_DEFAULT_V"]="$(AM_DEFAULT_VERBOSITY)"
@@ -693,12 +693,12 @@ S["mkdir_p"]="$(MKDIR_P)"
 S["MKDIR_P"]="/usr/bin/mkdir -p"
 S["INSTALL_STRIP_PROGRAM"]="$(install_sh) -c -s"
 S["STRIP"]=""
-S["install_sh"]="${SHELL} /home/patrick/SOURCES/agnostep-theme/install/TOOLS/dockapps/wmudmount/install-sh"
-S["MAKEINFO"]="${SHELL} /home/patrick/SOURCES/agnostep-theme/install/TOOLS/dockapps/wmudmount/missing makeinfo"
-S["AUTOHEADER"]="${SHELL} /home/patrick/SOURCES/agnostep-theme/install/TOOLS/dockapps/wmudmount/missing autoheader"
-S["AUTOMAKE"]="${SHELL} /home/patrick/SOURCES/agnostep-theme/install/TOOLS/dockapps/wmudmount/missing automake-1.16"
-S["AUTOCONF"]="${SHELL} /home/patrick/SOURCES/agnostep-theme/install/TOOLS/dockapps/wmudmount/missing autoconf"
-S["ACLOCAL"]="${SHELL} /home/patrick/SOURCES/agnostep-theme/install/TOOLS/dockapps/wmudmount/missing aclocal-1.16"
+S["install_sh"]="${SHELL} /home/patrick/SOURCES/agnostep/build/agnostep-theme/install/TOOLS/dockapps/wmudmount/install-sh"
+S["MAKEINFO"]="${SHELL} /home/patrick/SOURCES/agnostep/build/agnostep-theme/install/TOOLS/dockapps/wmudmount/missing makeinfo"
+S["AUTOHEADER"]="${SHELL} /home/patrick/SOURCES/agnostep/build/agnostep-theme/install/TOOLS/dockapps/wmudmount/missing autoheader"
+S["AUTOMAKE"]="${SHELL} /home/patrick/SOURCES/agnostep/build/agnostep-theme/install/TOOLS/dockapps/wmudmount/missing automake-1.16"
+S["AUTOCONF"]="${SHELL} /home/patrick/SOURCES/agnostep/build/agnostep-theme/install/TOOLS/dockapps/wmudmount/missing autoconf"
+S["ACLOCAL"]="${SHELL} /home/patrick/SOURCES/agnostep/build/agnostep-theme/install/TOOLS/dockapps/wmudmount/missing aclocal-1.16"
 S["VERSION"]="3.0"
 S["PACKAGE"]="wmudmount"
 S["CYGPATH_W"]="echo"

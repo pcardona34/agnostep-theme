@@ -22,9 +22,11 @@ PREFIX=$(echo ${LANG%.UTF-8} | awk -F'_' '{print $1}')
 
 case "$PREFIX" in
 	"fr")
+		TITLE="Mémo:"
 		CELMSG="Fête:"
 		BIRMSG="Anniver.:";;
 	"en" | *)
+		TITLE="Remember:"
 		CELMSG="Feast:"
 		BIRMSG="Birthday:";;
 esac
@@ -46,7 +48,7 @@ fi
 TODAY=$(date +"%d/%m")
 #echo $TODAY
 
-printf "MEMO\n"
+printf "$TITLE\n"
 
 ### Reading the Birthday base
 while read LIGNE

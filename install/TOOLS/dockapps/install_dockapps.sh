@@ -28,60 +28,13 @@ STR="Network monitoring: wmnd";subtitulo
 sudo apt $APT_OPT install wmnd
 ok "Done";sleep 2;clear
 
-##################################################################
-### wminfo: used for date, weather, uptime, memory check.
-### First call:
-# wminfo -p memory.wmi -u 1 -k -b #2f2f2f -f #c0c0c0
-### Second call:
-# wminfo -p meteo.wmi -u 3600 -k -b #2f2f2f -f #c0c0c0
-
-STR="Date, Weather, Uptime, Memory free: wminfo";subtitulo
-
-printf "Fetching...\n"
-if [ -d wminfo ];then
-	cd wminfo
-	git pull origin master &>/dev/null
-else
-	git clone https://github.com/gapan/wminfo &>/dev/null
-	cd wminfo || exit 1
-fi
-ok "Done"
-
-printf "Configuring...\n"
-cd wminfo
-if [ -f Makefile ];then
-	make clean &>/dev/null
-fi
-./configure --prefix=/usr &>/dev/null
-ok "Done"
-
-printf "Building...\n"
-make &>>$LOG &
-PID=$!
-spinner
-ok "\rDone"
-
-printf "Installing...\n"
-sudo pkill wminfo &>/dev/null
-sudo -E make install &>>$LOG &
-
-printf "Plugins...\n"
-cd ../..
-cd wmi_plugins
-for P in *.wmi
-do
-echo "$P"
-sudo -E cp $P /usr/local/bin/
-done
-cd ..
-ok "Done"
-
 ################################################################"
 ### wmtext: used for new Updater notification
 ### Call:
 # wmtext -i 3600 -b 'forest green' -a 'New' crimson white updater4wmtext
 
-STR="Notifications: Updater, Birthdays...: wmtext";subtitulo
+STR="Uptime, Date, Heat, Updater, Birthdays...: WMText";subtitulo
+
 cd wmtext || exit 1
 
 if [ -f Makefile ] && [ -f wmtext ];then

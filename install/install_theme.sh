@@ -61,8 +61,8 @@ fi
 
 whereis gnustep-config
 if [ $? -eq 0 ];then
-	LOCAL_INSTALL_DIR=$(gnustep-config --variable=GNUSTEP_LOCAL_APPS)
-	GNUSTEP_SYSTEM_TOOLS=$(gnustep-config --variable=GNUSTEP_SYSTEM_TOOLS)
+	export APP_DIR=`gnustep-config --variable=GNUSTEP_LOCAL_APPS`
+	export GNUSTEP_SYSTEM_TOOLS=`gnustep-config --variable=GNUSTEP_SYSTEM_TOOLS`
 	echo $PATH | grep -e "${GNUSTEP_SYSTEM_TOOLS}" &>/dev/null
 	if [ $? -ne 0 ];then
 		export PATH=${GNUSTEP_SYSTEM_TOOLS}:$PATH
@@ -85,6 +85,24 @@ DEPS="laptop-detect picom dunst dialog"
 sudo apt -y install ${DEPS}
 ok "Done"
 sleep 2;clear
+
+###################################################
+### GNUstep apps needed (1/2)
+STR="Checking installed apps (1)";titulo
+
+APPS="GWorkspace SimpleAgenda Terminal TextEdit GNUMail InnerSpace"
+for APP in ${APPS}
+do
+	echo -e "Looking for: ${APP_DIR}/${APP}.app"
+	if [ -d ${APP_DIR}/${APP}.app ];then
+		info "$APP has been found."
+	else
+		alert "$APP was not found. Install it before, please."
+		exit 1
+	fi
+done
+ok "Done"
+sleep 2
 
 ####################################################
 ### FreeDesktop User filesystem
@@ -142,6 +160,36 @@ subtitulo
 
 cd $_PWD
 set_flavour
+
+###################################################
+### GNUstep apps needed (2/2)
+. $HOME/.config/agnostep/flavour.conf || exit 1
+
+function more_apps
+{
+STR="Checking installed apps (2)";titulo
+APPS="AClock TimeMon"
+laptop-detect
+if [ $? -eq 0 ];then
+   	APPS="$APPS batmon"
+fi
+for APP in ${APPS}
+do
+	echo -e "Looking for ${APP_DIR}/${APP}.app"
+       	if [ -d ${APP_DIR}/${APP}.app ];then
+		info "$APP has been found."
+       	else
+               	alert "$APP was not found. Install it before, please."
+               	exit 1
+       	fi
+done
+}
+
+if [ "$FLAVOUR" == "c5c" ];then
+	more_apps
+	ok "Done"
+	sleep 2
+fi
 
 stop
 
@@ -264,7 +312,7 @@ else
 	GWD=${GWDEF}.TEMPLATE
 fi
 
-cat ${GWD} | sed -e s/patrick/$USER/g | sed -e s#/Local/Applications#${LOCAL_INSTALL_DIR}#g > ${GWDEF}.plist
+cat ${GWD} | sed -e s/patrick/$USER/g | sed -e s#/Local/Applications#${APP_DIR}#g > ${GWDEF}.plist
 
 cd $_PWD
 #if [ ! -f $HOME_GNUSTEP_DEF/WindowMaker ];then
@@ -286,7 +334,13 @@ case $FLAVOUR in
 		tar -xf c5c_cachedpixmaps.tar && rm c5c_cachedpixmaps.tar
 		cd $_PWD
 	fi
-	WMSTATE="WMState_c5c";;
+	laptop-detect
+	if [ $? -eq 0 ];then
+		WMSTATE="WMState_laptop"
+		cp $_PWD/RESOURCES/ICONS/batmon.GNUstep.xpm $HOME/GNUstep/Library/WindowMaker/CachedPixmaps/
+	else
+		WMSTATE="WMState_c5c"
+	fi;;
 esac
 
 cd RESOURCES/DEFAULTS

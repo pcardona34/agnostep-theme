@@ -25,7 +25,7 @@ FLAVOUR_CONF=$HOME/.config/agnostep/flavour.conf
 FICHTEMP=$(mktemp /tmp/agno-XXXXX)
 trap "rm -f $FICHTEMP" EXIT
 CHOICE=""
-GNUSTEP_SYSTEM_TOOLS=$(gnustep-config --variable=GNUSTEP_SYSTEM_TOOLS)
+GNUSTEP_SYSTEM_TOOLS=`gnustep-config --variable=GNUSTEP_SYSTEM_TOOLS`
 
 ####################################################
 ### Functions include

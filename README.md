@@ -23,12 +23,13 @@ The theme is also providing some usefull desktop tools:
 - Time, date, Wheather health, CPU, Network and Memory monitoring.
 - Birthday Notification.
 - Updater: checking wether new Debian packages are available...
+- On laptops, the two flavours provide a Battery monitoring.
 
 ## How to install AGNOSTEP theme
 
 ### Within AGNoStep Desktop
 
-If you yet installed the whole AGNoStep Desktop, this theme has been already set.
+If you yet installed the whole AGNoStep Desktop, this theme has been already set: see stage 6.
 
 ## Installing without AGNoStep Desktop
 
@@ -42,7 +43,7 @@ As the dependencies are managed with the apt command, you must use a compliant O
 2) Install a complete GNUstep system with the frameworks (see  [agnostep](https://github.com/pcardona34/agnostep) for a complete list).
 
 3) Install the Workspace (GWorkspace) and the mostly used GNUstep applications: namely AddressManager, GNUMail, SimpleAgenda, TextEdit, Terminal, InnerSpace...  
-For the Classic Flavour (C5C) you will need also: AClock, TimeMon.
+For the Classic Flavour (C5C) you will need also: AClock, TimeMon, batmon (laptop only).
 
 4) Clone this repository:
 ````cd; mkdir SOURCES; cd SOURCES

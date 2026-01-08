@@ -1,8 +1,10 @@
 #!/bin/bash
 
-# wminfo plugin: displays Memory infos
+# wmtxt plugin: displays Memory monitoring and UpTime
 # This script must be copied to: /usr/local/bin
-# command: wminfo -p memory.wmi -u 1 -k -b#2f2f2f -f#c0c0c0
+# command: 
+# wmtext -i 1 -b '#8686be' -f '#c0c0c0' ./memory4wmtext # Testing
+# wmtext -i 1 -b '#8686be' -f '#c0c0c0' /usr/local/bin/memory4wmtext # published
 
 # Get total and used memory
 TOTAL=$(free | grep -e "Mem:" | awk '{print $2}')
@@ -16,7 +18,7 @@ UP=$(uptime | awk '{print $3}' | awk -F, '{print $1}')
 # Construct the memory bar using square characters (filled squares)
 BAR=""
 for ((i=0; i<PERSIX; i++)); do
-    BAR+="#"  # Use the filled square character directly
+    BAR+="|"  # Use the filled square character directly
 done
 
 # Add some ASCII representation for the remaining part
@@ -25,16 +27,23 @@ for ((i=PERSIX; i<6; i++)); do
 done
 
 # Prepare output lines
-L1="UP: ${UP}"
+LG=${LANG:0:2}
+case "$LG" in
+"fr")
+L1="Durée:"
+L2="${UP}"
+L3="Mémoire:"
+L4="${BAR}${PERCENT}%";;
+"en"|*)
+L1="Up: ${UP}"
 L2=""
-L3="MEMORY:"
-L4="${BAR}${PERCENT}%"
-L5=""
+L3="Memory:"
+L4="${BAR}${PERCENT}%";;
+esac
 
 # Print the results
 echo "$L1"
 echo "$L2"
 echo "$L3"
 printf "%s\n" "$L4"
-echo "$L5"
 

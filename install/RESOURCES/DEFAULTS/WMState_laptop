@@ -252,6 +252,18 @@
             PasteCommand = "wmudmount %s";
             Command = wmudmount;
             Omnipresent = No;
+          },
+          {
+            Forced = No;
+            Name = batmon.GNUstep;
+            DropCommand = "";
+            BuggyApplication = No;
+            AutoLaunch = Yes;
+            Position = "9,0";
+            Lock = Yes;
+            PasteCommand = "";
+            Command = "/System/Tools/openapp batmon.app";
+            Omnipresent = No;
           }
         );
         Collapsed = No;

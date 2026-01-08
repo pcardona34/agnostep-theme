@@ -4,26 +4,26 @@ Description from left to right:
 
 - Default Clip icon
 
-- Date and Weather heat are provided with 'wminfo' and the plugin 'meteo.wmi'
+- Date and Weather heat are provided with 'wmtext' and the plugin 'meteo4wmtext'
 Command: 
-	wminfo -p meteo.wmi -u 3600 -k -b#2f2f2f -f#c0c0c0
+	wmtext -i 3600 -b '#8686bE -f 'white' /usr/local/bin/meteo4wmtext
 Localized: yes (auto)
 
 - Clock
 Command:
-	/System/Tools/openapp AClock
+	$GNUSTEP_SYSTEM_TOOLS/openapp AClock
 
-- Uptime, Memory free are provided by 'wminfo' with the plugin 'memory.wmi
+- Uptime, Memory free are provided by 'wmtext' with the plugin 'memory4wmtext'
 Command:
-	wminfo -p memory.wmi -u 1 -k -b#2f2f2f -f#c0c0c0
-Localized: to be done
+	wmtext -i 1 -b '#8686bE -f 'white' /usr/local/bin/memory4wmtext
+Localized: done
 
 - CPU monitoring is provided by Timon (an app ported from OPENSTEP to GNUstep)
-	/System/Tools/openapp TimeMon
+	$GNUSTEP_SYSTEM_TOOLS/openapp TimeMon
 
-- Root FileSytem (/) Disk Storage is monitored by wmdiskmon
-Command: you must adapt this to your context
-	wmdiskmon -p /dev/mmcblk0p2 -s
+- Root FileSytem (/) Disk Storage and removable diskq are monitored by wmudmount
+Command:
+	wmudmount
 
 - Network activity is monitored by wmnd
 Command:
@@ -31,7 +31,7 @@ Command:
 
 - Debian System Updater notification is provided by wmtext with the script updater4wmtext
 Command:
-	wmtext -i 3600 -b \"forest green\" -a \"New|Nouveaux\" crimson white /usr/local/bin/updater4wmtext
+	wmtext -i 3600 -b '#8686be' -f 'white' -a \"New|Nouveaux\" crimson white /usr/local/bin/updater4wmtext
 Localized: English, French
 
 - Birthday/Feast Memo notification is provided by wmtext he script birthday4wmtext
@@ -41,6 +41,6 @@ Localized: English, French
 
 - Mounting/Unmouting removable media is provided by the interactive wmudmount dockapp
 Command:
-	wmudmount
+	wmudmount: see above.
 
 INSTALL: see 'install_dockapps.sh' in the current folder.
