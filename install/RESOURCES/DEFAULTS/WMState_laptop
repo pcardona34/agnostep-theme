@@ -152,7 +152,7 @@
     DropCommand = "wmsetbg -u -t %d";
     BuggyApplication = No;
     AutoLaunch = No;
-    Position = "665,0";
+    Position = "465,0";
     Lock = No;
     Command = "-";
   };
