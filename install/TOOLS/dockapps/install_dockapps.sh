@@ -68,6 +68,13 @@ ok "Done"
 
 STR="WMudmount";subtitulo
 
+### Fetching
+if [ ! -d wmudmount ];then
+	printf "Fetching WMudmount source...\n"
+	WMUDMOUNT=https://sourceforge.net/projects/wmudmount/files/wmudmount/wmudmount-3.0.tar.gz/download
+	wget $WMUDMOUNT && gunzip --force wmudmount-3.0.tar.gz && tar -xf wmudmount-3.0.tar && rm wmudmount-3.0.tar
+	mv wmudmount-3.0 wmudmount
+fi
 cd wmudmount || exit 1
 ### To avoid the config.guess type error:
 ### We must update config.guess... and  config.sub
@@ -99,5 +106,7 @@ sudo -E make install &>>$LOG &
 PID=$!
 spinner
 ok "\rDone"
+
+################################################
 
 info "DockApps: all was done."
