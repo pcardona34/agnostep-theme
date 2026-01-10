@@ -2,7 +2,7 @@
 
 This is AGNOSTEP-Updater, an applet for the [A G N o S t e p   Desktop](https://github.com/pcardona34/agnostep).
 It checks if an update is available (until now, only for the OS Debian)
-and then notify it via the standard `notify-send' command.
+and then notify it via the standard `notify-send' command (conky flavour theme) or it creates a flag for the dockapp wmtext.
 
 ## Prerequisite
 
@@ -11,7 +11,7 @@ already done if you yet installed  A G N o S t e p  Desktop.
 
 ## Installing
 
-- To add the tool script to your 'autostart' script within WindowMaker, 
+# Autostart is now written separately. 
 just execute:
 
 ````

@@ -9,7 +9,7 @@
 ####################################################
 
 ################################
-### Updater
+### Upgrade
 ################################
 
 ################################
@@ -68,7 +68,7 @@ if [ $NB -gt 0 ];then
 		case "$ANSWER" in
 			"2"|"EXIT") exit 0;;
 			"UPGRADE")
-			xterm -title "Upgrade" -e "/usr/local/bin/Upgrade" "$date_today";;
+			cd $HOME && Updater --upgrade;;
 		esac
 	fi
 else
@@ -90,11 +90,11 @@ function upgrade
 case $PREFIX in
         "fr")
         TITLE="Mise à jour du Système Debian"
-        MSG="Mise à niveau des paquets..."
+        MSG="Installation de nouveaux paquets..."
         OK="Votre système est à jour.";;
         "en" | *)
-        TITLE="Debian System Upgrade"
-        MSG="Installing upgradable packages..."
+        TITLE="Debian System Updater"
+        MSG="Installing new packages..."
         OK="Your Operating System is up to date.";;
 esac
 
@@ -106,13 +106,13 @@ if [ $? -eq 0 ];then
 	dunstify "$TITLE" "$OK" -i $BELL
 	update
 else
-	echo "Upgrade: Error!!!"
+	echo "Update: Error!!!"
 fi
 }
 
 ### End of upgrade
 
-#######################################
+######################################
 ### main script
 
-update
+upgrade

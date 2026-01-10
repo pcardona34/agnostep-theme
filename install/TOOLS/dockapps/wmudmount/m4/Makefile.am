@@ -1,2 +1,0 @@
-SUBDIRS =
-EXTRA_DIST = statfs.m4

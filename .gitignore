@@ -1,2 +1,3 @@
-.gwdir
-install/TOOLS/dockapps/wmudmount
+**/.gwdir
+install/TOOLS/dockapps/wmudmount/**
+wmudmount/

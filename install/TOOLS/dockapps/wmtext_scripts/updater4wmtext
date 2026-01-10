@@ -3,7 +3,7 @@
 # wmtxt plugin: displays System Updates
 # This script must be copied to: /usr/local/bin
 # command: 
-# wmtext -i 30 -b 'forest green' -a 'New|Nouveaux' red white /usr/local/bin/updater4wmtext
+# wmtext -i 10 -b '#8686be' -f 'white' -a 'New|Nouveaux' crimson white /usr/local/bin/updater4wmtext
 
 NB=0
 FLAG=$HOME/.UPDATER

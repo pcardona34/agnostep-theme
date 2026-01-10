@@ -1,2 +1,0 @@
-?package(wmudmount):needs="X11" section="Applications/Viewers"\
-  title="wmudmount" command="/usr/bin/wmudmount"

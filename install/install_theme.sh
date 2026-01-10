@@ -143,10 +143,30 @@ stop
 cd $_PWD
 ###############################################
 
-STR="Compositor"
+STR="Compositor";subtitulo
 cd TOOLS/agnostep_picom
 . install_agnostep_picom.sh || exit 1
 install_picom
+cd $_PWD
+stop
+
+###################################################
+### XSudo
+STR="XSudo"
+if [ ! -d ../../build ];then
+	mkdir ../../build
+fi
+cd ../../build
+printf "Fetching...\n"
+if [ ! -d xsudo ];then
+	git clone https://github.com/mavit/xsudo.git
+	cd xsudo
+else
+	cd xsudo
+	git pull
+fi
+ls .
+
 cd $_PWD
 stop
 
