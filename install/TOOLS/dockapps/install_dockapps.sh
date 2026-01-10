@@ -71,7 +71,7 @@ STR="WMudmount";subtitulo
 ### Fetching
 if [ ! -d wmudmount ];then
 	printf "Fetching WMudmount source...\n"
-	WMUDMOUNT=https://sourceforge.net/projects/wmudmount/files/wmudmount/wmudmount-3.0.tar.gz/download
+	WMUDMOUNT=https://sourceforge.net/projects/wmudmount/files/wmudmount/wmudmount-3.0.tar.gz
 	wget $WMUDMOUNT && gunzip --force wmudmount-3.0.tar.gz && tar -xf wmudmount-3.0.tar && rm wmudmount-3.0.tar
 	mv wmudmount-3.0 wmudmount
 fi
