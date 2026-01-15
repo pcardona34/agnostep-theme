@@ -238,7 +238,7 @@
             Position = "7,0";
             Lock = Yes;
             PasteCommand = "";
-            Command = "wmtext -i 3600 -b #8686be -a Anniveraire|Birthday crimson white /usr/local/bin/birthday4wmtext";
+            Command = "wmtext -i 3600 -b #8686be f- white -a Anniv|Birth orange white /usr/local/bin/birthday4wmtext";
             Omnipresent = No;
           },
           {
