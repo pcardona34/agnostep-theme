@@ -226,7 +226,7 @@
             Position = "6,0";
             Lock = Yes;
             PasteCommand = "/usr/local/bin/Updater --upgrade";
-            Command = "wmtext -i 10 -b #8686be  -a \"New|Nouveaux\" crimson white /usr/local/bin/updater4wmtext";
+            Command = "wmtext -i 10 -b #8686be -f white -a \"New|Nouv\" crimson white /usr/local/bin/updater4wmtext";
             Omnipresent = No;
           },
           {
@@ -238,7 +238,7 @@
             Position = "7,0";
             Lock = Yes;
             PasteCommand = "";
-            Command = "wmtext -i 3600 -b #8686be f- white -a Anniv|Birth orange white /usr/local/bin/birthday4wmtext";
+            Command = "wmtext -i 3600 -b #8686be -f white -a \"Anniv|Birth\" orange white /usr/local/bin/birthday4wmtext";
             Omnipresent = No;
           },
           {
@@ -263,3 +263,4 @@
   );
   Workspace = Main;
 }
+
