@@ -24,7 +24,7 @@ do
 		sudo cp --remove-destination ${INFO} ${TARGET} && ok "Done"
 	else
 		warning "$TARGET was not found for $INFO"
-		#This should not prevent the 3rd step to accomplish...
+		#This should not prevent the next stage to accomplish...
 	fi
 done
 }

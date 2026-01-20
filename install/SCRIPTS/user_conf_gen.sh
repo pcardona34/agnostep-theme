@@ -20,7 +20,6 @@ STR="..."
 XINITRC=$HOME/.xinitrc
 XSESSION=$HOME/.xsession
 AUTOSTART=$HOME/GNUstep/Library/WindowMaker/autostart
-METEO_CONF=$HOME/.config/agnostep/meteo.conf
 FLAVOUR_CONF=$HOME/.config/agnostep/flavour.conf
 FICHTEMP=$(mktemp /tmp/agno-XXXXX)
 trap "rm -f $FICHTEMP" EXIT
@@ -128,90 +127,10 @@ chmod +x $AUTOSTART
 ####################################################
 ### Writing the meteo conf
 
-function inputboxCountry
-{
-# boîte d'entrée de valeur proprement dite
-dialog --backtitle "$METEO_TITLE" --title "$COUNTRY_TAG" \
---inputbox "
-${COUNTRY_TAG}:" 14 60 2> $FICHTEMP
-# retour d'information (boîte d'info)
-# 0 est le code retour du bouton Accepter
-if [ $? = 0 ];then
-        COUNTRY=`cat $FICHTEMP`
-        #echo "$COUNTRY"
-else
-        inputboxCountry
-fi
+. SCRIPTS/meteo_form.sh
 
-}
+info "Weather station has been set."
 
-function inputboxState
-{
-# boîte d'entrée de valeur proprement dite
-dialog --backtitle "$METEO_TITLE" --title "$STATE_TAG" \
---inputbox "
-${STATE_TAG}:" 14 60 2> $FICHTEMP
-# retour d'information (boîte d'info)
-# 0 est le code retour du bouton Accepter
-if [ $? = 0 ];then
-        STATE=`cat $FICHTEMP`
-        #echo "$STATE"
-else
-        inputboxState
-fi
-
-}
-
-function inputboxCity
-{
-# boîte d'entrée de valeur proprement dite
-dialog --backtitle "$METEO_TITLE" --title "$CITY_TAG" \
---inputbox "
-${CITY_TAG}:" 14 60 2> $FICHTEMP
-# retour d'information (boîte d'info)
-# 0 est le code retour du bouton Accepter
-if [ $? = 0 ];then
-        CITY=`cat $FICHTEMP`
-        #echo "$CITY"
-else
-        inputboxCity
-fi
-
-}
-
-function write_meteo_conf
-{
-STR="$METEO_TITLE";subtitulo
-sleep 2
-
-if [ -f $METEO_CONF ];then
-	dialog --backtitle "AGNoStep Setup" --title "Weather Settings" \
-	--yesno "
-	${INFO_FILE_EXISTS}
-	${EDIT_FILE}?" 12 60
-	# traitement de la réponse
-	# O est le code retour du bouton Oui
-	# toute autre action (Non, Esc, Ctrl-C) le poursuit
-	if [ $? = 0 ];then
-		nano $METEO_CONF
-	else
-		rm -f $METEO_CONF
-		#read -p "${COUNTRY_TAG} - ${ENTER}: " COUNTRY
-		#read -p "${STATE_TAG}:  - ${ENTER}: " STATE
-		#read -p "${CITY_TAG}:  - ${ENTER}: " CITY
-		inputboxCountry
-		inputboxState
-		inputboxCity
-		echo -e "STATION=\"${CITY},${STATE},${COUNTRY}\"" > $METEO_CONF
-	fi
-else
-	inputboxCountry
-	inputboxState
-	inputboxCity
-	echo -e "STATION=\"${CITY},${STATE},${COUNTRY}\"" > $METEO_CONF
-fi
-info "$INFO_METEO_END"
-}
 ####################################################
 
 ####################################################

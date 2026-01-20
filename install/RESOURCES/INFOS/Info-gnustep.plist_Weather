@@ -14,7 +14,7 @@
     GSMainMarkupFile = "";
     NOTE = "Automatically generated, do not edit!";
     NSExecutable = Weather;
-    NSIcon = "wheather.tiff";
+    NSIcon = "weather.tiff";
     NSMainNibFile = "Weather.gorm";
     NSMainStoryboardFile = "";
     NSPrincipalClass = NSApplication;
