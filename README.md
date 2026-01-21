@@ -1,6 +1,6 @@
 # agnostep-theme
 
-GNUstep theme for the [AGNoStep Desktop Project](https://github.com/pcardona34/agnostep).
+GNUstep theme for the [AGNoStep Desktop Project](https://github.com/pcardona34/agnostep-desktop).
 
 Although this theme was created with the AGNoStep Desktop Project in mind, it could be also used with any other GNUstep system already installed.
  
