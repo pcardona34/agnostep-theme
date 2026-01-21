@@ -2,6 +2,6 @@
  
 XTerm*foreground:         white
 XTerm*background:         Grey11
-*scrollBar:          true
-XTerm*font:               -misc-fixed-medium-r-normal--14-*-*-*-*-*-iso10646-1
+*scrollBar:	          false
+XTerm*font:               -misc-fixed-medium-r-normal--12-*-*-*-*-*-iso10646-1
  
