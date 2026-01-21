@@ -47,7 +47,6 @@
 	    NSDocumentClass = Document;
 	}
     );
-    CFBundleIconFile = "accessories-text-editor.icns";
     Copyright = "Copyright 1995-1996 NeXT Software, Inc., 2001-2010 Dusk to Dawn Computing, 1995-2009 by Apple Computer, Inc., all rights reserved.";
     CopyrightDescription = "You may freely copy, distribute, and reuse the code in this example.";
     GSMainMarkupFile = "";
