@@ -26,7 +26,7 @@ fi
 
 _PWD=`pwd`
 SPIN='\-/|'
-STOP=0 # Set to 0 to avoid stops; to 1 to make stops for debugging purpose
+STOP=1 # Set to 0 to avoid stops; to 1 to make stops for debugging purpose
 #set -v
 MSG_STOP="Stop: type <Enter> to continue."
 LOG=$HOME/AGNOSTEP_THEME.log
@@ -45,6 +45,7 @@ trap "rm -f $TEMPFILE" EXIT
 . SCRIPTS/functions_misc_folders.sh
 . SCRIPTS/functions_inst_themes.sh
 . SCRIPTS/functions_misc_themes.sh
+. SCRIPTS/meteo_form.sh
 . RELEASE
 
 ####################################################
@@ -59,7 +60,7 @@ fi
 
 ### PATH
 
-whereis gnustep-config
+which -s gnustep-config
 if [ $? -eq 0 ];then
 	export APP_DIR=`gnustep-config --variable=GNUSTEP_LOCAL_APPS`
 	export GNUSTEP_SYSTEM_TOOLS=`gnustep-config --variable=GNUSTEP_SYSTEM_TOOLS`
@@ -151,26 +152,6 @@ cd $_PWD
 stop
 
 ###################################################
-### XSudo
-STR="XSudo"
-if [ ! -d ../../build ];then
-	mkdir ../../build
-fi
-cd ../../build
-printf "Fetching...\n"
-if [ ! -d xsudo ];then
-	git clone https://github.com/mavit/xsudo.git
-	cd xsudo
-else
-	cd xsudo
-	git pull
-fi
-ls .
-
-cd $_PWD
-stop
-
-###################################################
 ### Autostart, Xinitrc / Xsession, meteo config...
 STR="Flavour, Autostart, Xsession..."
 subtitulo
@@ -221,6 +202,9 @@ stop
 write_autostart
 
 stop
+
+##################################################
+### Meteo settings
 
 write_meteo_conf
 
@@ -319,8 +303,8 @@ subtitulo
 ################################
 
 HOME_GNUSTEP_DEF=$HOME/GNUstep/Defaults
-if [ ! -d $HOME_GNUSTEP_DEF ];then
-	mkdir -p $HOME_GNUSTEP_DEF
+if [ ! -d ${HOME_GNUSTEP_DEF} ];then
+	mkdir -p ${HOME_GNUSTEP_DEF}
 fi
 
 cd $DEFDIR || exit 1
@@ -335,9 +319,9 @@ fi
 cat ${GWD} | sed -e s/patrick/$USER/g | sed -e s#/Local/Applications#${APP_DIR}#g > ${GWDEF}.plist
 
 cd $_PWD
-#if [ ! -f $HOME_GNUSTEP_DEF/WindowMaker ];then
-#	cd RESOURCES/DEFAULTS && cp WindowMaker $HOME_GNUSTEP_DEF/
-#fi
+if [ ! -f $HOME_GNUSTEP_DEF/WindowMaker ];then
+	cd RESOURCES/DEFAULTS && cp WindowMaker $HOME_GNUSTEP_DEF/
+fi
 
 
 
@@ -452,6 +436,10 @@ stop
 ### Installing Tools
 STR="User Tools"
 subtitulo
+
+if [ ! -d /usr/local/bin ];then
+	sudo mkdir -p /usr/local/bin
+fi
 
 cd RESOURCES/SCRIPTS || exit 1
 for TOOL in agnostep

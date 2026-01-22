@@ -13,6 +13,8 @@
 ### Meteo Form
 ################################
 
+function write_meteo_conf
+{
 FICHTEMP=$(mktemp /tmp/agno-XXXXX)
 trap "rm --force $FICHTEMP" EXIT
 METEO_CONF=$HOME/.config/agnostep/meteo.conf
@@ -59,3 +61,4 @@ if [ $? -eq 0 ];then
 fi
 
 echo -e "STATION=\"${STATION#,}\"" > ${METEO_CONF}
+}

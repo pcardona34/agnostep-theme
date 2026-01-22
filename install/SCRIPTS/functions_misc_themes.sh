@@ -35,10 +35,12 @@ done
 function customize_clip
 {
 CLIP_ICON=$_PWD/RESOURCES/ICONS/clip_c5c.tiff
-DESTINATION_ICON=$HOME/GNUstep/Library/Icons/clip.tiff
-if [ ! -d $DESTINATION ];then
+DESTINATION_ICON=$HOME/GNUstep/Library/Icons
+if [ ! -d $DESTINATION_ICON ];then
 	mkdir -p $DESTINATION_ICON
 fi
-cp $CLIP_ICON $DESTINATION_ICON
-cat $HOME/GNUstep/Defaults/WMWindowAttributes | sed s#/usr/share/WindowMaker#~/GNUstep/Library# > TEMP && mv TEMP $HOME/GNUstep/Defaults/WMWindowAttributes
+cp ${CLIP_ICON} ${DESTINATION_ICON}/clip.tiff
+if [ -f $HOME/GNUstep/Defaults/WMWindowAttributes ];then
+	cat $HOME/GNUstep/Defaults/WMWindowAttributes | sed s#/usr/share/WindowMaker#~/GNUstep/Library# > TEMP && mv TEMP $HOME/GNUstep/Defaults/WMWindowAttributes
+fi
 }

@@ -20,7 +20,13 @@ STR="..."
 XINITRC=$HOME/.xinitrc
 XSESSION=$HOME/.xsession
 AUTOSTART=$HOME/GNUstep/Library/WindowMaker/autostart
+if [ ! -d $HOME/GNUstep/Library/WindowMaker ];then
+	mkdir -p $HOME/GNUstep/Library/WindowMaker
+fi
 FLAVOUR_CONF=$HOME/.config/agnostep/flavour.conf
+if [ ! -d $HOME/.config/agnostep ];then
+	mkdir -p $HOME/.config/agnostep
+fi
 FICHTEMP=$(mktemp /tmp/agno-XXXXX)
 trap "rm -f $FICHTEMP" EXIT
 CHOICE=""
@@ -51,11 +57,16 @@ function write_xinitrc
 STR="Xinitrc - Xsession";subtitulo
 
 cat << "HEAD_OF_XINIT" > $XINITRC
+#!/bin/bash
 
-#!/bin/sh
 PID_XSESSION=$$
+
 # Compositor
 /usr/bin/picom --config $HOME/.config/picom.conf &
+
+if [ -f $HOME/.Xresources ];then
+	xrdb -merge $HOME/.Xresources
+fi
 
 HEAD_OF_XINIT
 
@@ -64,8 +75,8 @@ cat << BODY_OF_XINIT >> $XINITRC
 
 ### Window Manager
 /usr/bin/wmaker $WMDOCK $WMCLIP --static &
+
 ### Agenda
-sleep 2
 ${AGENDA}
 
 ### GWorkspace within a DBus session
@@ -122,15 +133,6 @@ FOOT_OF_AUTOSTART
 
 chmod +x $AUTOSTART
 }
-####################################################
-
-####################################################
-### Writing the meteo conf
-
-. SCRIPTS/meteo_form.sh
-
-info "Weather station has been set."
-
 ####################################################
 
 ####################################################
@@ -208,7 +210,7 @@ case "$CHOICE" in
 		FLAVOUR="conky"
 		WMCLIP="--no-clip"
 		WMDOCK="--no-dock"
-		AGENDA="${GNUSTEP_SYSTEM_TOOLS}/openapp SimpleAgenda &"
+		AGENDA="sleep 2;${GNUSTEP_SYSTEM_TOOLS}/openapp SimpleAgenda &"
 		CONKY="pgrep conky || sleep 8 && conky -c ~/.config/agnostep/conky.conf &"
 		BIRTHDAY="sleep 10 && /usr/local/bin/BirthNotify &"
 		UPDATER="sleep 10 && /usr/local/bin/Updater -d &";;

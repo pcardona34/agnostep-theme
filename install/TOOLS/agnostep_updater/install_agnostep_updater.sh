@@ -62,6 +62,6 @@ fi
 
 ### Misc appearence of XTerm
 cp --force _Xresources $HOME/.Xresources
-xrdb -merge $HOME/.Xresources
+#xrdb -merge $HOME/.Xresources
 
 printf "\nUpdater has been set.\n"
