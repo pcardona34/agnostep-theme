@@ -26,7 +26,7 @@ fi
 
 _PWD=`pwd`
 SPIN='\-/|'
-STOP=1 # Set to 0 to avoid stops; to 1 to make stops for debugging purpose
+STOP=0 # Set to 0 to avoid stops; to 1 to make stops for debugging purpose
 #set -v
 MSG_STOP="Stop: type <Enter> to continue."
 LOG=$HOME/AGNOSTEP_THEME.log
@@ -82,6 +82,7 @@ titulo
 ### Dependencies
 STR="Dependencies"
 subtitulo
+
 DEPS="laptop-detect picom dunst dialog"
 sudo apt -y install ${DEPS}
 ok "Done"
@@ -462,9 +463,8 @@ stop
 
 #################################################
 ### Installing Tools and confs... Updater
-TITLE="Updater tool"
-echo "$TITLE" >>$LOG
-title "$TITLE"
+STR="Updater tool"
+subtitulo
 
 cd TOOLS/agnostep_updater || exit 1
 . ./install_agnostep_updater.sh

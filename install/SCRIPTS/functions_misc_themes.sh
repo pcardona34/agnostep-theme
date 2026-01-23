@@ -15,16 +15,17 @@
 
 function update_info()
 {
+. $_PWD/SCRIPTS/find_app.sh
+
 cd $_PWD/RESOURCES/INFOS
 for INFO in Info-gnustep.plist_*
 do
-	printf "Updating ${INFO#Info-gnustep.plist_}...\n"
-	TARGET="${APP_DIR}/${INFO#Info-gnustep.plist_}.app/Resources/Info-gnustep.plist"
-	if [ -d ${APP_DIR}/${INFO#Info-gnustep.plist_}.app/Resources ]; then
+	APPNAME="${INFO#Info-gnustep.plist_}"
+	CHEMAPP="" && findapp ${APPNAME}
+	if [ $? -eq 0 ] && [ -n "$CHEMAPP" ];then
+		printf "Updating ${APPNAME} Info...\n"
+		TARGET="${CHEMAPP}/Resources/Info-gnustep.plist"
 		sudo cp --remove-destination ${INFO} ${TARGET} && ok "Done"
-	else
-		warning "$TARGET was not found for $INFO"
-		#This should not prevent the next stage to accomplish...
 	fi
 done
 }
