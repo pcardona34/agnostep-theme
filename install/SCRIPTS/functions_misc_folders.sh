@@ -17,7 +17,7 @@
 function icon_folder
 {
 FOLDER="$1"
-cd RESOURCES/ICONS
+cd $_PWD/RESOURCES/ICONS
 if [ -f dir_${FOLDER}.tiff ];then
 	### We only set an icon for non standard folders
 	cp -u dir_${FOLDER}.tiff $HOME/${FOLDER}/.dir.tiff
@@ -25,9 +25,25 @@ fi
 cd $_PWD
 }
 
+function app_sub_icon_folder
+{
+FOLDER="$1"
+APP_DIR=$(gnustep-config --variable=GNUSTEP_LOCAL_APPS)
+
+echo "$FOLDER is OK"
+
+cd $_PWD/RESOURCES/ICONS
+ls dir_${FOLDER}.tiff
+if [ -f dir_${FOLDER}.tiff ];then
+	sudo -E cp -u dir_${FOLDER}.tiff ${APP_DIR}/${FOLDER}/.dir.tiff
+	echo "$?"
+fi
+cd $_PWD
+}
+
 function l18n_folder
 {
-### The manage the case when folders with English names has been already created.
+### manage the case when folders with English names has been already created.
 LG=${LANG:0:2}
 case $LG in
 	"fr")

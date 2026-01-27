@@ -33,4 +33,4 @@ Weather Station." 16 60
 }
 
 ### Testing
-about_goodies;clear
+#about_goodies;clear

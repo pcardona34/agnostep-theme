@@ -1,13 +1,27 @@
 #!/bin/bash
 
+####################################################
+### A G N o S t e p  -  Theme - by Patrick Cardona
+### pcardona34 @ Github
+###
+### Thanks for the GNUstep Developers Community
+### This is Free and Open Source software.
+### Read License in the root directory.
+####################################################
+
+################################
+### Display title and messages
+### with colors
+################################
+
 ### VARS
-LOG="$HOME/DOCKAPPS.log"
 if [ -f $LOG ];then
 	rm $LOG
 fi
 APT_OPT="-y --no-show-upgraded --no-upgrade --show-progress --color"
 SPIN='/-\|'
 
+. ../../SCRIPTS/log.sh
 . ../../SCRIPTS/colors.sh
 . ../../SCRIPTS/spinner.sh
 

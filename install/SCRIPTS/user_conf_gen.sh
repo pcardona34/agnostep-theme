@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ####################################################
-### A G N o S t e p  -  Desktop - by Patrick Cardona
+### A G N o S t e p  -  Theme - by Patrick Cardona
 ### pcardona34 @ Github
 ###
 ### Thanks for the GNUstep Developers Community
@@ -24,6 +24,7 @@ if [ ! -d $HOME/GNUstep/Library/WindowMaker ];then
 	mkdir -p $HOME/GNUstep/Library/WindowMaker
 fi
 FLAVOUR_CONF=$HOME/.config/agnostep/flavour.conf
+MENUS_CONF=$HOME/.config/agnostep/menus.conf
 if [ ! -d $HOME/.config/agnostep ];then
 	mkdir -p $HOME/.config/agnostep
 fi
@@ -146,7 +147,7 @@ dialog --backtitle "Variante du thème" --title "Choix de la variante" \
 --menu "
 Le thème AGNOSTEP se décline en deux variantes.
 
-Choisissez une des variantes proposées:" 18 66 2 \
+Choisissez une des variantes proposées:" 18 66 3 \
 "Conky" "Installer le panneau d'infos système de Conky" \
 "Classic" "Installer la variante classique de Window Maker" 2>> $FICHTEMP
 # traitement de la réponse
@@ -188,8 +189,8 @@ fi
 function set_flavour
 {
 clear
-STR="A G N o S t e p  -  ${FLAVOUR_TITLE}";titulo
-sleep 2
+#STR="A G N o S t e p  -  ${FLAVOUR_TITLE}";titulo
+#sleep 2
 
 LG=${LANG:0:2}
 case $LG in
@@ -198,7 +199,7 @@ case $LG in
 esac
 
 case "$CHOICE" in
-	"CLASSIC")
+	"CLASSIC"|"MACSTYLE")
 		FLAVOUR="c5c"
 		WMCLIP=""
 		WMDOCK=""
@@ -219,8 +220,37 @@ esac
 echo -e "FLAVOUR=\"${FLAVOUR}\"" > ${FLAVOUR_CONF}
 }
 
+function set_menus
+{
+# boîte de menu
+dialog --backtitle "Menus of the Theme" --title "Menus Style Choice" \
+--menu "
+The AGNOSTEP Theme provides two menus styles.
+
+Select one of these styles:" 18 66 2 \
+"NextStep" "Vertical menus boxes" \
+"Mac" "Macintosh Horizontal menus" 2>> $FICHTEMP
+# traitement de la réponse
+if [ $? = 0 ]
+then
+for i in `cat $FICHTEMP`
+do
+case $i in
+"NextStep") echo "You chose: NextStep style"
+	defaults write NSGlobalDomain NSMenuInterfaceStyle "NSNextStepInterfaceStyle";;
+"Mac") echo "You chose: Mac style"
+	defaults write NSGlobalDomain NSMenuInterfaceStyle "NSMacintoshInterfaceStyle"
+	cd RESOURCES/MACSET
+	cp WMState WMWindowAttributes $HOME/GNUstep/Defaults/
+	cd $_PWD;;
+esac
+done
+fi
+}
+
 ### To be called in install_theme.sh:
 # set_flavour
 # write_xinitrc
 # write_autostart
 # write_meteo
+# set_menus

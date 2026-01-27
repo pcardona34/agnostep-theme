@@ -14,11 +14,15 @@ The color space (palette) was inspired from the classic OPENSTEP background. See
 The default wallpapers were created on purpose: see Flavours below.  
 Of course, you may change it with a picture of your own using the Preferences of GWorkspace.
 
+AGNOSTEP-theme is under the [GPL License](LICENSE.txt).
+
+- Release: see [RELEASE](RELEASE.txt).
+
 ## Goodies
 
 The theme is also providing some usefull desktop tools:
 
-- Time, date, Wheather health, CPU, Network and Memory monitoring.
+- Time, date, Wheather health; CPU, Network and Memory monitoring.
 - Birthday Notification.
 - Updater: checking wether new Debian packages are upgradable...
 - On laptops, a Battery monitoring.
@@ -74,7 +78,7 @@ As the dependencies are managed with the apt command, you must use a compliant O
 
 2) Install a complete GNUstep system with the frameworks (see  [agnostep](https://github.com/pcardona34/agnostep) for a complete list).
 
-3) Install the Workspace (GWorkspace) and the mostly used GNUstep applications: namely AddressManager, GNUMail, SimpleAgenda, TextEdit, Terminal, InnerSpace...  
+3) Install the Workspace (GWorkspace) and the mostly used GNUstep applications: namely AddressManager, GNUMail, SimpleAgenda, Ink, Terminal, InnerSpace...  
 For the Classic Flavour (C5C) you will need also: AClock, TimeMon, batmon (laptop only).
 
 4) Clone this repository:

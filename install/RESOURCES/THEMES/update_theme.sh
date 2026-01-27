@@ -3,15 +3,21 @@
 THEME=AGNOSTEP
 _PWD=`pwd`
 
+if [ -f BACKUP_THEME.tar ];then
+	rm BACKUP_THEME.tar
+fi
+if [ -d ${THEME}.theme ];then
+	tar -cvf BACKUP_THEME.tar ${THEME}.theme
+	rm -r ${THEME}.theme
+fi
+
 cd $HOME/GNUstep/Library/Themes || exit 1
 
 if [ -d ${THEME}.theme ];then
-	tar -cvf GSAGNOSTEP.tar ${THEME}.theme
-	gzip GSAGNOSTEP.tar
-	mv --force GSAGNOSTEP.tar.gz $_PWD/
+	cp -a ${THEME}.theme $_PWD/
 fi
-printf "Theme AGNOSTEP was updated and the archive created.\n"
 
 cd $_PWD
+printf "Theme AGNOSTEP was updated and a backup created.\n"
 ls -l
 

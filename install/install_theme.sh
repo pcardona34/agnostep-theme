@@ -15,6 +15,11 @@
 ### accordingly.
 ####################################################
 
+sudo -v
+if [ $? -ne 0 ];then
+	exit 1
+fi
+
 clear
 
 function stop
@@ -27,9 +32,9 @@ fi
 _PWD=`pwd`
 SPIN='\-/|'
 STOP=0 # Set to 0 to avoid stops; to 1 to make stops for debugging purpose
+SLEEP=1
 #set -v
 MSG_STOP="Stop: type <Enter> to continue."
-LOG=$HOME/AGNOSTEP_THEME.log
 GWDEF="org.gnustep.GWorkspace"
 DEFDIR=RESOURCES/DEFAULTS
 RPI=1 # By default, we assume the hw is not a RPI one. If not, it will be detected.
@@ -39,6 +44,7 @@ trap "rm -f $TEMPFILE" EXIT
 ####################################################
 ### Include functions
 
+. SCRIPTS/log.sh
 . SCRIPTS/colors.sh
 . SCRIPTS/spinner.sh
 . SCRIPTS/functions_prep.sh
@@ -46,7 +52,7 @@ trap "rm -f $TEMPFILE" EXIT
 . SCRIPTS/functions_inst_themes.sh
 . SCRIPTS/functions_misc_themes.sh
 . SCRIPTS/meteo_form.sh
-. RELEASE
+. RELEASE.txt
 
 ####################################################
 ### DO NOT RUN under an existent X session
@@ -86,13 +92,13 @@ subtitulo
 DEPS="laptop-detect picom dunst dialog"
 sudo apt -y install ${DEPS}
 ok "Done"
-sleep 2;clear
+sleep $SLEEP ;clear
 
 ###################################################
 ### GNUstep apps needed (1/2)
 STR="Checking installed apps (1)";titulo
 
-APPS="GWorkspace SimpleAgenda Terminal TextEdit GNUMail InnerSpace"
+APPS="GWorkspace SimpleAgenda Terminal Ink GNUMail InnerSpace"
 for APP in ${APPS}
 do
 	echo -e "Looking for: ${APP_DIR}/${APP}.app"
@@ -104,7 +110,7 @@ do
 	fi
 done
 ok "Done"
-sleep 2
+sleep $SLEEP 
 
 ####################################################
 ### FreeDesktop User filesystem
@@ -120,9 +126,9 @@ case "$LG" in
 "fr")
 	# Some folders are auto-translated by GNUstep, others none: we only care about the others;
 	# The same is for the folders icons...
-	FOLDERS="Livres Desktop Documents Downloads Favoris GNUstep Aide Images Mailboxes Music Exemples SOURCES Videos";;
+	FOLDERS="Livres Bookshelf Desktop Documents Downloads Favoris GNUstep Aide Images Mailboxes Music Exemples SOURCES Videos";;
 "en"|*)
-	FOLDERS="Books Desktop Documents Downloads Favorites GNUstep Help Images Mailboxes Music Samples SOURCES Videos";;
+	FOLDERS="Books Bookshelf Desktop Documents Downloads Favorites GNUstep Help Images Mailboxes Music Samples SOURCES Videos";;
 esac
 
 ### We manage the case of existing folders in English or in French
@@ -139,26 +145,62 @@ do
 	icon_folder $FOLD
 	ok "Done"
 done
-sleep 2
+sleep $SLEEP
 stop
 
 cd $_PWD
+
+###############################################
+
+STR="Customizing Subfolders in Applications folder"
+subtitulo
+
+APP_DIR=$(gnustep-config --variable=GNUSTEP_LOCAL_APPS)
+
+LG=${LANG:0:2}
+case "$LG" in
+"fr")
+	FOLDERS="Jeux Prog Utilitaires";;
+
+"en"|*)
+	FOLDERS="Dev Games Utilities";;
+esac
+
+for FOLD in ${FOLDERS}
+do
+	printf "Setting Folder ${FOLD}\n"
+	cd $APP_DIR || exit 1
+	if [ -d ${FOLD} ];then
+		app_sub_icon_folder "$FOLD"
+		ok "Done"
+	fi
+done
+sleep $SLEEP
+stop
+
+cd $_PWD
+
 ###############################################
 
 STR="Compositor";subtitulo
+
 cd TOOLS/agnostep_picom
 . install_agnostep_picom.sh || exit 1
 install_picom
 cd $_PWD
+
 stop
 
 ###################################################
 ### Autostart, Xinitrc / Xsession, meteo config...
 STR="Flavour, Autostart, Xsession..."
 subtitulo
+sleep $SLEEP
 
-. SCRIPTS/functions_goodies.sh || exit 1
+#. SCRIPTS/functions_goodies.sh || exit 1
 . SCRIPTS/user_conf_gen.sh || exit 1
+
+sleep $SLEEP
 
 cd $_PWD
 set_flavour
@@ -189,18 +231,24 @@ done
 
 if [ "$FLAVOUR" == "c5c" ];then
 	more_apps
-	ok "Done"
-	sleep 2
+	#ok "Done"
+	sleep $SLEEP
 fi
 
 stop
 
+printf "Xsession...\n"
 write_xinitrc
 cp $HOME/.xinitrc $HOME/.xsession
+ok "Done"
+sleep $SLEEP 
 
 stop
 
+printf "Autostart...\n"
 write_autostart
+ok "Done"
+sleep $SLEEP 
 
 stop
 
@@ -210,7 +258,6 @@ stop
 write_meteo_conf
 
 cd $_PWD
-ok "Done"
 
 stop
 
@@ -218,18 +265,20 @@ stop
 
 ###################################################
 ### User WindowMaker profile
+clear
 STR="User's WindowMaker profile"
 subtitulo
 
 ### We set standard first
 if [ -d $HOME/GNUstep/Library/WindowMaker ];then
-	printf "Already set.\n"
+	printf "Folder already set.\n"
 else
 	cd
 	mkdir -p $HOME/GNUstep/Library/WindowMaker
 fi
 cd $_PWD
 ok "Done"
+sleep $SLEEP 
 
 stop
 
@@ -255,28 +304,29 @@ cd RESOURCES/WALLPAPERS || exit 1
 sudo cp --remove-destination ${WP} ${WP_FOLDER}/fond_agnostep.png
 cd $_PWD
 ok "Done"
+sleep $SLEEP 
 
 stop
 
 ###########################################
 ### Installing the main AGNOSTEP theme
-STR="Main AGNOSTEP Theme"
-titulo
+#STR="Main AGNOSTEP Theme"
+#titulo
 
-#printf "Window Maker Theme...\n"
-#install_wm_theme
-#stop
-
-printf "GNUstep Theme..."
+#printf "GNUstep Theme..."
 install_gs_theme
 
 cd $_PWD
+sleep $SLEEP 
+
 stop
 
 ### Clip
 . $HOME/.config/agnostep/flavour.conf || exit 1
 if [ "$FLAVOUR" == "c5c" ];then
+	printf "Clip Icon...\n"
 	customize_clip
+	ok "Done";sleep $SLEEP 
 fi
 cd $_PWD
 stop
@@ -289,7 +339,7 @@ stop
 update_info
 
 cd $_PWD
-
+sleep 3
 stop
 
 ###
@@ -322,23 +372,25 @@ cat ${GWD} | sed -e s/patrick/$USER/g | sed -e s#/Local/Applications#${APP_DIR}#
 cd $_PWD
 if [ ! -f $HOME_GNUSTEP_DEF/WindowMaker ];then
 	cd RESOURCES/DEFAULTS && cp WindowMaker $HOME_GNUSTEP_DEF/
+	cd $_PWD
 fi
-
-
 
 . $HOME/.config/agnostep/flavour.conf || exit 1
 case $FLAVOUR in
 "conky")
 	WMSTATE="WMState_conky";;
 "c5c"|*)
+	cp --force $_PWD/RESOURCES/DEFAULTS/WMWindowAttributes $HOME/GNUstep/Defaults/
 	if [ -d $HOME/GNUstep/Library/WindowMaker/CachedPixmaps ];then
-		cd $HOME/GNUstep/Library/WindowMaker/CachedPixmaps
-		rm -f *.xpm
-		cp $_PWD/RESOURCES/THEMES/c5c_cachedpixmaps.tar.gz ./
-		gunzip --force c5c_cachedpixmaps.tar.gz
-		tar -xf c5c_cachedpixmaps.tar && rm c5c_cachedpixmaps.tar
-		cd $_PWD
+		cd $HOME/GNUstep/Library/WindowMaker
+		rm -fR CachedPixmaps
 	fi
+	### CachedPixmaps ###
+	cd $_PWD/RESOURCES/THEMES
+	cp -a CachedPixmaps_c5c $HOME/GNUstep/Library/WindowMaker/
+	mv $HOME/GNUstep/Library/WindowMaker/CachedPixmaps_c5c $HOME/GNUstep/Library/WindowMaker/CachedPixmaps
+	cd $_PWD
+	### Laptop? ###
 	laptop-detect
 	if [ $? -eq 0 ];then
 		WMSTATE="WMState_laptop"
@@ -353,12 +405,15 @@ if [ ! -f $WMSTATE ];then
 	alert "The file $WMSTATE was not found. This is a major issue."
 	exit 1
 else
-	cp $WMSTATE $HOME_GNUSTEP_DEF/WMState
+	cp --force $WMSTATE $HOME_GNUSTEP_DEF/WMState
 	### Setting to the user env
 	cat $HOME_GNUSTEP_DEF/WMState | sed -e s#/System/Tools#${GNUSTEP_SYSTEM_TOOLS}#g > $TEMPFILE
 	cat $TEMPFILE > $HOME_GNUSTEP_DEF/WMState
 fi
 cd $_PWD
+ok "Done"
+sleep $SLEEP
+
 stop
 
 ################################
@@ -379,6 +434,7 @@ fi
 
 setstyle --no-cursors --no-fonts $STYLE
 ok "Done"
+sleep $SLEEP 
 stop
 
 ############################################
@@ -430,7 +486,8 @@ defaults write org.gnustep.GWorkspace hidedock $HIDE
 defaults write org.gnustep.GWorkspace dockposition $DOCKPOS
 
 cd $_PWD
-
+ok "Done"
+sleep $SLEEP 
 stop
 
 ###########################################
@@ -457,6 +514,7 @@ do
 done
 cd $_PWD
 ok "Done"
+sleep $SLEEP 
 
 stop
 ###########################################
@@ -470,6 +528,7 @@ cd TOOLS/agnostep_updater || exit 1
 . ./install_agnostep_updater.sh
 cd $_PWD
 ok "Done"
+sleep $SLEEP 
 
 stop
 #################################################
@@ -484,6 +543,7 @@ if [ "$FLAVOUR" == "conky" ];then
 	. ./prepare_agnostep_conky.sh || exit 1
 	. ./install_agnostep_conky.sh || exit 1
 
+
 stop
 
 	cd $_PWD
@@ -495,7 +555,9 @@ stop
 	sudo cp ${ICOBAT} /usr/local/share/icons/conky/
 	cd $_PWD
 	ok "Done"
+	sleep $SLEEP 
 fi
+
 stop
 
 ####################################################
@@ -506,6 +568,7 @@ if [ "$FLAVOUR" == "c5c" ];then
 	cd TOOLS/dockapps
 	./install_dockapps.sh
 	cd $_PWD
+	sleep $SLEEP 
 fi
 
 stop
@@ -519,6 +582,7 @@ cd TOOLS/agnostep_birthday || exit 1
 . ./install_birthday.sh
 cd $_PWD
 ok "Done"
+sleep $SLEEP 
 
 stop
 
@@ -531,23 +595,26 @@ cd TOOLS/agnostep_fw || exit 1
 . ./install_agnostep_fw.sh
 cd $_PWD
 ok "Done"
+sleep $SLEEP 
 stop
 
 ###########################################
 
 ###########################################
-### Loading notification
+printf "Loading notification script\n"
 sudo cp -u RESOURCES/SCRIPTS/loading.sh /usr/local/bin/
+ok "Done"
+sleep $SLEEP 
 
 stop
 ###########################################
 
-
-
+set_menus
+sleep $SLEEP
 
 ##################################################
-MESSAGE="A G N o S t e p   Theme  was set."
+MESSAGE="A G N o S t e p  Theme  was set."
 
-info "$MESSAGE"
-
+info "$MESSAGE" | tee -a $LOG
+date >> $LOG
 cd $_PWD

@@ -1,0 +1,44 @@
+{
+  firefox.Firefox = {
+    Icon = firefox.Firefox.xpm;
+  };
+  InnerSpace.GNUstep = {
+    Icon = InnerSpace.GNUstep.xpm;
+  };
+  SimpleAgenda.GNUstep = {
+    Icon = SimpleAgenda.GNUstep.xpm;
+  };
+  AClock.GNUstep = {
+    Icon = AClock.GNUstep.xpm;
+  };
+  WMDrawer = {
+    Icon = Drawer.tiff;
+  };
+  Weather.GNUstep = {
+    Icon = Weather.GNUstep.xpm;
+  };
+  TimeMon.GNUstep = {
+    Icon = TimeMon.GNUstep.xpm;
+  };
+  Ink.GNUstep = {
+    Icon = Ink.GNUstep.xpm;
+  };
+  Terminal.GNUstep = {
+    Icon = Terminal.GNUstep.xpm;
+  };
+  GNUMail.GNUstep = {
+    Icon = GNUMail.GNUstep.xpm;
+  };
+  "*" = {
+    SharedAppIcon = Yes;
+  };
+  GWorkspace.GNUstep = {
+    Icon = GWorkspace.GNUstep.xpm;
+  };
+  Logo.WMClip = {
+    Icon = "~/GNUstep/Library/Icons/clip.tiff";
+  };
+  Recycler.GNUstep = {
+    Icon = Recycler.GNUstep.xpm;
+  };
+}

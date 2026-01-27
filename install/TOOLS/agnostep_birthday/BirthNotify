@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ####################################################
-### A G N o S t e p  -  Desktop - by Patrick Cardona
+### A G N o S t e p  -  Theme - by Patrick Cardona
 ### pcardona34 @ Github
 ###
 ### Thanks for the GNUstep Developers Community

@@ -1,5 +1,18 @@
 #!/bin/bash
 
+####################################################
+### A G N o S t e p  -  Theme - by Patrick Cardona
+### pcardona34 @ Github
+###
+### Thanks for the GNUstep Developers Community
+### This is Free and Open Source software.
+### Read License in the root directory.
+####################################################
+
+################################
+### Install Birthday tools
+################################
+
 DEST_ICON=/usr/local/share/icons
 if [ ! -d $DEST_ICON ];then
 	sudo mkdir -p $DEST_ICON

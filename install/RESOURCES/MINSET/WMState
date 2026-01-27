@@ -31,14 +31,14 @@
       },
       {
         Forced = No;
-        Name = TextEdit.GNUstep;
-        DropCommand = "/System/Tools/openapp TextEdit %d";
+        Name = Ink.GNUstep;
+        DropCommand = "/System/Tools/openapp Ink %d";
         BuggyApplication = No;
         AutoLaunch = No;
         Position = "0,3";
         Lock = Yes;
-        PasteCommand = "/System/Tools/openapp TextEdit %s";
-        Command = "/System/Tools/openapp TextEdit";
+        PasteCommand = "/System/Tools/openapp Ink %s";
+        Command = "/System/Tools/openapp Ink";
       },
       {
         Forced = No;
@@ -103,13 +103,13 @@
       {
         Forced = No;
         Name = TextEdit.GNUstep;
-        DropCommand = "/System/Tools/openapp TextEdit %d";
+        DropCommand = "/System/Tools/openapp Ink %d";
         BuggyApplication = No;
         AutoLaunch = No;
         Position = "0,3";
         Lock = Yes;
-        PasteCommand = "/System/Tools/openapp TextEdit %s";
-        Command = "/System/Tools/openapp TextEdit";
+        PasteCommand = "/System/Tools/openapp Ink %s";
+        Command = "/System/Tools/openapp Ink";
       },
       {
         Forced = No;
