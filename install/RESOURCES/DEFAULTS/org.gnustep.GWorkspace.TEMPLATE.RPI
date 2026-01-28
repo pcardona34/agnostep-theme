@@ -32,7 +32,7 @@
     <key>applications</key>
     <dict>
 	<key>1</key>
-	<string>TextEdit</string>
+	<string>Ink</string>
 	<key>2</key>
 	<string>SimpleAgenda</string>
 	<key>3</key>
@@ -47,7 +47,7 @@
     <key>default_sortorder</key>
     <integer>0</integer>
     <key>defaulteditor</key>
-    <string>TextEdit.app</string>
+    <string>Ink.app</string>
     <key>defxterm</key>
     <string>xterm</string>
     <key>desktopinfo</key>
