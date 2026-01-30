@@ -33,10 +33,10 @@ APP_DIR=$(gnustep-config --variable=GNUSTEP_LOCAL_APPS)
 echo "$FOLDER is OK"
 
 cd $_PWD/RESOURCES/ICONS
-ls dir_${FOLDER}.tiff
+#ls dir_${FOLDER}.tiff
 if [ -f dir_${FOLDER}.tiff ];then
 	sudo -E cp -u dir_${FOLDER}.tiff ${APP_DIR}/${FOLDER}/.dir.tiff
-	echo "$?"
+	#echo "$?"
 fi
 cd $_PWD
 }

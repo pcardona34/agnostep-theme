@@ -70,7 +70,7 @@
 	<key>iconsize</key>
 	<integer>48</integer>
 	<key>imagepath</key>
-	<string>/usr/share/wallpapers/fond_agnostep.png</string>
+	<string>/home/patrick/.local/share/wallpapers/fond_agnostep.png</string>
 	<key>imagestyle</key>
 	<integer>1</integer>
 	<key>indexes</key>

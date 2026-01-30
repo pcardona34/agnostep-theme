@@ -61,7 +61,37 @@ if [ $? -ne 0 ];then
 fi
 
 ### Misc appearence of XTerm
-cp --force _Xresources $HOME/.Xresources
-#xrdb -merge $HOME/.Xresources
+### This maybe already set by agnostep-desktop
+XRCONF=$HOME/.Xresources
+if [ -f $XRCONF ];then
+	grep -e "XTerm" $XRCONF &>/dev/null
+	if [ $? -eq 0 ];then
+		MSG="Xresources already set for XTerm."
+		if [ -n "$(LC_ALL=C type -t info)" ] && [ "$(LC_ALL=C type -t info)" == "function" ];then
+			info "$MSG"
+		else
+			printf "${MSG}\n"
+		fi
+	else
+		printf "We must update Xresources...\n"
+		cat Xresources >> $XRCONF
+		ok "Done"
+	fi
+else
+	cp Xresources $XRCONF
+	MSG="Xresources was set for XTerm."
+	if [ -n "$(LC_ALL=C type -t info)" ] && [ "$(LC_ALL=C type -t info)" == "function" ];then
+		info "$MSG"
+	else
+		printf "${MSG}\n"
+	fi
 
-printf "\nUpdater has been set.\n"
+fi
+
+if [ -n "$DISPLAY" ];then
+	# We try to update now the Xressources
+	# If it fails, it will be done in the next X session
+	xrdb -merge $HOME/.Xresources
+fi
+
+printf "\nUpdater monitor has been set.\n"

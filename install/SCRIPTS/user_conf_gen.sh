@@ -18,6 +18,7 @@
 LG=${LANG:0:2}
 STR="..."
 XINITRC=$HOME/.xinitrc
+XPROFILE=$HOME/.xprofile
 XSESSION=$HOME/.xsession
 AUTOSTART=$HOME/GNUstep/Library/WindowMaker/autostart
 if [ ! -d $HOME/GNUstep/Library/WindowMaker ];then
@@ -62,6 +63,17 @@ cat << "HEAD_OF_XINIT" > $XINITRC
 
 PID_XSESSION=$$
 
+# Hack to avoid path issues with LightDM
+if [ -f $HOME/.xprofile ];then
+	. $HOME/.xprofile
+fi
+
+# Rotate the wallpaper?
+WPRCONF=$HOME/.config/agnostep/wprotate.conf
+if [ -f $WPRCONF ];then
+	/usr/local/bin/wprotate.sh &
+fi
+
 # Compositor
 /usr/bin/picom --config $HOME/.config/picom.conf &
 
@@ -102,14 +114,13 @@ function write_autostart
 STR="Autostart";subtitulo
 
 cat << "HEAD_OF_AUTOSTART" > $AUTOSTART
-
 #!/bin/bash
 xset m 20/10 4
 ### This is to prevent DMPS and blanking issues on RPI machine
 xset -dpms
 xset s off
 ### gdnc
-#/Local/Tools/gdomap -L GDNCServer || /Local/Tools/gdnc &
+/Local/Tools/gdomap -L GDNCServer || /Local/Tools/gdnc &
 ### Notifications
 systemctl --user import-environment DISPLAY
 pgrep dunst || dunst &
@@ -223,13 +234,17 @@ echo -e "FLAVOUR=\"${FLAVOUR}\"" > ${FLAVOUR_CONF}
 function set_menus
 {
 # boîte de menu
-dialog --backtitle "Menus of the Theme" --title "Menus Style Choice" \
---menu "
+dialog --erase-on-exit --backtitle "Menus of the Theme" \
+ --title "Menus Style Choice" \
+ --menu "
 The AGNOSTEP Theme provides two menus styles.
 
 Select one of these styles:" 18 66 2 \
 "NextStep" "Vertical menus boxes" \
 "Mac" "Macintosh Horizontal menus" 2>> $FICHTEMP
+
+
+
 # traitement de la réponse
 if [ $? = 0 ]
 then

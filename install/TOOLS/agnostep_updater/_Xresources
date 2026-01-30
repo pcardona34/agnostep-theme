@@ -1,7 +1,0 @@
-! xdefaults
- 
-XTerm*foreground:         white
-XTerm*background:         Grey11
-*scrollBar:	          false
-XTerm*font:               -misc-fixed-medium-r-normal--12-*-*-*-*-*-iso10646-1
- 

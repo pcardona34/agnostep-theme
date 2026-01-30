@@ -239,7 +239,9 @@ stop
 
 printf "Xsession...\n"
 write_xinitrc
+cp RESOURCES/SCRIPTS/xprofile $HOME/.xprofile
 cp $HOME/.xinitrc $HOME/.xsession
+
 ok "Done"
 sleep $SLEEP 
 
@@ -271,7 +273,7 @@ subtitulo
 
 ### We set standard first
 if [ -d $HOME/GNUstep/Library/WindowMaker ];then
-	printf "Folder already set.\n"
+	printf "GNUstep Folder already set.\n"
 else
 	cd
 	mkdir -p $HOME/GNUstep/Library/WindowMaker
@@ -282,36 +284,10 @@ sleep $SLEEP
 
 stop
 
-#################################################
-### Wallpaper
-STR="Wallpaper"
-subtitulo
-
-. $HOME/.config/agnostep/flavour.conf || exit 1
-case $FLAVOUR in
-"conky")
-	WP="fond_agnostep_cubes.png";;
-"c5c")
-	WP="fond_agnostep_waves.png";;
-esac
-
-WP_FOLDER=/usr/share/wallpapers
-if [ ! -d $WP_FOLDER ];then
-	sudo mkdir -p $WP_FOLDER
-fi
-
-cd RESOURCES/WALLPAPERS || exit 1
-sudo cp --remove-destination ${WP} ${WP_FOLDER}/fond_agnostep.png
-cd $_PWD
-ok "Done"
-sleep $SLEEP 
-
-stop
-
 ###########################################
 ### Installing the main AGNOSTEP theme
-#STR="Main AGNOSTEP Theme"
-#titulo
+STR="Main AGNOSTEP Theme"
+titulo
 
 #printf "GNUstep Theme..."
 install_gs_theme
@@ -488,6 +464,75 @@ defaults write org.gnustep.GWorkspace dockposition $DOCKPOS
 cd $_PWD
 ok "Done"
 sleep $SLEEP 
+stop
+
+#################################################
+### Wallpaper
+STR="Generic Wallpaper"
+subtitulo
+
+ETCDIR=/etc/agnostep
+DIT=$ETCDIR/DesktopInfo.TEMPLATE
+cd RESOURCES/DEFAULTS || exit 1
+
+if [ ! -d $ETCDIR ];then
+	sudo mkdir -p $ETCDIR
+fi
+
+if [ ! -f $DIT ];then
+	sudo cp DesktopInfo.TEMPLATE $ETCDIR/
+fi
+cd $_PWD
+
+. $HOME/.config/agnostep/flavour.conf || exit 1
+case $FLAVOUR in
+"conky")
+	WP="fond_agnostep_cubes.png";;
+"c5c")
+	WP="fond_agnostep_waves.png";;
+esac
+
+### The following folder will be searched too by Lightdm
+WP_FOLDER=/usr/local/share/wallpapers
+if [ ! -d $WP_FOLDER ];then
+	sudo mkdir -p $WP_FOLDER
+fi
+
+cd RESOURCES/WALLPAPERS || exit 1
+sudo cp -f ${WP} ${WP_FOLDER}/fond_agnostep.png
+cd $_PWD
+
+cat $DIT | sed -e s#PATH#$WP_FOLDER/fond_agnostep.png# | defaults write
+
+ok "Done"
+sleep $SLEEP
+
+#################################################
+### User Wallpaper
+STR="User Wallpaper Collection"
+subtitulo
+
+function is_wprotate
+{
+dialog --no-shadow --erase-on-exit --backtitle "Wallpaper" \
+ --title "Rotation ask" \
+ --yesno "
+Do you want to rotate the wallpaper 
+from a collection of pictures?" 12 60
+
+if [ $? -eq 0 ];then
+	cd TOOLS/agnostep_wprotate || exit 1
+	./install_wprotate.sh
+else
+	WPRCONF=$HOME/.config/agnostep/wprotate.conf
+	if [ -f $WPRCONF ];then
+		rm $WPRCONF
+	fi
+fi
+}
+is_wprotate
+cd $_PWD
+sleep $SLEEP
 stop
 
 ###########################################
