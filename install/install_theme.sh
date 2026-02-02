@@ -612,6 +612,7 @@ stop
 if [ "$FLAVOUR" == "c5c" ];then
 	cd TOOLS/dockapps
 	./install_dockapps.sh
+	./check_dockapps.sh
 	cd $_PWD
 	sleep $SLEEP 
 fi

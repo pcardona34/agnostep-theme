@@ -46,16 +46,33 @@ ok "Done";sleep 2;clear
 ### wmtext: used for new Updater notification
 ### Call:
 # wmtext -i 3600 -b 'forest green' -a 'New' crimson white updater4wmtext
-
+### http://fccode.free.fr/dockapps
 STR="Uptime, Date, Heat, Updater, Birthdays...: WMText";subtitulo
+HUB=http://fccode.free.fr/dockapps
+ARCH=wmtext-3.tbz2
 
-cd wmtext || exit 1
+if [ ! -d wmtext-3 ];then
+	printf "Fetching...\n"
+	wget $HUB/$ARCH
+	bunzip2 $ARCH
+	tar -xf ${ARCH%.tbz2}.tar && rm ${ARCH%.tbz2}.tar
+	ok "Done"
+fi
 
+cd wmtext-3 || exit 1
+
+### Patch
+printf "A patch must be applied\n"
+PATCH=../wmtext.c.patch
+TARGET=src/wmtext.c
+patch --forward -u $TARGET -i $PATCH
+ok "Done"
+
+printf "Building...\n"
 if [ -f Makefile ] && [ -f wmtext ];then
 	make clean &>/dev/null
 fi
 
-printf "Building...\n"
 make &>>$LOG &
 PID=$!
 spinner
@@ -76,6 +93,7 @@ sudo -E chmod 755 /usr/local/bin/$SCRIPT
 done
 cd ..
 ok "Done"
+sleep 2;clear
 
 ####################################################
 ### Mountapp
@@ -123,4 +141,13 @@ ok "\rDone"
 
 ################################################
 
+cd ..
+printf "Post-install: cleaning\n"
+for DIR in wmtext-3 wmudmount
+do
+rm -r $DIR
+done
+ok "Done"
+
 info "DockApps: all was done."
+sleep 2

@@ -1,8 +1,0 @@
-* release 3 2011-04-16
-- locale's encoding (LC_ALL or LANG) taken into account when printing text
-- made compatible with libdockapp 0.6.2
-* release 2 2011-01-01
-- added font selection
-* release 1 2010-08-08
-- initial release: runs a command, displays its output, changes colours
-  according to regular expressions

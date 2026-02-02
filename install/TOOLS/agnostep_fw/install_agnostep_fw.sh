@@ -12,11 +12,16 @@
 ### Install the theme for FocusWriter
 ################################
 
+if [ -z "$COLORS" ];then
+	. ../../SCRIPTS/colors.sh
+fi
+
 ################################
 ### VARS
+SLEEP=2
 THERE=`pwd`
 
-whereis focuswriter
+which -s focuswriter
 if [ $? -eq 0 ];then
 	THEMES_DIR=$HOME/.local/share/GottCode/FocusWriter
 	CONF_DIR=$HOME/.config/GottCode
@@ -38,6 +43,7 @@ if [ $? -eq 0 ];then
 	cd "$THERE"
 	cp --remove-destination FocusWriter.conf $CONF_DIR/
 else
-	alert "FocusWriter not found. This theme will not be installed."
+	warning "FocusWriter not found. You should install the wrapper first. This theme will not be installed."
+	sleep $SLEEP
 fi
 cd "$THERE"

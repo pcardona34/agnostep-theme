@@ -9,6 +9,9 @@
 ### Read License in the root directory.
 ####################################################
 
+### To test sourcing yet done
+COLORS="YES"
+
 ################################
 ### Display title and messages
 ### with colors
