@@ -2,8 +2,10 @@
 
 # wmtxt plugin: displays Weather Heat
 # This script must be copied to: /usr/local/bin
-# command: 
+# command:
+### Testing:
 # wmtext -i 3600 -b '#2f2f2f' -f '#c0c0c0' ./meteo4wmtext
+### Prod:
 # wmtext -i 3600 -b '#2f2f2f' -f '#c0c0c0' /usr/local/bin/meteo4wmtext
 
 # Gets weather Heat from Wttr.in
@@ -19,7 +21,7 @@ fi
 HEAT=`curl "wttr.in/${STATION}?m&format=1" | awk '{print $2}'`
 SITE=`echo $STATION | awk -F, '{print $1}'`
 
-DATE=$(date +"%a%d/%m")
+DATE=$(date +"%a %d/%m")
 L1="$DATE"
 L2=" "
 L3="${SITE:0:9}"

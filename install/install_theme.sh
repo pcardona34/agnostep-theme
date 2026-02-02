@@ -471,19 +471,6 @@ stop
 STR="Generic Wallpaper"
 subtitulo
 
-ETCDIR=/etc/agnostep
-DIT=$ETCDIR/DesktopInfo.TEMPLATE
-cd RESOURCES/DEFAULTS || exit 1
-
-if [ ! -d $ETCDIR ];then
-	sudo mkdir -p $ETCDIR
-fi
-
-if [ ! -f $DIT ];then
-	sudo cp DesktopInfo.TEMPLATE $ETCDIR/
-fi
-cd $_PWD
-
 . $HOME/.config/agnostep/flavour.conf || exit 1
 case $FLAVOUR in
 "conky")
@@ -500,10 +487,12 @@ fi
 
 cd RESOURCES/WALLPAPERS || exit 1
 sudo cp -f ${WP} ${WP_FOLDER}/fond_agnostep.png
+
+DEFGW=org.gnustep.GWorkspace.plist
+cd $HOME/GNUstep/Defaults || exit 1
+sed -i -r "s#.*wallpapers.*#<string>$WP_FOLDER/fond_agnostep.png</string>#" $DEFGW
+
 cd $_PWD
-
-cat $DIT | sed -e s#PATH#$WP_FOLDER/fond_agnostep.png# | defaults write
-
 ok "Done"
 sleep $SLEEP
 

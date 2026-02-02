@@ -25,15 +25,13 @@ if [ ! -d $WPCONFDIR ];then
 	mkdir -p $WPCONFDIR
 fi
 WPCONF=${WPCONFDIR}/wprotate.conf
-#ETCDIR=/etc/agnostep
-#if [ ! -d $ETCDIR ];then
-#	sudo mkdir -p $ETCDIR
-#fi
 
 ################################
 ### Functions
 
-. ../../SCRIPTS/colors.sh
+if [ -z "$COLORS" ];then
+	. ../../SCRIPTS/colors.sh
+fi
 . ../../SCRIPTS/log.sh
 
 ################################
@@ -101,9 +99,6 @@ fi
 if [ -f wprotate.sh ];then
 	sudo cp -f wprotate.sh $TARGET/
 fi
-
-#cd ../../RESOURCES/DEFAULTS
-#sudo cp -f DesktopInfo.TEMPLATE $ETCDIR/
 
 cd $HERE
 

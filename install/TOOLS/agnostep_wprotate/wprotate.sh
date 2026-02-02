@@ -22,7 +22,7 @@ COUNT=0
 WPCONFDIR=$HOME/.config/agnostep
 WPCONF=${WPCONFDIR}/wprotate.conf
 ETCDIR=/etc/agnostep
-DEFGW=/$HOME/GNUstep/Defaults/org.gnustep.GWorkspace.plist
+DEFGW=org.gnustep.GWorkspace.plist
 if [ ! -f $WPCONF ];then
 	exit 1
 fi
@@ -57,4 +57,4 @@ nombre=$(alea)
 WP=$WPDIR/$COLLECTION/${ARRAY[$nombre]}
 #echo $WP
 cd $HOME/GNUstep/Defaults || exit 1
-sed -i -r "s#.*wallpapers.*#<string>$WP</string>#" org.gnustep.GWorkspace.plist
+sed -i -r "s#.*wallpapers.*#<string>$WP</string>#" $DEFGW
