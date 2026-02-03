@@ -25,7 +25,7 @@ which -s focuswriter
 if [ $? -eq 0 ];then
 	THEMES_DIR=$HOME/.local/share/GottCode/FocusWriter
 	CONF_DIR=$HOME/.config/GottCode
-	WP_DIR=/usr/share/wallpapers
+	WP_DIR=/usr/local/share/wallpapers
 
 	for DIR in "$THEMES_DIR" "$CONF_DIR"
 	do
@@ -33,7 +33,9 @@ if [ $? -eq 0 ];then
 			mkdir -p $DIR
 		fi
 	done
-
+	if [ ! -d $WP_DIR ];then
+		sudo mkdir -p $WP_DIR
+	fi
 	sudo cp fond_agnostep_fw.png $WP_DIR/
 	cp FocusWriter_Themes.tar.gz $THEMES_DIR/
 	cd $THEMES_DIR
