@@ -149,5 +149,5 @@ rm -r $DIR
 done
 ok "Done"
 
-info "DockApps: all was done."
+#info "DockApps: all was done."
 sleep 2

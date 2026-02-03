@@ -36,7 +36,9 @@ GNUSTEP_SYSTEM_TOOLS=`gnustep-config --variable=GNUSTEP_SYSTEM_TOOLS`
 
 ####################################################
 ### Functions include
-. SCRIPTS/colors.sh
+if [ -z "$COLORS" ];then
+	. SCRIPTS/colors.sh
+fi
 
 ### STRINGS L18N
 STRINGS="${0%.sh}"
@@ -56,8 +58,6 @@ fi
 ### writing xinitrc
 function write_xinitrc
 {
-STR="Xinitrc - Xsession";subtitulo
-
 cat << "HEAD_OF_XINIT" > $XINITRC
 #!/bin/bash
 
@@ -111,8 +111,6 @@ cp -f $XINITRC $XSESSION
 ### Writing autostart
 function write_autostart
 {
-STR="Autostart";subtitulo
-
 cat << "HEAD_OF_AUTOSTART" > $AUTOSTART
 #!/bin/bash
 xset m 20/10 4
@@ -155,12 +153,12 @@ function menu_fr
 {
 # boîte de menu
 dialog --backtitle "Variante du thème" --title "Choix de la variante" \
---menu "
+ --menu "
 Le thème AGNOSTEP se décline en deux variantes.
 
 Choisissez une des variantes proposées:" 18 66 3 \
 "Conky" "Installer le panneau d'infos système de Conky" \
-"Classic" "Installer la variante classique de Window Maker" 2>> $FICHTEMP
+"Classic" "Installer la variante classique de Window Maker" 2> $FICHTEMP
 # traitement de la réponse
 if [ $? = 0 ]
 then
@@ -178,18 +176,18 @@ function menu_en
 {
 # boîte de menu
 dialog --backtitle "Flavour of the Theme" --title "Flavour Choice" \
---menu "
+ --menu "
 The AGNOSTEP Theme provides two flavours.
 
 Select one of these flavours:" 18 66 2 \
 "Conky" "Install the Conky Sysinfo Panel" \
-"Classic" "Install the Classic flavour of Window Maker" 2>> $FICHTEMP
+"Classic" "Install the Classic flavour of Window Maker" 2> $FICHTEMP
 # traitement de la réponse
 if [ $? = 0 ]
 then
 for i in `cat $FICHTEMP`
 do
-case $i in
+case "$i" in
 "Conky") echo "You chose: Conky";CHOICE="CONKY" ;;
 "Classic") echo "You chose: Classic";CHOICE="CLASSIC";;
 esac
@@ -204,13 +202,13 @@ clear
 #sleep 2
 
 LG=${LANG:0:2}
-case $LG in
+case "$LG" in
 "fr") menu_fr;;
 "en"|*) menu_en;;
 esac
 
 case "$CHOICE" in
-	"CLASSIC"|"MACSTYLE")
+	"CLASSIC")
 		FLAVOUR="c5c"
 		WMCLIP=""
 		WMDOCK=""
@@ -228,7 +226,7 @@ case "$CHOICE" in
 		UPDATER="sleep 10 && /usr/local/bin/Updater -d &";;
 esac
 
-echo -e "FLAVOUR=\"${FLAVOUR}\"" > ${FLAVOUR_CONF}
+echo -e "FLAVOUR=${FLAVOUR}" > ${FLAVOUR_CONF}
 }
 
 function set_menus
@@ -241,23 +239,26 @@ The AGNOSTEP Theme provides two menus styles.
 
 Select one of these styles:" 18 66 2 \
 "NextStep" "Vertical menus boxes" \
-"Mac" "Macintosh Horizontal menus" 2>> $FICHTEMP
-
-
+"Mac" "Macintosh Horizontal menus" 2> $FICHTEMP
 
 # traitement de la réponse
 if [ $? = 0 ]
 then
 for i in `cat $FICHTEMP`
 do
-case $i in
+case "$i" in
 "NextStep") echo "You chose: NextStep style"
-	defaults write NSGlobalDomain NSMenuInterfaceStyle "NSNextStepInterfaceStyle";;
+	defaults write NSGlobalDomain NSMenuInterfaceStyle "NSNextStepInterfaceStyle"
+	defaults write NSGlobalDomain NSInterfaceStyleDefault "NSNextStepInterfaceStyle";;
 "Mac") echo "You chose: Mac style"
 	defaults write NSGlobalDomain NSMenuInterfaceStyle "NSMacintoshInterfaceStyle"
-	cd RESOURCES/MACSET
-	cp WMState WMWindowAttributes $HOME/GNUstep/Defaults/
-	cd $_PWD;;
+	defaults write NSGlobalDomain NSInterfaceStyleDefault "NSMacintoshInterfaceStyle"
+	. ${FLAVOUR_CONF}
+	if [ "$FLAVOUR" == "c5c" ];then
+		cd RESOURCES/MACSET
+		cp WMState WMWindowAttributes $HOME/GNUstep/Defaults/
+		cd $_PWD
+	fi;;
 esac
 done
 fi

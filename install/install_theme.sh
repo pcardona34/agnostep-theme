@@ -32,7 +32,7 @@ fi
 _PWD=`pwd`
 SPIN='\-/|'
 STOP=0 # Set to 0 to avoid stops; to 1 to make stops for debugging purpose
-SLEEP=1
+SLEEP=2
 #set -v
 MSG_STOP="Stop: type <Enter> to continue."
 GWDEF="org.gnustep.GWorkspace"
@@ -189,13 +189,13 @@ cd TOOLS/agnostep_picom
 install_picom
 cd $_PWD
 
+sleep $SLEEP
 stop
 
 ###################################################
 ### Autostart, Xinitrc / Xsession, meteo config...
 STR="Flavour, Autostart, Xsession..."
-subtitulo
-sleep $SLEEP
+titulo
 
 #. SCRIPTS/functions_goodies.sh || exit 1
 . SCRIPTS/user_conf_gen.sh || exit 1
@@ -231,26 +231,28 @@ done
 
 if [ "$FLAVOUR" == "c5c" ];then
 	more_apps
-	#ok "Done"
 	sleep $SLEEP
 fi
 
 stop
 
-printf "Xsession...\n"
+STR="Xinitrc - Xsession"
+subtitulo
+
 write_xinitrc
 cp RESOURCES/SCRIPTS/xprofile $HOME/.xprofile
 cp $HOME/.xinitrc $HOME/.xsession
-
 ok "Done"
 sleep $SLEEP 
 
 stop
 
-printf "Autostart...\n"
+STR="Autostart"
+subtitulo
+
 write_autostart
 ok "Done"
-sleep $SLEEP 
+sleep 4
 
 stop
 
@@ -352,9 +354,9 @@ if [ ! -f $HOME_GNUSTEP_DEF/WindowMaker ];then
 fi
 
 . $HOME/.config/agnostep/flavour.conf || exit 1
-case $FLAVOUR in
+case "$FLAVOUR" in
 "conky")
-	WMSTATE="WMState_conky";;
+	rm $HOME/GNUstep/Defaults/WMState;;
 "c5c"|*)
 	cp --force $_PWD/RESOURCES/DEFAULTS/WMWindowAttributes $HOME/GNUstep/Defaults/
 	if [ -d $HOME/GNUstep/Library/WindowMaker/CachedPixmaps ];then
@@ -373,23 +375,22 @@ case $FLAVOUR in
 		cp $_PWD/RESOURCES/ICONS/batmon.GNUstep.xpm $HOME/GNUstep/Library/WindowMaker/CachedPixmaps/
 	else
 		WMSTATE="WMState_c5c"
-	fi;;
+	fi
+	cd RESOURCES/DEFAULTS
+	if [ ! -f $WMSTATE ];then
+		alert "The file $WMSTATE was not found. This is a major issue."
+		exit 1
+	else
+		cp --force $WMSTATE $HOME_GNUSTEP_DEF/WMState
+		### Setting to the user env
+		cat $HOME_GNUSTEP_DEF/WMState | sed -e s#/System/Tools#${GNUSTEP_SYSTEM_TOOLS}#g > $TEMPFILE
+		cat $TEMPFILE > $HOME_GNUSTEP_DEF/WMState
+	fi
 esac
 
-cd RESOURCES/DEFAULTS
-if [ ! -f $WMSTATE ];then
-	alert "The file $WMSTATE was not found. This is a major issue."
-	exit 1
-else
-	cp --force $WMSTATE $HOME_GNUSTEP_DEF/WMState
-	### Setting to the user env
-	cat $HOME_GNUSTEP_DEF/WMState | sed -e s#/System/Tools#${GNUSTEP_SYSTEM_TOOLS}#g > $TEMPFILE
-	cat $TEMPFILE > $HOME_GNUSTEP_DEF/WMState
-fi
 cd $_PWD
 ok "Done"
 sleep $SLEEP
-
 stop
 
 ################################
@@ -448,22 +449,26 @@ do
 	fi
 done
 
-### Misc GWorkspace settings
+STR="GWorkspace: Dock position and visibility"
+subtitulo
+
 . $HOME/.config/agnostep/flavour.conf || exit 1
-case $FLAVOUR in
+case "$FLAVOUR" in
 "conky")
         DOCKPOS=0
-	HIDE=0;;
+	HIDE=0
+	printf "Set at the left side.\n";;
 "c5c")
         DOCKPOS=1
-	HIDE=1;;
+	HIDE=1
+	printf "Hidden.\n";;
 esac
 defaults write org.gnustep.GWorkspace hidedock $HIDE
 defaults write org.gnustep.GWorkspace dockposition $DOCKPOS
 
 cd $_PWD
 ok "Done"
-sleep $SLEEP 
+sleep $SLEEP
 stop
 
 #################################################
@@ -603,6 +608,7 @@ if [ "$FLAVOUR" == "c5c" ];then
 	./install_dockapps.sh
 	./check_dockapps.sh
 	cd $_PWD
+	ok "Dockapps: all was done."
 	sleep $SLEEP 
 fi
 
