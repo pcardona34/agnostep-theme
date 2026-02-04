@@ -44,10 +44,10 @@ LABEL2="STATE"
 LABEL3="CITY";;
 esac
 
-dialog                            \
---separate-widget $':'            \
---title "Weather Settings"        \
---form ""                         \
+dialog --no-shadow                \
+ --separate-widget $':'           \
+ --title "Weather Settings"       \
+ --form ""                        \
 0 0 0                             \
 "${LABEL3}:"  1 1 "$CITY"     1 13 30 0  \
 "${LABEL2}:"  2 1 "$STATE"    2 13 30 0  \

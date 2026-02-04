@@ -2,7 +2,7 @@
 
 conky.config = {
 alignment = 'bottom_right',
-background = false,
+background = true,
 update_interval = 2.0,
 double_buffer = true,
 no_buffers = true,
@@ -16,7 +16,7 @@ own_window_type = 'desktop',
 own_window_hints = 'undecorated',
 own_window_transparent = false,
 own_window_argb_visual = true,
-own_window_argb_value = 0,
+own_window_argb_value = 100,
 border_width = 0,
 border_inner_margin = 0,
 border_outer_margin = 0,
@@ -54,7 +54,7 @@ ${voffset 0}
 ${alignc}${color2}${font SansSerif:size=20}${exec date +"%a %d %b"}
 ${font}${color}
 ${voffset -40}
-${alignc}${color4}${font SansSerif:size=28}${exec date +"%H"}${color}:${color4}${exec date +"%M"}
+${alignc}${color2}${font SansSerif:size=28}${exec date +"%H"}${color}:${color2}${exec date +"%M"}
 ${font}${color}
 ${alignc}${font ConkySymbols:size=24}S${voffset -10}${font}${font SansSerif:size=14}${color1}${distribution} ${execi 86400 lsb_release -r -s}${font}${color}
 ${alignc}${voffset 12} Uptime: ${uptime}

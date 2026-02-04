@@ -101,7 +101,13 @@ That's done. Enjoy!
 
 ## Screenshots
 
-![AGNOSTEP Classic French](./Screenshots/screenshot_2025-12-21_Agnostep_Classic.png)
+Below: AGNOSTEP-theme: Classic flavour. NeXT style menus.
+
+![AGNOSTEP Classic](./Screenshots/screenshot_2026-02-04_Last_AGNOSTEP_Classic_NeXT.png)
+
+Below: AGNOSTEP-theme: Classic flavour. NeXT style menus.
+
+![AGNOSTEP Conky](./Screenshots/screenshot_2026-02-04_Last_AGNOSTEP_Conky_MacStyle.png)
 
 Some other screenshots are provided in the folder [Screenshots](Screenshots).
 

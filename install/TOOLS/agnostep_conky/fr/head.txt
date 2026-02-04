@@ -2,7 +2,7 @@
 
 conky.config = {
 alignment = 'bottom_right',
-background = false,
+background = true,
 update_interval = 2.0,
 double_buffer = true,
 no_buffers = true,
@@ -16,7 +16,7 @@ own_window_type = 'desktop',
 own_window_hints = 'undecorated',
 own_window_transparent = false,
 own_window_argb_visual = true,
-own_window_argb_value = 0,
+own_window_argb_value = 100,
 border_width = 0,
 border_inner_margin = 0,
 border_outer_margin = 0,

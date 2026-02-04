@@ -152,7 +152,8 @@ chmod +x $AUTOSTART
 function menu_fr
 {
 # boîte de menu
-dialog --backtitle "Variante du thème" --title "Choix de la variante" \
+dialog --no-shadow --backtitle "Variante du thème" \
+ --title "Choix de la variante" \
  --menu "
 Le thème AGNOSTEP se décline en deux variantes.
 
@@ -175,7 +176,8 @@ fi
 function menu_en
 {
 # boîte de menu
-dialog --backtitle "Flavour of the Theme" --title "Flavour Choice" \
+dialog --no-shadow --backtitle "Flavour of the Theme" \
+ --title "Flavour Choice" \
  --menu "
 The AGNOSTEP Theme provides two flavours.
 
@@ -232,8 +234,9 @@ echo -e "FLAVOUR=${FLAVOUR}" > ${FLAVOUR_CONF}
 function set_menus
 {
 # boîte de menu
-dialog --erase-on-exit --backtitle "Menus of the Theme" \
- --title "Menus Style Choice" \
+dialog --no-shadow --erase-on-exit \
+ --backtitle "Menus of the Theme"  \
+ --title "Menus Style Choice"      \
  --menu "
 The AGNOSTEP Theme provides two menus styles.
 

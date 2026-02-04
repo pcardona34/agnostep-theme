@@ -32,7 +32,7 @@ fi
 _PWD=`pwd`
 SPIN='\-/|'
 STOP=0 # Set to 0 to avoid stops; to 1 to make stops for debugging purpose
-SLEEP=2
+SLEEP=1
 #set -v
 MSG_STOP="Stop: type <Enter> to continue."
 GWDEF="org.gnustep.GWorkspace"
