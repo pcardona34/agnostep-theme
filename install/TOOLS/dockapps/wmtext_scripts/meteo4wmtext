@@ -24,9 +24,9 @@ SITE=`echo $STATION | awk -F, '{print $1}'`
 LG=${LANG:0:2}
 case "$LG" in
 "fr")
-	DATE=$(date +"%a%d/%m")
+	DATE=$(date +"%a%d/%m");;
 "en"|*)
-	DATE=$(date +"%a %d/%m")
+	DATE=$(date +"%a %d/%m");;
 esac
 
 L1="$DATE"

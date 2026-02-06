@@ -69,7 +69,11 @@ fi
 which -s gnustep-config
 if [ $? -ne 0 ];then
 	alert "Your GNUstep System seems not correctly set. Aborting!"
-	info "You should log out and log in again to update your environment. When it will be done, try again the 'Settings' stage."
+	info "You should log out and back in to update your environment. When it will be done, try again the 'Settings' stage."
+	MSG="Seconds before logout: "
+	DELAY=8
+	timer
+	exec SCRIPTS/lo.sh
 	exit 1
 fi
 

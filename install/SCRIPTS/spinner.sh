@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ####################################################
-### A G N o S t e p   Theme  -  by Patrick Cardona
+### A G N o S t e p   Desktop  -  by Patrick Cardona
 ### pcardona34 @ Github
 ###
 ### Thanks for the GNUstep Developers Community
@@ -45,3 +45,27 @@ done
 ### End of Spinner
 #############################################
 
+
+#############################################
+### Timer
+### set: DELAY=x
+### default: DELAY=5
+### MSG="a message"
+function timer
+{
+if [ $DELAY ];then
+	i=$DELAY
+else
+	i=5
+fi
+
+printf "$MSG "
+while [ $i -gt 0 ]
+do
+	sleep 1
+	let i--
+	printf "\b$i"
+done
+printf "\nGo!\n"
+
+}
