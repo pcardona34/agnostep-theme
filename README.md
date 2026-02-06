@@ -18,20 +18,23 @@ AGNOSTEP-theme is under the [GPL License](LICENSE.txt).
 
 - Release: see [RELEASE](RELEASE.txt).
 
-## Goodies
-
-The theme is also providing some usefull desktop tools:
-
-- Time, date, Wheather health; CPU, Network and Memory monitoring.
-- Birthday Notification.
-- Updater: checking wether Debian packages are upgradable...
-- On laptops, a Battery monitoring.
-
 ## Two Flavours
 
 AGNOSTEP-theme provides two flavours: *Conky* and *Classic* (alias *c5c*). In the two cases, the Workspace is handled by GWorkspace, the GNUstep Workspace manager.
 
-### Conky Panel
+### Screenshots
+
+Below: AGNOSTEP-theme: Classic flavour. NeXT style menus. Rotate Wallpapers: WINTER collection.
+
+![AGNOSTEP Classic](./Screenshots/screenshot_2026-02-04_Last_AGNOSTEP_Classic_NeXT.png)
+
+Below: AGNOSTEP-theme: Conky flavour. Mac style menus. Rotate Wallpapers: WINTER collection.
+
+![AGNOSTEP Conky](./Screenshots/screenshot_2026-02-04_Last_AGNOSTEP_Conky_MacStyle.png)
+
+Some other screenshots are provided in the folder [Screenshots](Screenshots).
+
+### Conky Panel Flavour Details
 
 - Wallpaper: Cubes and logos. It suggests GNUstep as a Workshop.
 
@@ -41,7 +44,7 @@ AGNOSTEP-theme provides two flavours: *Conky* and *Classic* (alias *c5c*). In th
 
 - Updater or Birthday notifications are provided threw Dunst notification messages.
 
-### Classic
+### Classic Flavour Details
 
 - Wallpaper: Waves with the palette theme for this Classic flavour.
 
@@ -62,5 +65,19 @@ AGNOSTEP-theme provides two flavours: *Conky* and *Classic* (alias *c5c*). In th
 - On laptops, Battery is monitored by the docked GNUstep 'batmon' app. 
 
 I tried, when it was possible, to give those dockapps an unified appearence within the AGNOSTEP theme.
+
+## Goodies
+
+The theme is also providing some usefull desktop tools:
+
+- Time, date, Wheather health; CPU, Network and Memory monitoring.
+- Birthday Notification.
+- Updater: checking wether Debian packages are upgradable...
+- On laptops, a Battery monitoring.
+
+## How to install AGNOSTEP-Theme?
+
+See [INSTALL.md](INSTALL.md)...
+
 
 
