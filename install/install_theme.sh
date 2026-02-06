@@ -67,15 +67,17 @@ fi
 ### PATH
 
 which -s gnustep-config
-if [ $? -eq 0 ];then
-	export APP_DIR=`gnustep-config --variable=GNUSTEP_LOCAL_APPS`
-	export GNUSTEP_SYSTEM_TOOLS=`gnustep-config --variable=GNUSTEP_SYSTEM_TOOLS`
-	echo $PATH | grep -e "${GNUSTEP_SYSTEM_TOOLS}" &>/dev/null
-	if [ $? -ne 0 ];then
-		export PATH=${GNUSTEP_SYSTEM_TOOLS}:$PATH
-	fi
-else
+if [ $? -ne 0 ];then
 	alert "Your GNUstep System seems not correctly set. Aborting!"
+	info "You should log out and log in again to update your environment. When it will be done, try again the 'Settings' stage."
+	exit 1
+fi
+
+export APP_DIR=`gnustep-config --variable=GNUSTEP_LOCAL_APPS`
+export GNUSTEP_SYSTEM_TOOLS=`gnustep-config --variable=GNUSTEP_SYSTEM_TOOLS`
+echo $PATH | grep -e "${GNUSTEP_SYSTEM_TOOLS}" &>/dev/null
+if [ $? -ne 0 ];then
+	export PATH=${GNUSTEP_SYSTEM_TOOLS}:$PATH
 fi
 
 ### End of functions
@@ -239,6 +241,7 @@ stop
 STR="Xinitrc - Xsession"
 subtitulo
 
+set_french_layout
 write_xinitrc
 cp RESOURCES/SCRIPTS/xprofile $HOME/.xprofile
 cp $HOME/.xinitrc $HOME/.xsession
@@ -470,6 +473,21 @@ cd $_PWD
 ok "Done"
 sleep $SLEEP
 stop
+
+STR="Recycler: is Docked?"
+subtitulo
+
+case "$FLAVOUR" in
+"conky")
+	ISDOCKED=0;;
+"c5c")
+	ISDOCKED=1
+	printf "Recycler will be docked.\n";;
+esac
+
+defaults write org.gnustep.GWorkspace.Recycler hidedock $ISDOCKED
+
+ok "Done"
 
 #################################################
 ### Wallpaper

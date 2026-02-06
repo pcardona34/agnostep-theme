@@ -17,6 +17,7 @@
 ### VARS
 LG=${LANG:0:2}
 STR="..."
+SETXKB=""
 XINITRC=$HOME/.xinitrc
 XPROFILE=$HOME/.xprofile
 XSESSION=$HOME/.xsession
@@ -55,6 +56,20 @@ fi
 ####################################################
 
 ####################################################
+### Keyboard: setting a French layout
+function set_french_layout
+{
+dialog --no-shadow --backtitle "French Environment" \
+ --title "X Keyboard Layout" \
+ --yesno "
+Do You want a French keyboard Layout within X session?" 12 50
+
+if [ $? -eq 0 ];then
+	SETXKB="setxkbmap -model pc105 -layout fr -variant oss"
+fi
+}
+
+####################################################
 ### writing xinitrc
 function write_xinitrc
 {
@@ -83,8 +98,10 @@ fi
 
 HEAD_OF_XINIT
 
-
 cat << BODY_OF_XINIT >> $XINITRC
+
+### X Keyboard Layout
+${SETXKB}
 
 ### Window Manager
 /usr/bin/wmaker $WMDOCK $WMCLIP --static &

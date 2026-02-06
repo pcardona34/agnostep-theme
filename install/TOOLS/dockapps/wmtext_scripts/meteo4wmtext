@@ -21,7 +21,14 @@ fi
 HEAT=`curl "wttr.in/${STATION}?m&format=1" | awk '{print $2}'`
 SITE=`echo $STATION | awk -F, '{print $1}'`
 
-DATE=$(date +"%a %d/%m")
+LG=${LANG:0:2}
+case "$LG" in
+"fr")
+	DATE=$(date +"%a%d/%m")
+"en"|*)
+	DATE=$(date +"%a %d/%m")
+esac
+
 L1="$DATE"
 L2=" "
 L3="${SITE:0:9}"
