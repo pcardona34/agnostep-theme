@@ -187,3 +187,8 @@ MESSAGE="A G N O S T E P Theme has been removed."
 info "$MESSAGE"
 
 warning "If you are not using a Display Manager, You need to logout and login again to apply the changes..."
+MSG="Seconds before logout: "
+DELAY=6
+timer
+exec SCRIPTS/lo.sh
+
