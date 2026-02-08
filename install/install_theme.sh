@@ -560,18 +560,12 @@ if [ ! -d /usr/local/bin ];then
 	sudo mkdir -p /usr/local/bin
 fi
 
-cd RESOURCES/SCRIPTS || exit 1
-for TOOL in agnostep
-do
-	sudo cp -u $TOOL /usr/local/bin/
-done
-cd $_PWD
-stop
-
 cd SCRIPTS || exit 1
 for TOOL in colors.sh
 do
-	sudo cp -u $TOOL /usr/local/bin/
+	if [ ! -f /usr/local/bin/$TOOL ];then
+		sudo cp -u $TOOL /usr/local/bin/
+	fi
 done
 cd $_PWD
 ok "Done"
