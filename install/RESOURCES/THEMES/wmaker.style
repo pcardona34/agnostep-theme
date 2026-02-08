@@ -33,4 +33,5 @@
   MenuTextFont = "sans serif:bold:pixelsize=12:xlfd=-*-helvetica-bold-r-normal-*-12-*-*-*-*-*-*-*";
   FrameSelectedBorderColor = "#ffffff";
   HighlightTextColor = "#000000";
+  WorkspaceBack = (solid, "#4F4F74");
 }

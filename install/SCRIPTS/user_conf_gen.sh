@@ -34,6 +34,7 @@ FICHTEMP=$(mktemp /tmp/agno-XXXXX)
 trap "rm -f $FICHTEMP" EXIT
 CHOICE=""
 GNUSTEP_SYSTEM_TOOLS=`gnustep-config --variable=GNUSTEP_SYSTEM_TOOLS`
+GNUSTEP_LOCAL_TOOLS=`gnustep-config --variable=GNUSTEP_LOCAL_TOOLS`
 
 ####################################################
 ### Functions include
@@ -93,15 +94,18 @@ fi
 /usr/bin/picom --config $HOME/.config/picom.conf &
 
 if [ -f $HOME/.Xresources ];then
-	xrdb -merge $HOME/.Xresources
+	xrdb -merge $HOME/.Xresources &
 fi
 
 HEAD_OF_XINIT
 
 cat << BODY_OF_XINIT >> $XINITRC
 
+### gdnc
+${GNUSTEP_LOCAL_TOOLS}/gdomap -L GDNCServer || ${GNUSTEP_LOCAL_TOOLS}/gdnc &
+
 ### X Keyboard Layout
-${SETXKB}
+${SETXKB} &
 
 ### Window Manager
 /usr/bin/wmaker $WMDOCK $WMCLIP --static &
@@ -131,11 +135,11 @@ function write_autostart
 cat << "HEAD_OF_AUTOSTART" > $AUTOSTART
 #!/bin/bash
 xset m 20/10 4
+
 ### This is to prevent DMPS and blanking issues on RPI machine
 xset -dpms
 xset s off
-### gdnc
-/Local/Tools/gdomap -L GDNCServer || /Local/Tools/gdnc &
+
 ### Notifications
 systemctl --user import-environment DISPLAY
 pgrep dunst || dunst &

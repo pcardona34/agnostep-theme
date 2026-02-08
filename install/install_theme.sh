@@ -489,7 +489,7 @@ case "$FLAVOUR" in
 	printf "Recycler will be docked.\n";;
 esac
 
-defaults write org.gnustep.GWorkspace.Recycler hidedock $ISDOCKED
+defaults write org.gnustep.GWorkspace.Recycler docked $ISDOCKED
 
 ok "Done"
 
