@@ -245,7 +245,7 @@ stop
 STR="Xinitrc - Xsession"
 subtitulo
 
-set_french_layout
+#set_french_layout
 write_xinitrc
 cp RESOURCES/SCRIPTS/xprofile $HOME/.xprofile
 cp $HOME/.xinitrc $HOME/.xsession

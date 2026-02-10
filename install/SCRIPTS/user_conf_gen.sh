@@ -66,7 +66,7 @@ dialog --no-shadow --backtitle "French Environment" \
 Do You want a French keyboard Layout within X session?" 12 50
 
 if [ $? -eq 0 ];then
-	SETXKB="setxkbmap -model pc105 -layout fr -variant oss"
+	SETXKB="setxkbmap -model pc105 -layout fr -variant oss &"
 fi
 }
 
@@ -104,8 +104,8 @@ cat << BODY_OF_XINIT >> $XINITRC
 ### gdnc
 ${GNUSTEP_LOCAL_TOOLS}/gdomap -L GDNCServer || ${GNUSTEP_LOCAL_TOOLS}/gdnc &
 
-### X Keyboard Layout
-${SETXKB} &
+### X Keyboard Layout - to be removed
+${SETXKB}
 
 ### Window Manager
 /usr/bin/wmaker $WMDOCK $WMCLIP --static &
