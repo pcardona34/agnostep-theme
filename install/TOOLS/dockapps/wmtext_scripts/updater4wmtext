@@ -12,16 +12,12 @@ PREFIX=$(echo ${LANG%.UTF-8} | awk -F'_' '{print $1}')
 
 case "$PREFIX" in
 	"fr")
-		TITLE="M.À.J:"
-		MSG="Nouveaux\nPaquets:"
+		MSG="Paquets\ncaducs:\n"
 		ELSE="Système\nà jour";;
 	"en" | *)
-		TITLE="Updater:"
-		MSG="New\nPackages:"
+		MSG="Packages\nto\n upgrade:\n"
 		ELSE="System\nis up\nto date";;
 esac
-
-printf "%b\n" "$TITLE"
 
 ### Is there an UPDATER flag?
 

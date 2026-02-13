@@ -26,21 +26,28 @@ SNOW=""
 LG=${LANG:0:2}
 case "$LG" in
 "fr")
-LABEL3="P:"
-LABEL4="N:";;
+TITLE="Météo"
+LABEL3="Pluie"
+LABEL4="Neige"
+LABEL5="Sec";;
 "en"|*)
-LABEL3="R:"
-LABEL4="S:";;
+TITLE="Weather"
+LABEL3="Rain"
+LABEL4="Snow"
+LABEL5="Dry";;
 esac
 ### We get the STATION vars:
 fetch_meteo
 
+L0="Meteo"
 L1="$HEAT °C"
-L2="$WIND km/h"
-L3="${LABEL3}$RAIN mm"
-L4="${LABEL4}$SNOW mm"
+L2="${WIND%.00} km/h"
+if [ "$RAIN" == "0.00" ] && [ "SNOW" == "0.00" ];then
+	L3="- $LABEL5"
+	L4=""
+else
+	L3="${LABEL3}: ${RAIN%.00} mm"
+	L4="${LABEL4}: ${SNOW%.00} mm"
+fi
 
-echo "$L1"
-echo "$L2"
-echo "$L3"
-echo "$L4"
+echo -e "\t$L1 - $L2 \n\t$L3 - $L4"

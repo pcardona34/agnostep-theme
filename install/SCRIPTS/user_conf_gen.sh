@@ -60,13 +60,16 @@ fi
 ### Keyboard: setting a French layout
 function set_french_layout
 {
-dialog --no-shadow --backtitle "French Environment" \
- --title "X Keyboard Layout" \
- --yesno "
-Do You want a French keyboard Layout within X session?" 12 50
+LG=${LANG:0:2}
+if [ "$LG" == "fr" ];then
+	dialog --no-shadow --backtitle "French Environment" \
+	 --title "X Keyboard Layout" \
+	 --yesno "
+	Do You want a French keyboard Layout within X session?" 12 50
 
-if [ $? -eq 0 ];then
-	SETXKB="setxkbmap -model pc105 -layout fr -variant oss &"
+	if [ $? -eq 0 ];then
+		SETXKB="setxkbmap -model pc105 -layout fr -variant oss &"
+	fi
 fi
 }
 
@@ -102,9 +105,9 @@ HEAD_OF_XINIT
 cat << BODY_OF_XINIT >> $XINITRC
 
 ### gdnc
-${GNUSTEP_LOCAL_TOOLS}/gdomap -L GDNCServer || ${GNUSTEP_LOCAL_TOOLS}/gdnc &
+#${GNUSTEP_LOCAL_TOOLS}/gdomap -L GDNCServer || ${GNUSTEP_LOCAL_TOOLS}/gdnc &
 
-### X Keyboard Layout - to be removed
+### X Keyboard Layout
 ${SETXKB}
 
 ### Window Manager

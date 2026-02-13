@@ -15,6 +15,7 @@
 ################################
 ### VARS
 
+CONKY=`pwd`
 HOME_DIR_CONF=$HOME/.config
 
 if [ ! -d $HOME_DIR_CONF/agnostep ];then
@@ -47,5 +48,10 @@ if [ ! -f $DEST/ConkySymbols.ttf ];then
 	fc-cache -f
 fi
 ok "Done"
+cd $CONKY
+
+####################################
+### install meteo4conky
+sudo cp -f meteo4conky /usr/local/bin/
 
 printf "\nConky has been set.\n"

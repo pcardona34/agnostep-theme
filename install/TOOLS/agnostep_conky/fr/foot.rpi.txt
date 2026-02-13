@@ -1,5 +1,3 @@
-
-${hr}
 ${alignc}${font ConkySymbols:size=24}I${voffset -10}${font SansSerif:size=14}${color1} Réseau ${font}${color}
 ${if_existing /proc/net/route wlan0}
 ${goto 40}${upspeedgraph wlan0 26,80 00FFFF 00FFFF}${goto 150}${downspeedgraph wlan0 26,80 FFFFFF FFFFFF}

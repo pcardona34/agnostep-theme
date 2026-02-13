@@ -34,4 +34,8 @@
   FrameSelectedBorderColor = "#ffffff";
   HighlightTextColor = "#000000";
   WorkspaceBack = (solid, "#4F4F74");
+  ClipAutoraiseDelay = 600;
+  ClipAutolowerDelay = 1000;
+  ClipAutoexpandDelay = 600;
+  ClipAutocollapseDelay = 1000;
 }

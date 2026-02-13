@@ -70,11 +70,12 @@ case $LG in
 	fi
 	if [ -d $HOME/Help ];then
 		if [ -d $HOME/Aide ];then
-			alert "Vous avez déjà deux dossiers pour gérer les exemples: Samples et Exemples. Vous devez en supprimer un."
+			alert "Vous avez déjà deux dossiers pour gérer l'aide: Help et Aide. Vous devez en supprimer un."
 			exit 1
 		fi
 		mv $HOME/Help $HOME/Aide
 	fi
+
 
 	printf "Les dossiers ont été francisés autant que faire se peut.\n";;
 	"en"|*)

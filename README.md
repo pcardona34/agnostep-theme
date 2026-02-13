@@ -56,7 +56,9 @@ Some other screenshots are provided in the folder [Screenshots](Screenshots).
 
 - The Dock is also WMDock at the right side.
 
-- Updates or Birthday notifications, date, uptime, Memory monitoring, Weather Health... are handled by instances of the dockapp 'wmtext' together with dedicated scripts. In the future, I hope to provide native docked GNUstep apps.
+- Updates or Birthday notifications, date, uptime, Memory monitoring, Weather Heat[^2]... are handled by instances of the dockapp 'wmtext' together with dedicated scripts. In the future, I hope to provide native docked GNUstep apps.
+
+[^2]: Weather API changed since 0.9.4 release. You will need the decimal coordinates of the near weather station.
 
 - We use also 'wmnd' (Network) and 'wmudmount' (mounting of removable medias).
 
@@ -70,14 +72,22 @@ I tried, when it was possible, to give those dockapps an unified appearence with
 
 The theme is also providing some usefull desktop tools:
 
-- Time, date, Wheather health; CPU, Network and Memory monitoring.
+- Time, date, Wheather heat; CPU, Network and Memory monitoring.
 - Birthday Notification.
 - Updater: checking wether Debian packages are upgradable...
 - On laptops, a Battery monitoring.
 
+## Meteo API
+
+> [!TIP]
+> To set the weather infos, you must provide the decimal coordinates (latitude and longitude) of the nearest weather station. You could use the **Search** form at:
+> <https://open-meteo.com/en/docs>
+
 ## How to install AGNOSTEP-Theme?
 
-See [INSTALL.md](INSTALL.md)...
+See Meteo API above.
+
+Then, see [INSTALL.md](INSTALL.md)...
 
 
 

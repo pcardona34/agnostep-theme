@@ -51,7 +51,7 @@ trap "rm -f $TEMPFILE" EXIT
 . SCRIPTS/functions_misc_folders.sh
 . SCRIPTS/functions_inst_themes.sh
 . SCRIPTS/functions_misc_themes.sh
-. SCRIPTS/meteo_form.sh
+. SCRIPTS/functions_meteo.sh
 . RELEASE.txt
 
 ####################################################
@@ -131,11 +131,18 @@ LG=${LANG:0:2}
 case "$LG" in
 "fr")
 	# Some folders are auto-translated by GNUstep, others none: we only care about the others;
-	# The same is for the folders icons...
-	FOLDERS="Livres Bookshelf Desktop Documents Downloads Favoris GNUstep Aide Images Mailboxes Music Exemples SOURCES Videos";;
+	# The same is for the folder icon...
+	FOLDERS="Livres Desktop Documents Downloads Favoris GNUstep Aide Images Mailboxes Music Exemples SOURCES Videos";;
 "en"|*)
-	FOLDERS="Books Bookshelf Desktop Documents Downloads Favorites GNUstep Help Images Mailboxes Music Samples SOURCES Videos";;
+	FOLDERS="Books Desktop Documents Downloads Favorites GNUstep Help Images Mailboxes Music Samples SOURCES Videos";;
 esac
+
+### Bookshelf on RPI's
+RPI=1
+is_hw_rpi
+if [ $RPI -eq 0 ];then
+	FOLDERS="$FOLDERS Bookshelf"
+fi
 
 ### We manage the case of existing folders in English or in French
 l18n_folder
@@ -184,6 +191,23 @@ done
 sleep $SLEEP
 stop
 
+cd $_PWD
+
+###############################################
+### Screenshots folder
+STR="Screenshots subdirectory link"
+subtitulo
+
+cd $HOME/Images || exit 1
+SHOTS=$HOME/GNUstep/Library/WindowMaker/Screenshots
+if [ ! -d $SHOTS ];then
+	mkdir -p $SHOTS
+fi
+if [ ! -h Screenshots ];then
+	ln -s $SHOTS
+fi
+ok "Done"
+sleep $SLEEP
 cd $_PWD
 
 ###############################################
@@ -266,8 +290,18 @@ stop
 ##################################################
 ### Meteo settings
 
-write_meteo_conf
+DEP="jq"
+STR="Meteo: dependencies..."
+subtitulo
+sudo apt -y install ${DEP}
+ok "Done"
+sleep 2
+clear
 
+write_meteo_conf
+sudo cp SCRIPTS/functions_meteo.sh /usr/local/bin/
+ok "Meteo set"
+sleep 2
 cd $_PWD
 
 stop
@@ -363,7 +397,7 @@ fi
 . $HOME/.config/agnostep/flavour.conf || exit 1
 case "$FLAVOUR" in
 "conky")
-	rm $HOME/GNUstep/Defaults/WMState;;
+	rm -f $HOME/GNUstep/Defaults/WMState;;
 "c5c"|*)
 	cp --force $_PWD/RESOURCES/DEFAULTS/WMWindowAttributes $HOME/GNUstep/Defaults/
 	if [ -d $HOME/GNUstep/Library/WindowMaker/CachedPixmaps ];then
@@ -652,7 +686,7 @@ cd TOOLS/agnostep_fw || exit 1
 . ./install_agnostep_fw.sh
 cd $_PWD
 ok "Done"
-sleep $SLEEP 
+sleep $SLEEP
 stop
 
 ###########################################

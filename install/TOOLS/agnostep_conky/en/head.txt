@@ -1,7 +1,7 @@
 -- Conky settings English
 
 conky.config = {
-alignment = 'bottom_right',
+alignment = 'top_right',
 background = true,
 update_interval = 2.0,
 double_buffer = true,
@@ -50,25 +50,24 @@ color8 = 'D7D7FF'
 }
 
 conky.text = [[
-${voffset 0}
+${voffset 40}
 ${alignc}${color2}${font SansSerif:size=20}${exec date +"%a %d %b"}
 ${font}${color}
 ${voffset -40}
 ${alignc}${color2}${font SansSerif:size=28}${exec date +"%H"}${color}:${color2}${exec date +"%M"}
 ${font}${color}
+${voffset -20}
 ${alignc}${font ConkySymbols:size=24}S${voffset -10}${font}${font SansSerif:size=14}${color1}${distribution} ${execi 86400 lsb_release -r -s}${font}${color}
 ${alignc}${voffset 12} Uptime: ${uptime}
-${hr}
+
 ${alignc}${font ConkySymbols:size=24}H${voffset -10}${font}${font SansSerif:size=14}${color1} Weather ${font}${color}
 ${voffset 2}
-${goto 40}${font SansSerif:size=12}Grandrieu: ${color8}${execi 3600 curl 'wttr.in/Grandrieu,Lozère,France?m&format=1' | awk '{print $2}'}
+${goto 20}${font SansSerif:size=12}${color8}${execi 3600 /usr/local/bin/meteo4conky}
 ${font}${color}
-${hr}
 ${alignc}${font ConkySymbols:size=24}F${voffset -10}${font SansSerif:size=14}${color1} CPU ${font}${color}
 
 ${goto 40}CPU (${color4}${freq_g cpu1}${color} GHz)${alignr 39}${color8}${cpu}%${color}
 
-${hr}
 ${alignc}${font ConkySymbols:size=24}J${voffset -10}${font SansSerif:size=14}${color1} Memory ${font}${color}
 
 ${color3}${membar 16}$color

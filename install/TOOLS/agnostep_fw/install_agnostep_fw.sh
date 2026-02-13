@@ -18,7 +18,7 @@ fi
 
 ################################
 ### VARS
-SLEEP=2
+SLEEP=1
 THERE=`pwd`
 
 which -s focuswriter
@@ -45,7 +45,7 @@ if [ $? -eq 0 ];then
 	cd "$THERE"
 	cp --remove-destination FocusWriter.conf $CONF_DIR/
 else
-	warning "FocusWriter not found. You should install the wrapper first. This theme will not be installed."
+	info "FocusWriter not found. You should install the wrapper first. This theme will not be installed."
 	sleep $SLEEP
 fi
 cd "$THERE"

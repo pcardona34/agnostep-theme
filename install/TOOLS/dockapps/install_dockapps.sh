@@ -21,6 +21,7 @@ SPIN='/-\|'
 . ../../SCRIPTS/log.sh
 . ../../SCRIPTS/colors.sh
 . ../../SCRIPTS/spinner.sh
+. ../../SCRIPTS/fetcher.sh
 
 STR="D O C K    A P P S";titulo
 
@@ -29,7 +30,7 @@ STR="D O C K    A P P S";titulo
 ### Dependencies
 
 STR="Dependencies";subtitulo
-sudo apt $APT_OPT install libxpm-dev libdockapp-dev libwings-dev libudisks2-dev libsecret-1-dev libgcr-3-dev librsvg2-bin
+sudo apt $APT_OPT install libxpm-dev libdockapp-dev libwings-dev libudisks2-dev udisks2 libsecret-1-dev libgcr-3-dev librsvg2-bin
 ok "Done";sleep 2;clear
 
 ###################################################################
@@ -59,7 +60,7 @@ if [ $? -ne 0 ];then
 	ARCH=wmtext-3.tbz2
 	if [ ! -d wmtext-3 ];then
 		printf "Fetching...\n"
-		wget $HUB/$ARCH
+		fetch $HUB/$ARCH
 		bunzip2 $ARCH
 		tar -xf ${ARCH%.tbz2}.tar && rm ${ARCH%.tbz2}.tar
 		ok "Done"
@@ -86,23 +87,25 @@ if [ $? -ne 0 ];then
 
 	printf "Installing...\n"
 	sudo -E make install &>>$LOG
-	ok "Done"
-
-	printf "wmtext Scripts:\n"
-	cd ..
-	cd wmtext_scripts || exit 1
-	for SCRIPT in *4wmtext
-	do
-	echo "- $SCRIPT"
-	sudo -E cp $SCRIPT /usr/local/bin/
-	sudo -E chmod 755 /usr/local/bin/$SCRIPT
-	done
 	cd ..
 	ok "Done"
-	sleep 2;clear
 else
 	ok "Yet installed."
 fi
+
+STR="wmtext Scripts"
+subtitulo
+
+cd wmtext_scripts || exit 1
+for SCRIPT in *4wmtext
+do
+echo "- $SCRIPT"
+sudo -E cp $SCRIPT /usr/local/bin/
+sudo -E chmod 755 /usr/local/bin/$SCRIPT
+done
+cd ..
+ok "Done"
+sleep 2;clear
 
 ####################################################
 ### Mountapp
@@ -115,7 +118,7 @@ if [ $? -ne 0 ];then
 	if [ ! -d wmudmount ];then
 		printf "Fetching WMudmount source...\n"
 		WMUDMOUNT=https://sourceforge.net/projects/wmudmount/files/wmudmount/wmudmount-3.0.tar.gz
-		wget $WMUDMOUNT && gunzip --force wmudmount-3.0.tar.gz && tar -xf wmudmount-3.0.tar && rm wmudmount-3.0.tar
+		fetch $WMUDMOUNT && gunzip --force wmudmount-3.0.tar.gz && tar -xf wmudmount-3.0.tar && rm wmudmount-3.0.tar
 		mv wmudmount-3.0 wmudmount
 	fi
 	cd wmudmount || exit 1
@@ -123,9 +126,9 @@ if [ $? -ne 0 ];then
 	### We must update config.guess... and  config.sub
 
 	printf "Updating config.guess and config.sub...\n"
-	wget --quiet -O config.guess 'https://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=HEAD'
+	wget --no-verbose config.guess 'https://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=HEAD'
 
-	wget --quiet -O config.sub 'https://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.sub;hb=HEAD'
+	wget --no-verbose -O config.sub 'https://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.sub;hb=HEAD'
 	ok "Done"
 
 	printf "Configuring...\n"

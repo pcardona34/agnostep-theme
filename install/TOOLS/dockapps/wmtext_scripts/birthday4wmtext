@@ -19,14 +19,16 @@
 LOG=$HOME/BirthNotify.log
 CONFIG=$HOME/.config/agnostep/birthday.conf
 PREFIX=$(echo ${LANG%.UTF-8} | awk -F'_' '{print $1}')
+### getting the current date
+### Today
+TODAY=$(date +"%d/%m")
+TITLE="$TODAY"
 
 case "$PREFIX" in
 	"fr")
-		TITLE="Mémo:"
 		CELMSG="Fête:"
 		BIRMSG="Anniver.:";;
 	"en" | *)
-		TITLE="Remember:"
 		CELMSG="Feast:"
 		BIRMSG="Birthday:";;
 esac
@@ -42,11 +44,6 @@ if [ ! -f $BIRTH_FILE ];then
 	echo "The Birthday Base $BIRTH_FILE was not found." >> $LOG
 	exit 1
 fi
-
-### getting the current date
-### Today
-TODAY=$(date +"%d/%m")
-#echo $TODAY
 
 printf "$TITLE\n"
 

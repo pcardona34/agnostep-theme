@@ -18,7 +18,7 @@ UP=$(uptime | awk '{print $3}' | awk -F, '{print $1}')
 # Construct the memory bar using square characters (filled squares)
 BAR=""
 for ((i=0; i<PERSIX; i++)); do
-    BAR+="|"  # Use the filled square character directly
+    BAR+="="  # Use the filled square character directly
 done
 
 # Add some ASCII representation for the remaining part

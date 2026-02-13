@@ -15,10 +15,32 @@
 ################################
 ### VARS
 
-TRANS=`echo ${LANG%.UTF-8} | awk -F_ '{print $1}'`
+HERE=`pwd`
+TRANS=${LANG:0:2}
 . ../../SCRIPTS/functions_prep.sh
 RPI=1
 FOOT=foot.txt
+
+function restore_foot_template
+{
+if [ -f ${FOOT%.txt}.bak ];then
+	mv -f ${FOOT%.txt}.bak ${FOOT}
+fi
+}
+
+function guess_ifname
+{
+IFNAME=$(ls -1 /sys/class/net | grep -e "enp")
+if [ -z "$IFNAME" ];then
+	error "Interface not guessed"
+	exit 1
+else
+	ok "Interface: $IFNAME";sleep 2
+	cp $FOOT ${FOOT%.txt}.bak
+	sed -i "s/enp/${IFNAME}/g" $FOOT
+	#less $FOOT
+fi
+}
 
 ###################################################
 function assemble
@@ -37,15 +59,21 @@ if [ $RPI -eq 0 ];then
 	FOOT=foot.rpi.txt
 fi
 
-if [ -n $TRANS ];then
-	case $TRANS in
+if [ -n "$TRANS" ];then
+	case "$TRANS" in
 		"fr")
-			cd fr && assemble
+			cd fr || exit 1
+			guess_ifname
+			assemble
+			restore_foot_template
 			mv conky.conf.fr ../conky.conf
 			cd ..
 			printf "The file 'conky.conf' has been generated\n";;
 		"en" | *)
-			cd en && assemble
+			cd en || exit 1
+			guess_ifname
+			assemble
+			restore_foot_template
 			mv conky.conf.en ../conky.conf
 			cd ..
 			printf "The file 'conky.conf' has been generated\n";;
