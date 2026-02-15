@@ -18,6 +18,9 @@
 HERE=`pwd`
 TRANS=${LANG:0:2}
 . ../../SCRIPTS/functions_prep.sh
+if [ -z "$COLORS" ];then
+	. ../../SCRIPTS/colors.sh
+fi
 RPI=1
 FOOT=foot.txt
 
@@ -32,7 +35,7 @@ function guess_ifname
 {
 IFNAME=$(ls -1 /sys/class/net | grep -e "enp")
 if [ -z "$IFNAME" ];then
-	error "Interface not guessed"
+	alert "Interface not guessed"
 	exit 1
 else
 	ok "Interface: $IFNAME";sleep 2
@@ -55,28 +58,33 @@ fi
 ###################################################
 
 is_hw_rpi
-if [ $RPI -eq 0 ];then
-	FOOT=foot.rpi.txt
-fi
 
 if [ -n "$TRANS" ];then
 	case "$TRANS" in
 		"fr")
-			cd fr || exit 1
+		cd fr || exit 1
+		if [ $RPI -eq 0 ];then
+			FOOT=foot.rpi.txt
+		else
 			guess_ifname
-			assemble
-			restore_foot_template
-			mv conky.conf.fr ../conky.conf
-			cd ..
-			printf "The file 'conky.conf' has been generated\n";;
+		fi
+		assemble
+		restore_foot_template
+		mv conky.conf.fr ../conky.conf
+		cd ..
+		printf "The file 'conky.conf' has been generated\n";;
 		"en" | *)
-			cd en || exit 1
+		cd en || exit 1
+		if [ $RPI -eq 0 ];then
+			FOOT=foot.rpi.txt
+		else
 			guess_ifname
-			assemble
-			restore_foot_template
-			mv conky.conf.en ../conky.conf
-			cd ..
-			printf "The file 'conky.conf' has been generated\n";;
+		fi
+		assemble
+		restore_foot_template
+		mv conky.conf.en ../conky.conf
+		cd ..
+		printf "The file 'conky.conf' has been generated\n";;
 	esac
 else
 	printf "The LANG was not guessed. Aborting.\n"
