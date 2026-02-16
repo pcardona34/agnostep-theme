@@ -17,7 +17,14 @@ fi
 ### Check Dockapps
 ################################
 
-for DA in wmtext wmnd wmudmount
+. $HOME/.config/agnostep/flavour.conf
+if [ "$FLAVOUR" == "c5c" ];then
+	DAPPS="wmtext wmnd wmudmount"
+else
+	DAPPS="wmudmount"
+fi
+
+for DA in ${DAPPS}
 do
 which -s $DA
 if [ $? -eq 0 ];then

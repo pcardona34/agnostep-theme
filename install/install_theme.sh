@@ -651,16 +651,20 @@ stop
 
 ####################################################
 ### Installing Tools and confs... Dockapps
-### for C5C flavour
+### for C5C and Conky flavours
 . $HOME/.config/agnostep/flavour.conf || exit 1
+
+cd TOOLS/dockapps
 if [ "$FLAVOUR" == "c5c" ];then
-	cd TOOLS/dockapps
 	./install_dockapps.sh
 	./check_dockapps.sh
-	cd $_PWD
-	ok "Dockapps: all was done."
-	sleep $SLEEP 
+else
+	./install_wmudmount.sh
 fi
+
+cd $_PWD
+ok "Dockapps: all was done."
+sleep $SLEEP
 
 stop
 

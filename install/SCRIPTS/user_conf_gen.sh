@@ -116,6 +116,9 @@ ${SETXKB}
 ### Agenda
 ${AGENDA}
 
+### Mountapp
+${MOUNTAPP}
+
 ### GWorkspace within a DBus session
 sleep 4
 exec dbus-launch --sh-syntax --exit-with-session ${GNUSTEP_SYSTEM_TOOLS}/openapp GWorkspace
@@ -241,7 +244,8 @@ case "$CHOICE" in
 		AGENDA=""
 		CONKY=""
 		BIRTHDAY=""
-		UPDATER="";;
+		UPDATER=""
+		MOUNTAPP="";;
 	"CONKY"|*) echo "${YOUR_CHOICE}: AGNoStep and Conky."
 		FLAVOUR="conky"
 		WMCLIP="--no-clip"
@@ -249,7 +253,8 @@ case "$CHOICE" in
 		AGENDA="sleep 2;${GNUSTEP_SYSTEM_TOOLS}/openapp SimpleAgenda &"
 		CONKY="pgrep conky || sleep 8 && conky -c ~/.config/agnostep/conky.conf &"
 		BIRTHDAY="sleep 10 && /usr/local/bin/BirthNotify &"
-		UPDATER="sleep 10 && /usr/local/bin/Updater -d &";;
+		UPDATER="sleep 10 && /usr/local/bin/Updater -d &"
+		MOUNTAPP="/usr/local/bin/wmudmount &";;
 esac
 
 echo -e "FLAVOUR=${FLAVOUR}" > ${FLAVOUR_CONF}
