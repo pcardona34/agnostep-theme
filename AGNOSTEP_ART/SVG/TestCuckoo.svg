@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="48"
+   height="48"
+   version="1"
+   id="svg33790"
+   sodipodi:docname="TestCuckoo.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs33794" />
+  <sodipodi:namedview
+     id="namedview33792"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="15.791667"
+     inkscape:cx="22.258575"
+     inkscape:cy="23.999999"
+     inkscape:window-width="1645"
+     inkscape:window-height="1047"
+     inkscape:window-x="273"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg33790" />
+  <rect
+     style="opacity:0.2;stroke-width:1.2353"
+     width="39.556728"
+     height="40.11948"
+     x="4"
+     y="5.2868485"
+     rx="1.9778364"
+     ry="3.0861142"
+     id="rect33776"
+     inkscape:export-filename="TIFF/common_MusicFolder.tiff"
+     inkscape:export-xdpi="307.20001"
+     inkscape:export-ydpi="307.20001" />
+  <rect
+     style="fill:#e4e4e4;stroke-width:1.55801"
+     width="38.469658"
+     height="36.345493"
+     x="3.5303431"
+     y="7.1714511"
+     rx="2.1372032"
+     ry="4.5431867"
+     id="rect33782" />
+  <path
+     style="fill:#3a3a55;fill-opacity:1;stroke-width:1.38623"
+     d="m 18.036867,28.008407 c -0.47544,-0.149202 -0.976057,-0.227047 -1.481117,-0.228345 -2.454207,0 -4.443345,1.742426 -4.443345,3.892241 0,2.149813 1.989138,3.89224 4.443345,3.89224 2.454208,0 4.443347,-1.742427 4.443347,-3.89224 v -9.081896 h 8.886688 v 5.418 c -0.475439,-0.149202 -0.976054,-0.227047 -1.481114,-0.228345 -2.454208,0 -4.443347,1.742426 -4.443347,3.892241 0,2.149813 1.989139,3.89224 4.443347,3.89224 2.454206,0 4.443345,-1.742427 4.443345,-3.89224 V 18.698168 c 0,-0.718768 -0.990866,-1.297414 -2.221672,-1.297414 H 20.258538 c -1.230806,0 -2.221671,0.578646 -2.221671,1.297414"
+     id="path33788" />
+</svg>
