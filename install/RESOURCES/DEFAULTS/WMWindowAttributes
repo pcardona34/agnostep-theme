@@ -8,6 +8,9 @@
   SimpleAgenda.GNUstep = {
     Icon = SimpleAgenda.GNUstep.xpm;
   };
+  ExitSession.GNUstep = {
+    Icon = ExitSession.GNUstep.xpm;
+  };
   AClock.GNUstep = {
     Icon = AClock.GNUstep.xpm;
   };

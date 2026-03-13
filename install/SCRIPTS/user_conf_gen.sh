@@ -80,8 +80,6 @@ function write_xinitrc
 cat << "HEAD_OF_XINIT" > $XINITRC
 #!/bin/bash
 
-PID_XSESSION=$$
-
 # Hack to avoid path issues with LightDM
 if [ -f $HOME/.xprofile ];then
 	. $HOME/.xprofile
@@ -104,33 +102,22 @@ HEAD_OF_XINIT
 
 cat << BODY_OF_XINIT >> $XINITRC
 
-### gdnc
-#${GNUSTEP_LOCAL_TOOLS}/gdomap -L GDNCServer || ${GNUSTEP_LOCAL_TOOLS}/gdnc &
-
 ### X Keyboard Layout
 ${SETXKB}
-
-### Window Manager
-/usr/bin/wmaker $WMDOCK $WMCLIP --static &
 
 ### Agenda
 ${AGENDA}
 
+### Workspace
+${WORKSPACE}
+
 ### Mountapp
 ${MOUNTAPP}
 
-### GWorkspace within a DBus session
-sleep 4
-exec dbus-launch --sh-syntax --exit-with-session ${GNUSTEP_SYSTEM_TOOLS}/openapp GWorkspace
+### Window Manager
+exec /usr/bin/wmaker $WMDOCK $WMCLIP
 
 BODY_OF_XINIT
-
-cat << "END_OF_XINIT" >> $XINITRC
-
-### This is a secure way in any case Dbus fails to kill the session:
-kill $PID_XSESSION
-
-END_OF_XINIT
 
 cp -f $XINITRC $XSESSION
 }
@@ -242,6 +229,7 @@ case "$CHOICE" in
 		WMCLIP=""
 		WMDOCK=""
 		AGENDA=""
+        WORKSPACE=""
 		CONKY=""
 		BIRTHDAY=""
 		UPDATER=""
@@ -251,6 +239,7 @@ case "$CHOICE" in
 		WMCLIP="--no-clip"
 		WMDOCK="--no-dock"
 		AGENDA="sleep 2;${GNUSTEP_SYSTEM_TOOLS}/openapp SimpleAgenda &"
+		WORKSPACE="sleep 4;${GNUSTEP_SYSTEM_TOOLS}/openapp GWorkspace &"
 		CONKY="pgrep conky || sleep 8 && conky -c ~/.config/agnostep/conky.conf &"
 		BIRTHDAY="sleep 10 && /usr/local/bin/BirthNotify &"
 		UPDATER="sleep 10 && /usr/local/bin/Updater -d &"

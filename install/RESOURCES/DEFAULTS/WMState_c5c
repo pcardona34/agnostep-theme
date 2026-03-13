@@ -66,10 +66,21 @@
         DropCommand = "/System/Tools/openapp Recycler %d";
         BuggyApplication = No;
         AutoLaunch = Yes;
-        Position = "0,6";
+        Position = "0,7";
         Lock = Yes;
-        PasteCommand = "/Sytem/Tools/openapp Recycler %s";
+        PasteCommand = "/System/Tools/openapp Recycler %s";
         Command = "/System/Tools/openapp Recycler";
+      },
+      {
+        Forced = No;
+        Name = ExitSession.GNUstep;
+        DropCommand = "/Local/Applications/Utilitaires/ExitSession.app/ExitSession %d";
+        BuggyApplication = No;
+        AutoLaunch = No;
+        Position = "0,6";
+        Lock = No;
+        PasteCommand = "/Local/Applications/Utilitaires/ExitSession.app/ExitSession %s";
+        Command = "/Local/Applications/Utilitaires/ExitSession.app/ExitSession";
       }
     );
     Applications1080 = (
@@ -137,10 +148,21 @@
         DropCommand = "/System/Tools/openapp Recycler %d";
         BuggyApplication = No;
         AutoLaunch = Yes;
-        Position = "0,6";
+        Position = "0,7";
         Lock = Yes;
         PasteCommand = "/System/Tools/openapp Recycler %s";
         Command = "/System/Tools/openapp Recycler";
+      },
+      {
+        Forced = No;
+        Name = ExitSession.GNUstep;
+        DropCommand = "/Local/Applications/Utilitaires/ExitSession.app/ExitSession %d";
+        BuggyApplication = No;
+        AutoLaunch = No;
+        Position = "0,6";
+        Lock = No;
+        PasteCommand = "/Local/Applications/Utilitaires/ExitSession.app/ExitSession %s";
+        Command = "/Local/Applications/Utilitaires/ExitSession.app/ExitSession";
       }
     );
     Lowered = No;
@@ -152,7 +174,7 @@
     DropCommand = "wmsetbg -u -t %d";
     BuggyApplication = No;
     AutoLaunch = No;
-    Position = "665,0";
+    Position = "744,0";
     Lock = No;
     Command = "-";
   };
@@ -252,6 +274,18 @@
             PasteCommand = "wmudmount %s";
             Command = wmudmount;
             Omnipresent = No;
+          },
+          {
+            Forced = No;
+            Name = GWorkspace.GNUstep;
+            DropCommand = "GWorkspace %d";
+            BuggyApplication = No;
+            AutoLaunch = Yes;
+            Position = "-1,0";
+            Lock = Yes;
+            PasteCommand = "GWorkspace %s";
+            Command = GWorkspace;
+            Omnipresent = No;
           }
         );
         Collapsed = No;
@@ -263,4 +297,3 @@
   );
   Workspace = Main;
 }
-

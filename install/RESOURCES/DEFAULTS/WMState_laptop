@@ -133,11 +133,22 @@
       },
       {
         Forced = No;
+        Name = ExitSession.GNUstep;
+        DropCommand = "/Local/Applications/Utilitaires/ExitSession.app/ExitSession %d";
+        BuggyApplication = No;
+        AutoLaunch = No;
+        Position = "0,6";
+        Lock = No;
+        PasteCommand = "/Local/Applications/Utilitaires/ExitSession.app/ExitSession %s";
+        Command = "/Local/Applications/Utilitaires/ExitSession.app/ExitSession";
+      },
+      {
+        Forced = No;
         Name = Recycler.GNUstep;
         DropCommand = "/System/Tools/openapp Recycler %d";
         BuggyApplication = No;
         AutoLaunch = Yes;
-        Position = "0,6";
+        Position = "0,7";
         Lock = Yes;
         PasteCommand = "/System/Tools/openapp Recycler %s";
         Command = "/System/Tools/openapp Recycler";
@@ -263,6 +274,18 @@
             Lock = Yes;
             PasteCommand = "";
             Command = "/System/Tools/openapp batmon.app";
+            Omnipresent = No;
+          },
+          {
+            Forced = No;
+            Name = GWorkspace.GNUstep;
+            DropCommand = "GWorkspace %d";
+            BuggyApplication = No;
+            AutoLaunch = Yes;
+            Position = "-1,0";
+            Lock = Yes;
+            PasteCommand = "GWorkspace %s";
+            Command = GWorkspace;
             Omnipresent = No;
           }
         );

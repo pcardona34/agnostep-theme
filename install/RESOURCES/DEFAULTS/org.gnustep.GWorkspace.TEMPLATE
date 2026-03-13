@@ -41,6 +41,8 @@
 	<string>GNUMail</string>
 	<key>5</key>
 	<string>InnerSpace</string>
+    <key>6</key>
+    <string>ExitSession</string>
     </dict>
     <key>auto_calculate_sizes</key>
     <false/>
