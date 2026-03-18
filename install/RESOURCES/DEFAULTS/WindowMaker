@@ -24,6 +24,7 @@
   IconTitleColor = "#ffffff";
   MoveToWorkspace2Key = None;
   BLCMaximizeKey = None;
+  IgnoreFocusClick = YES;
   MenuTitleColor = "#ffffff";
   MouseWheelTiltAction = None;
   WindowShortcut3Key = None;
