@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="48"
+   height="48"
+   version="1"
+   id="svg7"
+   sodipodi:docname="File_presentation.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   inkscape:export-filename="../TIFF/File_presentation.tiff"
+   inkscape:export-xdpi="299.70999"
+   inkscape:export-ydpi="299.70999"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs7" />
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:zoom="16.229167"
+     inkscape:cx="24"
+     inkscape:cy="24"
+     inkscape:window-width="1452"
+     inkscape:window-height="983"
+     inkscape:window-x="280"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg7" />
+  <g
+     id="g7"
+     transform="translate(-0.7086005)">
+    <path
+       style="opacity:0.2;stroke-width:1.13102"
+       d="M 6.7997436,5 C 5.3823851,5 4.241335,5.892 4.241335,7 v 36 c 0,1.108 1.1410501,2 2.5584086,2 H 42.617459 c 1.417357,0 2.558407,-0.892 2.558407,-2 V 17 L 31.104621,16 29.825418,5 Z"
+       id="path1" />
+    <path
+       fill="#ff5722"
+       d="M 6.7997436,4 C 5.3823851,4 4.241335,4.892 4.241335,6 v 36 c 0,1.108 1.1410501,2 2.5584086,2 H 42.617459 c 1.417357,0 2.558407,-0.892 2.558407,-2 V 16 L 31.104621,15 29.825418,4 Z"
+       id="path2"
+       style="stroke-width:1.13102" />
+    <path
+       style="opacity:0.2;stroke-width:1.13102"
+       d="m 17.033376,26 c -2.825889,0 -5.116816,1.7909 -5.116816,4 0,2.2091 2.290927,4 5.116816,4 2.82589,0 5.116817,-1.7909 5.116817,-4 h -5.116817 z m 8.954429,0 v 2 h 11.512837 v -2 z m 0,5 v 2 H 37.500642 V 31 Z M 11.91656,36 v 2 h 20.467265 v -2 z"
+       id="path3" />
+    <path
+       fill="#ffffff"
+       d="m 17.033376,25 c -2.825889,0 -5.116816,1.7909 -5.116816,4 0,2.2091 2.290927,4 5.116816,4 2.82589,0 5.116817,-1.7909 5.116817,-4 h -5.116817 z m 8.954429,0 v 2 h 11.512837 v -2 z m 0,5 v 2 H 37.500642 V 30 Z M 11.91656,35 v 2 h 20.467265 v -2 z"
+       id="path4"
+       style="stroke-width:1.13102" />
+    <path
+       fill="#ffffff"
+       opacity="0.1"
+       d="M 6.7997436,4 C 5.3823851,4 4.241335,4.892 4.241335,6 v 1 c 0,-1.108 1.1410501,-2 2.5584086,-2 H 29.825418 l 14.071245,11 h 1.279203 L 29.825418,4 Z"
+       id="path5"
+       style="stroke-width:1.13102" />
+    <path
+       style="opacity:0.2;stroke-width:1.13102"
+       d="m 29.825418,5 v 10 c 0,1.1046 1.145437,2 2.558407,2 h 12.792041 z"
+       id="path6" />
+    <path
+       fill="#ff8660"
+       d="m 29.825418,4 v 10 c 0,1.1046 1.145437,2 2.558407,2 h 12.792041 z"
+       id="path7"
+       style="stroke-width:1.13102" />
+  </g>
+</svg>
