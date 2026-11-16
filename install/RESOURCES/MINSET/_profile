@@ -1,0 +1,5 @@
+### GNUstep env
+if [ -f /etc/GNUstep/GNUstep.conf ];then
+	export GNUSTEP_MAKEFILES=$(grep "MAKEFILES" /etc/GNUstep/GNUstep.conf | awk -F= '{print $2}')
+	. $GNUSTEP_MAKEFILES/GNUstep.sh
+fi

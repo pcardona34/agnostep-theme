@@ -1,0 +1,240 @@
+#!/bin/bash
+
+####################################################
+### A G N o S t e p  -  Desktop - by Patrick Cardona
+### pcardona34 @ Github
+###
+### Thanks for the GNUstep Developers Community
+### This is Free and Open Source software.
+### Read License in the root directory.
+####################################################
+
+if [ -z "$COLORS" ];then
+    . SCRIPTS/colors.sh
+fi
+if [ -z "$FIND" ];then
+    . SCRIPTS/find_app.sh
+fi
+
+#########################################
+### Check if the app is ok
+### $1: the name of the installed App.
+#########################################
+function check
+{
+### VARS ENV
+__PWD=`pwd`
+
+if [ -z "$INSTALL_DIR" ];then
+	INSTALL_DIR=$(gnustep-config --variable=GNUSTEP_LOCAL_APPS)
+fi
+ISSUES="https://github.com/pcardona34/agnostep-desktop/issues"
+
+if ! [ -d $INSTALL_DIR ];then
+	alert "$INSTALL_DIR was not found!"
+	exit 1
+fi
+
+if [ -n "$1" ];then
+	APP="$1"
+else
+	alert "The APP name is empty."
+	printf "Use:"
+	cli "$0 <APP_NAME>"
+	exit 1
+fi
+
+CHEMAPP=""
+findapp ${APP}
+if [ $? -eq 0 ] && [ -n "$CHEMAPP" ];then
+	info "The application ${APP} has been found: ok."
+else
+	alert "ERROR! The application ${APP} was not found in ${INSTALL_DIR}.\nPlease, report this issue at:\n${ISSUES}"
+	exit 1
+fi
+
+cd $__PWD
+}
+
+#########################################
+### Check if the FW is ok
+### $1: the name of the installed FW.
+#########################################
+
+function check_FW
+{
+### VARS ENV
+__PWD=`pwd`
+if [ -z "$INSTALL_DIR" ];then
+	INSTALL_DIR=$(gnustep-config --variable=GNUSTEP_LOCAL_LIBRARY)
+	INSTALL_DIR=${INSTALL_DIR}/Frameworks
+fi
+ISSUES=https://github.com/pcardona34/agnostep-desktop/issues
+
+if ! [ -d ${INSTALL_DIR} ];then
+	printf "\nError: ${INSTALL_DIR} was not found.\n";exit 1
+fi
+
+if [ -n "$1" ];then
+	APP="$1"
+else
+	alert "The Framework name is empty."
+	printf "Use:"
+	cli "$0 <APP_NAME>"
+	exit 1
+fi
+
+cd ${INSTALL_DIR} || exit 1
+if [ -d "${APP}.framework" ];then
+	info "The Framework ${APP} has been found: ok."
+else
+	alert "ERROR! The Framework ${APP} was not found in ${GNUSTEP_FW_DIR}.\nPlease, report this issue at:\n${ISSUES}"
+	exit 1
+fi
+
+cd $__PWD
+}
+
+#####################################
+### Case of Renaissance
+function check_REN
+{
+### VARS ENV
+__PWD=`pwd`
+ISSUES=https://github.com/pcardona34/agnostep-desktop/issues
+
+LOCAL_APPS=$(gnustep-config --variable=GNUSTEP_LOCAL_APPS)
+RENAPP="GSMarkupBrowser.app"
+LOCAL_LIBS=$(gnustep-config --variable=GNUSTEP_LOCAL_LIBRARIES)
+RENLIB="libRenaissance.so"
+
+if [ -d "${LOCAL_APPS}/${RENAPP}" ] && [ -f "${LOCAL_LIBS}/${RENLIB}" ];then
+	info "The lib Renaissance and its tools were found: ok."
+else
+	alert "ERROR! The lib Renaissance was not found.\nPlease, report this issue at:\n${ISSUES}"
+	exit 1
+fi
+
+cd $__PWD
+}
+
+#####################################
+### Case of Performance
+function check_PER
+{
+### VARS ENV
+__PWD=`pwd`
+ISSUES="https://github.com/pcardona34/agnostep-desktop/issues"
+
+LOCAL_LIB=$(gnustep-config --variable=GNUSTEP_LOCAL_LIBRARIES)
+LIBPER="libPerformance.so"
+
+if [ -f "${LOCAL_LIB}/${LIBPER}" ];then
+	info "The lib Performance was found: ok."
+else
+	alert "ERROR! The lib Performance was not found.\nPlease, report this issue at:\n${ISSUES}"
+	exit 1
+fi
+
+cd $__PWD
+}
+
+#####################################
+### Case of WebServices
+function check_WEB()
+{
+### VARS ENV
+__PWD=`pwd`
+ISSUES="https://github.com/pcardona34/agnostep-desktop/issues"
+
+LOCAL_LIB=$(gnustep-config --variable=GNUSTEP_LOCAL_LIBRARIES)
+LIBWEB="libWebServices.so"
+
+if [ -f "${LOCAL_LIB}/${LIBWEB}" ];then
+	info "The lib WebServices was found: ok."
+else
+	alert "ERROR! The lib WebServices was not found.\nPlease, report this issue at:\n${ISSUES}"
+	exit 1
+fi
+
+cd $__PWD
+}
+
+#########################################
+### Check if the THEME is ok
+### $1: the name of the installed THEME.
+#########################################
+
+function check_USER_THEME
+{
+### VARS ENV
+__PWD=`pwd`
+INSTALL_DIR=$(gnustep-config --variable=GNUSTEP_USER_LIBRARY)
+GNUSTEP_THEMES_DIR=$INSTALL_DIR/Themes
+
+if ! [ -d $GNUSTEP_THEMES_DIR ];then
+	sudo mkdir -p $GNUSTEP_THEMES_DIR
+fi
+
+if [ -n "$1" ];then
+	APP="$1"
+else
+	alert "The THEME name is empty."
+	printf "Use:"
+	cli "$0 <THEME_NAME>"
+	exit 1
+fi
+
+cd $GNUSTEP_THEMES_DIR || exit 1
+if [ -d "${APP}" ] || [ -d "${APP}.theme" ];then
+	info "The Theme ${APP} has been found: ok."
+else
+    exit 1
+fi
+
+cd $__PWD
+}
+
+function check_GLOBAL_THEME
+{
+### VARS ENV
+__PWD=`pwd`
+INSTALL_DIR=$(gnustep-config --variable=GNUSTEP_LOCAL_LIBRARY)
+GNUSTEP_THEMES_DIR=$INSTALL_DIR/Themes
+
+if [ -n "$1" ];then
+	APP="$1"
+else
+	alert "The THEME name is empty."
+	printf "Use:"
+	cli "$0 <THEME_NAME>"
+	exit 1
+fi
+
+cd $GNUSTEP_THEMES_DIR || exit 1
+if [ -d "${APP}" ] || [ -d "${APP}.theme" ];then
+	info "The Theme ${APP} has been found: ok."
+else
+    exit 1
+fi
+
+cd $__PWD
+}
+
+function check_THEME
+{
+ISSUES="https://github.com/pcardona34/agnostep-desktop/issues"
+
+    export APP="$1"
+    if check_GLOBAL_THEME ${APP} || check_USER_THEME ${APP};then
+        echo "All is ok for theme ${APP}."
+    else
+        alert "The theme ${APP} was not found. \nReport the issue at \n${ISSUES}"
+    fi
+}
+
+############################################"
+
+### Test
+#check "Terminal"
+#check "Xpdf"

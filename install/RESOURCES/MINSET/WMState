@@ -1,0 +1,132 @@
+{
+  Dock = {
+    AutoRaiseLower = No;
+    Applications = (
+      {
+        Forced = No;
+        Name = Logo.WMDock;
+        BuggyApplication = No;
+        AutoLaunch = No;
+        Position = "0,0";
+        Lock = Yes;
+        Command = "/usr/bin/WPrefs";
+      },
+      {
+        Forced = No;
+        Name = SystemPreferences.GNUstep;
+        BuggyApplication = No;
+        AutoLaunch = No;
+        Position = "0,1";
+        Lock = Yes;
+        Command = "openapp SystemPreferences";
+      },
+      {
+        Forced = No;
+        Name = GWorkspace.GNUstep;
+        BuggyApplication = No;
+        AutoLaunch = No;
+        Position = "0,2";
+        Lock = Yes;
+        Command = "openapp GWorkspace";
+      },
+      {
+        Forced = No;
+        Name = Terminal.GNUstep;
+        BuggyApplication = No;
+        AutoLaunch = No;
+        Position = "0,3";
+        Lock = Yes;
+        Command = "openapp Terminal";
+      },
+      {
+        Forced = No;
+        Name = Recycler.GNUstep;
+        DropCommand = "openapp Recycler %d";
+        BuggyApplication = No;
+        AutoLaunch = Yes;
+        Position = "0,4";
+        Lock = Yes;
+        PasteCommand = "openapp Recycler %s";
+        Command = "openapp Recycler";
+      }
+     );
+    Applications1080 = (
+      {
+        Forced = No;
+        Name = Logo.WMDock;
+        BuggyApplication = No;
+        AutoLaunch = No;
+        Position = "0,0";
+        Lock = Yes;
+        Command = "/usr/bin/WPrefs";
+      },
+      {
+        Forced = No;
+        Name = SystemPreferences.GNUstep;
+        BuggyApplication = No;
+        AutoLaunch = No;
+        Position = "0,1";
+        Lock = Yes;
+        Command = "openapp SystemPreferences";
+      },
+      {
+        Forced = No;
+        Name = GWorkspace.GNUstep;
+        BuggyApplication = No;
+        AutoLaunch = No;
+        Position = "0,2";
+        Lock = Yes;
+        Command = "openapp GWorkspace";
+      },
+      {
+        Forced = No;
+        Name = Terminal.GNUstep;
+        BuggyApplication = No;
+        AutoLaunch = No;
+        Position = "0,3";
+        Lock = Yes;
+        Command = "openapp Terminal";
+      },
+       {
+        Forced = No;
+        Name = Recycler.GNUstep;
+        DropCommand = "openapp Recycler %d";
+        BuggyApplication = No;
+        AutoLaunch = Yes;
+        Position = "0,4";
+        Lock = Yes;
+        PasteCommand = "openapp Recycler %s";
+        Command = "openapp Recycler";
+      }
+    );
+    Lowered = No;
+    Position = "1856,0";
+  };
+  Clip = {
+    Forced = No;
+    Name = Logo.WMClip;
+    DropCommand = "wmsetbg -u -t %d";
+    BuggyApplication = No;
+    AutoLaunch = No;
+    Position = "626,0";
+    Lock = No;
+    Command = "-";
+  };
+  Applications = ();
+  Drawers = ();
+  Workspaces = (
+    {
+      Clip = {
+        AutoRaiseLower = No;
+        AutoCollapse = No;
+        Applications = (
+          );
+        Collapsed = No;
+        AutoAttractIcons = No;
+        Lowered = Yes;
+      };
+      Name = Main;
+    }
+  );
+  Workspace = Main;
+}
