@@ -77,6 +77,8 @@ export GNUSTEP_SYSTEM_TOOLS=`gnustep-config --variable=GNUSTEP_SYSTEM_TOOLS`
 ### Install the theme
 ####################################################
 
+. SCRIPTS/splash.sh
+
 STR="Checking your Desktop env..."
 titulo
 
