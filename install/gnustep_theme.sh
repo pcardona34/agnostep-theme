@@ -65,9 +65,9 @@ fi
 clear
 info "Resetting GNUstep Theme defaults...\n"
 sleep $SLEEP
-pushd .
+pushd . >/dev/null
 reset_theme
-popd
+popd >/dev/null
 
 #######################################
 

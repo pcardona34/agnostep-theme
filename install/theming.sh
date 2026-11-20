@@ -92,8 +92,6 @@ titulo
 
 menu_theme_choice
 
-cd "$PWD"
-
 stop
 
 ##################################################
@@ -101,4 +99,3 @@ stop
 MESSAGE="Theme was set."
 echo "$MESSAGE" >> $LOG
 date >> $LOG
-cd $_PWD

@@ -94,17 +94,17 @@ if [ ! -d $HOME/GNUstep/Library/WindowMaker ];then
     mkdir -p $HOME/GNUstep/Library/WindowMaker
 else
     if [ -d $HOME/GNUstep/Library/WindowMaker/CachedPixmaps ];then
-        pushd .
+        pushd . >/dev/null
 	    cd $HOME/GNUstep/Library/WindowMaker
 	    rm -r CachedPixmaps
-        popd
+        popd >/dev/null
     fi
 fi
 
-pushd .
+pushd . >/dev/null
 cd RESOURCES/MINSET || exit 1
 cp -r CachedPixmaps $HOME/GNUstep/Library/WindowMaker/
-popd
+popd >/dev/null
 
 ### Reinitialising themed folders
 LG=${LANG:0:2}
@@ -132,10 +132,10 @@ GS_USER_LIB=$(gnustep-config --variable=GNUSTEP_USER_LIBRARY)
 if ! [ -d ${GS_USER_LIB}/Themes ];then
 	mkdir -p ${GS_USER_LIB}/Themes
 fi
-pushd .
+pushd . >/dev/null
 cd RESOURCES/THEMES || exit 1
 cp -a AGNOSTEP.theme ${GS_USER_LIB}/Themes/
-popd
+popd >/dev/null
 ok "Done"
 }
 

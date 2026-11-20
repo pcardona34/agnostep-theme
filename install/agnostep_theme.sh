@@ -26,11 +26,6 @@ SLEEP=2
 #set -v
 GWDEF="org.gnustep.GWorkspace"
 DEFDIR=RESOURCES/AGNOSET
-#if [ -f SCRIPTS/env_modern.sh ];then
-#    DEFDIR=RESOURCES/MODERNSET
-#else
-#    DEFDIR=RESOURCES/DEFAULTS
-#fi
 RPI=1 # By default, we assume the hw is not a RPI one. If not, it will be detected.
 TEMPFILE=$(mktemp /tmp/agno-XXXXX)
 trap "rm -f $TEMPFILE" EXIT
@@ -46,7 +41,6 @@ trap "rm -f $TEMPFILE" EXIT
 . SCRIPTS/functions_misc_folders.sh
 . SCRIPTS/functions_inst_themes.sh
 . SCRIPTS/functions_misc_themes.sh
-#. ../Documentation/RELEASE_THEME.txt
 
 ####################################################
 ### DO NOT RUN under an existent X session
@@ -82,6 +76,7 @@ fi
 ####################################################
 
 reset_theme
+sleep 2
 
 STR="Installing AGNOSTEP theme"
 titulo
@@ -117,20 +112,19 @@ stop
 STR="Customizing the Icons of User Home folder contents"
 subtitulo
 
-pushd .
+pushd . >/dev/null
 for FOLD in ${FOLDERS}
 do
-	printf "Setting Icon for the Folder ${FOLD}\n"
 	if [ -d $HOME/${FOLD} ];then
         # Only non default themed icons are provided there...
     	icon_folder $FOLD
-	    ok "Done"
     fi
 done
+ok "All was done for Icon Folders"
 sleep $SLEEP
 stop
 
-popd
+popd >/dev/null
 
 ###########################################
 ### Installing the main AGNOSTEP theme
@@ -138,33 +132,31 @@ STR="Main AGNOSTEP Theme"
 titulo
 
 #printf "GNUstep Theme..."
-pushd .
+pushd . >/dev/null
 install_gs_theme
-popd
+popd >/dev/null
 
 sleep $SLEEP
 
 stop
 
 ### Clip
-if [ ! -f $_PWD/SCRIPTS/env_modern.sh ];then
-    printf "Clip Icon...\n"
-    pushd .
-    customize_clip
-    ok "Done";sleep $SLEEP 
+printf "Clip Icon...\n"
+pushd . >/dev/null
+customize_clip
+ok "Done";sleep $SLEEP 
 
-    popd
-    stop
-fi
+popd >/dev/null
+stop
 
 ### Some Apps known to not comply with Theme: workaround
 ### We need to update Info-gnustep.plist for these apps
 ### Adding 'CFBundleIdentifier' property in the Dictionary
 ### Updating too Help path
 
-pushd .
+pushd . >/dev/null
 update_info
-popd
+popd >/dev/null
 
 sleep ${SLEEP:-2}
 stop
@@ -185,7 +177,7 @@ if [ ! -d ${HOME_GNUSTEP_DEF} ];then
 	mkdir -p ${HOME_GNUSTEP_DEF}
 fi
 
-pushd .
+pushd . >/dev/null
 cd $DEFDIR || exit 1
 
 GWD=${GWDEF}.TEMPLATE
@@ -194,31 +186,31 @@ cat ${GWD} | sed -e s/patrick/$USER/g > ${GWDEF}.plist
 cp --force --verbose ${GWDEF}.plist ${HOME_GNUSTEP_DEF}
 rm ${GWDEF}.plist
 cp --force --verbose NSGlobalDomain.plist ${HOME_GNUSTEP_DEF}
-popd
+popd >/dev/null
 
 if [ ! -f $HOME_GNUSTEP_DEF/WindowMaker ];then
-    pushd .
+    pushd . >/dev/null
 	cd ${DEFDIR} || exit 1
     cp WindowMaker $HOME_GNUSTEP_DEF/
-	popd
+	popd >/dev/null
 fi
 
 cp --force ${DEFDIR}/WMWindowAttributes $HOME/GNUstep/Defaults/
 
 ### Cached Pixmaps
 if [ -d $HOME/GNUstep/Library/WindowMaker/CachedPixmaps ];then
-    pushd .
+    pushd . >/dev/null
 	cd $HOME/GNUstep/Library/WindowMaker
 	rm -fR CachedPixmaps
-    popd
+    popd >/dev/null
     fi
 
-pushd .
+pushd . >/dev/null
 cd ${DEFDIR} || exit 1
 cp -r CachedPixmaps $HOME/GNUstep/Library/WindowMaker/
-popd
+popd >/dev/null
 
-pushd .
+pushd . >/dev/null
 WMSTATE="WMState"
 cd RESOURCES/MINSET
 if [ ! -f $WMSTATE ];then
@@ -230,7 +222,7 @@ if [ ! -f $WMSTATE ];then
 	    cat $HOME_GNUSTEP_DEF/WMState | sed -e s#/System/Tools#${GNUSTEP_SYSTEM_TOOLS}#g > $TEMPFILE
 	    cat $TEMPFILE > $HOME_GNUSTEP_DEF/WMState
     fi
-popd
+popd >/dev/null
 
 ok "Done"
 sleep $SLEEP
@@ -263,8 +255,10 @@ stop
 #### Applying Defaults for GNUstep
 ############################################
 
-pushd .
+pushd . >/dev/null
 cd ${DEFDIR} || exit 1
+GSUSERDEFDIR=$(gnustep-config --variable=GNUSTEP_USER_DEFAULTS_DIR)
+DEST=${HOME}/${GSUSERDEFDIR}
 
 for PLIST in "Addresses" "org.gap.InnerSpace" "org.gap.Terminal" "org.gnustep.GNUMail" "org.poroussel.SimpleAgenda" "org.gap.AClock" "TimeMon"
 do
@@ -278,12 +272,12 @@ do
 		fi
 		ok "Done"
 		stop
-	else
-		warning "The File ${PLIST}.plist was not found."
-		stop
+#	else
+#		info "The File ${PLIST}.plist was not found."
+#		stop
 	fi
 done
-popd
+popd >/dev/null
 
 STR="GWorkspace: Dock position and visibility"
 subtitulo
@@ -316,10 +310,10 @@ if [ $? -eq 0 ];then
     if [ -d ${APP_DIR}/Writer.app ];then
         STR="Theme for FocusWriter"
         subtitulo
-        pushd .
+        pushd . >/dev/null
         cd THEMING/agnostep_fw || exit 1
         . ./install_agnostep_fw.sh
-        popd
+        popd >/dev/null
         ok "Done"
         sleep ${SLEEP:-2}
         stop
@@ -328,7 +322,7 @@ fi
 
 ###########################################
 
-MESSAGE="A G N o S t e p  Theme  was set."
+MESSAGE="AGNOSTEP Theme  was set."
 
 info "$MESSAGE" | tee -a $LOG
 date >> $LOG

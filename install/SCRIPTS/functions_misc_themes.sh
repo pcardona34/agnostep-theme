@@ -15,9 +15,9 @@
 
 function update_info()
 {
-. SCRIPTS/find_app.sh
+. SCRIPTS/find_app.sh || exit 1
 
-pushd .
+pushd . >/dev/null
 cd RESOURCES/INFOS || exit 1
 for INFO in Info-gnustep.plist_*
 do
@@ -29,7 +29,7 @@ do
 		sudo cp --remove-destination ${INFO} ${TARGET} && ok "Done"
 	fi
 done
-popd
+popd >/dev/null
 }
 
 ##########################################

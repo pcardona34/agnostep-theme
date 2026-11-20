@@ -30,56 +30,24 @@ function rik_setting
 STR="Session minimal settings"
 subtitulo
 
-#cd $_PWD
-
-### Setup GWorkspace...
-#cat RESOURCES/MINSET/org.gnustep.GWorkspace.template | sed s/patrick/${USER}/g >> RESOURCES/MINSET/org.gnustep.GWorkspace.plist
-#mv RESOURCES/MINSET/org.gnustep.GWorkspace.plist $HOME/GNUstep/Defaults/
-
-### Removing themed plist of TimeMon and AClock
-#for PLIST in org.gap.AClock TimeMon
-#do
-#	rm --force $HOME/GNUstep/Defaults/${PLIST}.plist
-#done
-
-### Defaults
-#for DEF in RESOURCES/MINSET/*.plist
-#do
-#    cp $DEF $HOME/GNUstep/Defaults/
-#done
-
-#cp --force RESOURCES/MODERNSET/NSGlobalDomain.plist $HOME/GNUstep/Defaults/
-
 defaults write NSGlobalDomain GSTheme Rik
-
-#if [ ! SCRIPTS/env_modern.sh ];then
-#    if [ ! -f $HOME/GNUstep/Defaults/WindowMaker ];then
-#        cp RESOURCES/MINSET/WindowMaker $HOME/GNUstep/Defaults/WindowMaker
-#    fi
-#    setstyle RESOURCES/STYLES/Tradition.style
-#
-#    ### Retrieving default Clip icon and WMWindowAttributes
-#    if [ -f $HOME/GNUstep/Library/Icons/clip.tiff ];then
-#	    rm $HOME/GNUstep/Library/Icons/clip.tiff
-#	    cat $HOME/GNUstep/Defaults/WMWindowAttributes | sed s#~/GNUstep/Library#/usr/share/WindowMaker# > TEMP && mv TEMP $HOME/GNUstep/Defaults/WMWindowAttributes
-#    fi
 
 ### Cached Pixmaps
 if [ ! -d $HOME/GNUstep/Library/WindowMaker ];then
    mkdir -p $HOME/GNUstep/Library/WindowMaker
 else
     if [ -d $HOME/GNUstep/Library/WindowMaker/CachedPixmaps ];then
-        pushd .
+        pushd . >/dev/null
         cd $HOME/GNUstep/Library/WindowMaker
         rm -r CachedPixmaps
-        popd
+        popd >/dev/null
     fi
 fi
 
-pushd .
-cd $_PWD/RESOURCES/RIKSET || exit 1
+pushd . >/dev/null
+cd RESOURCES/RIKSET || exit 1
 cp -r CachedPixmaps $HOME/GNUstep/Library/WindowMaker/
-popd
+popd >/dev/null
 
 ### Reinitialising themed folders
 LG=${LANG:0:2}
@@ -102,7 +70,7 @@ done
 function install_rik
 {
 clear
-pushd .
+pushd . >/dev/null
 cd ../build || exit 1
 
 APPNAME="Rik.theme"
@@ -132,5 +100,5 @@ ok "${REPO}: Fetched"
 _build_Theme
 
 ok "All was done for ${APPNAME}"
-popd
+popd >/dev/null
 }

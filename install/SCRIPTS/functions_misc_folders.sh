@@ -17,13 +17,14 @@
 function icon_folder
 {
 FOLDER="$1"
-pushd .
+pushd . >/dev/null
 cd RESOURCES/ICONS
 if [ -f dir_${FOLDER}.tiff ];then
+    printf "We update the Folder Icon of ${FOLDER}.\n"
 	### We only set an icon for non standard folders
-	cp --verbose -u dir_${FOLDER}.tiff $HOME/${FOLDER}/.dir.tiff
+	cp -u dir_${FOLDER}.tiff $HOME/${FOLDER}/.dir.tiff
 fi
-popd
+popd >/dev/null
 }
 
 function l18n_folder

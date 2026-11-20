@@ -16,7 +16,6 @@
 ################################
 ### ENV
 
-_PWD=`pwd`
 GSMAKE=$(gnustep-config --variable=GNUSTEP_MAKEFILES)
 . ${GSMAKE}/GNUstep.sh
 SPIN='/-\|'
